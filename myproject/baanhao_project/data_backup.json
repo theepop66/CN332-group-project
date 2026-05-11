@@ -1,0 +1,41 @@
+[
+{
+  "model": "sessions.session",
+  "pk": "7zs5sbolkji6jtvin5ugbyp7yb9ix9sk",
+  "fields": {
+    "session_data": ".eJxVjDsOwjAQBe_iGlnx-oNDSZ8zWLveNQ6gRIqTCnF3iJQC2jcz76USbmtNW5MljawuyqjT70aYHzLtgO843Wad52ldRtK7og_a9DCzPK-H-3dQsdVvTdZ5pJy9LfHsCAQZBYALkXRgewngAIPnYk2Evme0rlDMlMF3wRv1_gAK6jh-:1wMGSy:gKSJtDcjxHLGOIPiUp5CxM0Gq93b6X5CHscKQIKc7N0",
+    "expire_date": "2026-05-25T02:33:56.585Z"
+  }
+},
+{
+  "model": "users.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$s1KLmowaXvi6Pu2KHPt5nH$eoord81xNPbPU0gAaRr84b1sgGmiU9YFCDztYDYZQOc=",
+    "last_login": "2026-05-11T02:33:56.584Z",
+    "is_superuser": true,
+    "username": "admin",
+    "first_name": "",
+    "last_name": "",
+    "email": "admin@baanhao.com",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2026-05-11T02:33:29.406Z",
+    "line_id": null,
+    "phone_number": null,
+    "profile_image": "",
+    "role": "RESIDENT",
+    "gender": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "sites.site",
+  "pk": 1,
+  "fields": {
+    "domain": "example.com",
+    "name": "example.com"
+  }
+}
+]
