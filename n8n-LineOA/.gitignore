@@ -1,0 +1,15 @@
+# Environment variables
+.env
+
+# n8n user data (auto-generated)
+n8n_data/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.idea/
+.vscode/
+*.swp
+*.swo
