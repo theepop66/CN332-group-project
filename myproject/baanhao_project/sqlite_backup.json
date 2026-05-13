@@ -1,0 +1,3807 @@
+[
+{
+  "model": "admin.logentry",
+  "pk": 1,
+  "fields": {
+    "action_time": "2026-01-28T07:54:32.412Z",
+    "user": 1,
+    "content_type": 9,
+    "object_id": "1",
+    "object_repr": "Resident: admin",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 2,
+  "fields": {
+    "action_time": "2026-01-28T07:54:35.340Z",
+    "user": 1,
+    "content_type": 12,
+    "object_id": "1",
+    "object_repr": "House 1/001 (ID: A-1)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 3,
+  "fields": {
+    "action_time": "2026-01-28T11:38:11.230Z",
+    "user": 1,
+    "content_type": 6,
+    "object_id": "2",
+    "object_repr": "athiphat (Resident)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 4,
+  "fields": {
+    "action_time": "2026-01-28T11:38:26.358Z",
+    "user": 1,
+    "content_type": 6,
+    "object_id": "2",
+    "object_repr": "athiphat (Resident)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Gender\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 5,
+  "fields": {
+    "action_time": "2026-01-28T11:40:07.958Z",
+    "user": 1,
+    "content_type": 14,
+    "object_id": "1",
+    "object_repr": "[PENDING] aaaa (by Resident: admin)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 6,
+  "fields": {
+    "action_time": "2026-02-07T07:08:10.390Z",
+    "user": 1,
+    "content_type": 14,
+    "object_id": "1",
+    "object_repr": "[PENDING] aaaa (by Resident: admin)",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 7,
+  "fields": {
+    "action_time": "2026-02-07T07:26:43.316Z",
+    "user": 1,
+    "content_type": 6,
+    "object_id": "3",
+    "object_repr": "micheal (Technician)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 8,
+  "fields": {
+    "action_time": "2026-02-07T07:27:29.675Z",
+    "user": 1,
+    "content_type": 6,
+    "object_id": "3",
+    "object_repr": "technician (Technician)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Username\", \"First name\", \"Last name\", \"Staff status\", \"Gender\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 9,
+  "fields": {
+    "action_time": "2026-02-07T07:27:44.971Z",
+    "user": 1,
+    "content_type": 6,
+    "object_id": "3",
+    "object_repr": "technician001 (Technician)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Username\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 10,
+  "fields": {
+    "action_time": "2026-02-07T07:28:04.163Z",
+    "user": 1,
+    "content_type": 11,
+    "object_id": "1",
+    "object_repr": "Tech: technician001",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 11,
+  "fields": {
+    "action_time": "2026-02-07T07:28:09.761Z",
+    "user": 1,
+    "content_type": 11,
+    "object_id": "1",
+    "object_repr": "Tech: technician001",
+    "action_flag": 2,
+    "change_message": "[]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 12,
+  "fields": {
+    "action_time": "2026-02-07T07:28:46.038Z",
+    "user": 1,
+    "content_type": 6,
+    "object_id": "3",
+    "object_repr": "technician001 (Technician)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Email address\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 13,
+  "fields": {
+    "action_time": "2026-02-07T07:29:55.958Z",
+    "user": 1,
+    "content_type": 6,
+    "object_id": "4",
+    "object_repr": "technician002 (Technician)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 14,
+  "fields": {
+    "action_time": "2026-02-07T07:30:10.019Z",
+    "user": 1,
+    "content_type": 6,
+    "object_id": "4",
+    "object_repr": "technician002 (Technician)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"First name\", \"Last name\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 15,
+  "fields": {
+    "action_time": "2026-02-07T07:30:20.177Z",
+    "user": 1,
+    "content_type": 11,
+    "object_id": "2",
+    "object_repr": "Tech: technician002",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 16,
+  "fields": {
+    "action_time": "2026-02-07T07:31:18.162Z",
+    "user": 1,
+    "content_type": 6,
+    "object_id": "4",
+    "object_repr": "technician002 (Technician)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Staff status\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 17,
+  "fields": {
+    "action_time": "2026-02-07T07:38:14.656Z",
+    "user": 1,
+    "content_type": 6,
+    "object_id": "5",
+    "object_repr": "technician003 (Resident)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}, {\"added\": {\"name\": \"technician\", \"object\": \"Tech: technician003\"}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 18,
+  "fields": {
+    "action_time": "2026-02-07T07:39:31.403Z",
+    "user": 1,
+    "content_type": 6,
+    "object_id": "5",
+    "object_repr": "technician003 (Technician)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Staff status\", \"Role\", \"Line id\", \"Phone number\", \"Gender\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 19,
+  "fields": {
+    "action_time": "2026-02-07T07:40:02.298Z",
+    "user": 1,
+    "content_type": 6,
+    "object_id": "5",
+    "object_repr": "technician003 (Technician)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"First name\", \"Last name\", \"Email address\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 20,
+  "fields": {
+    "action_time": "2026-02-07T07:46:48.564Z",
+    "user": 1,
+    "content_type": 6,
+    "object_id": "6",
+    "object_repr": "security001 (Security)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 21,
+  "fields": {
+    "action_time": "2026-02-07T07:47:14.644Z",
+    "user": 1,
+    "content_type": 6,
+    "object_id": "6",
+    "object_repr": "security001 (Security)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"First name\", \"Last name\", \"Gender\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 22,
+  "fields": {
+    "action_time": "2026-02-07T07:48:15.271Z",
+    "user": 1,
+    "content_type": 10,
+    "object_id": "1",
+    "object_repr": "Security object (1)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 23,
+  "fields": {
+    "action_time": "2026-02-07T07:48:50.954Z",
+    "user": 1,
+    "content_type": 6,
+    "object_id": "7",
+    "object_repr": "security002 (Security)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 24,
+  "fields": {
+    "action_time": "2026-02-07T07:49:30.419Z",
+    "user": 1,
+    "content_type": 10,
+    "object_id": "2",
+    "object_repr": "Security object (2)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 25,
+  "fields": {
+    "action_time": "2026-02-07T07:54:18.214Z",
+    "user": 1,
+    "content_type": 9,
+    "object_id": "1",
+    "object_repr": "Resident: admin",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 26,
+  "fields": {
+    "action_time": "2026-02-07T07:55:13.157Z",
+    "user": 1,
+    "content_type": 6,
+    "object_id": "8",
+    "object_repr": "admin001 (Admin)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 27,
+  "fields": {
+    "action_time": "2026-02-07T07:55:48.197Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "1",
+    "object_repr": "Admin object (1)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 28,
+  "fields": {
+    "action_time": "2026-02-07T08:00:06.773Z",
+    "user": 1,
+    "content_type": 12,
+    "object_id": "1",
+    "object_repr": "House 1/001 (ID: A-1)",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 29,
+  "fields": {
+    "action_time": "2026-02-07T08:01:29.921Z",
+    "user": 1,
+    "content_type": 12,
+    "object_id": "2",
+    "object_repr": "House 01/01 (ID: A-001)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 30,
+  "fields": {
+    "action_time": "2026-02-07T08:01:34.682Z",
+    "user": 1,
+    "content_type": 12,
+    "object_id": "2",
+    "object_repr": "House 01/01 (ID: A-001)",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 31,
+  "fields": {
+    "action_time": "2026-02-07T08:03:08.172Z",
+    "user": 1,
+    "content_type": 12,
+    "object_id": "3",
+    "object_repr": "House 100/1 (ID: A-101)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 32,
+  "fields": {
+    "action_time": "2026-02-07T08:03:16.885Z",
+    "user": 1,
+    "content_type": 12,
+    "object_id": "4",
+    "object_repr": "House 100/2 (ID: A-102)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 33,
+  "fields": {
+    "action_time": "2026-02-07T08:03:27.533Z",
+    "user": 1,
+    "content_type": 12,
+    "object_id": "5",
+    "object_repr": "House 100/15 (ID: B-201)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 34,
+  "fields": {
+    "action_time": "2026-02-07T08:03:43.121Z",
+    "user": 1,
+    "content_type": 12,
+    "object_id": "6",
+    "object_repr": "House 100/16 (ID: B-202)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 35,
+  "fields": {
+    "action_time": "2026-02-07T08:03:57.924Z",
+    "user": 1,
+    "content_type": 12,
+    "object_id": "7",
+    "object_repr": "House 100/30 (ID: C-301)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 36,
+  "fields": {
+    "action_time": "2026-02-07T08:04:06.378Z",
+    "user": 1,
+    "content_type": 12,
+    "object_id": "8",
+    "object_repr": "House 100/31 (ID: C-302)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 37,
+  "fields": {
+    "action_time": "2026-02-07T08:04:22.908Z",
+    "user": 1,
+    "content_type": 12,
+    "object_id": "9",
+    "object_repr": "House 100/45 (ID: D-401)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 38,
+  "fields": {
+    "action_time": "2026-02-07T08:05:01.051Z",
+    "user": 1,
+    "content_type": 12,
+    "object_id": "10",
+    "object_repr": "House 100/46 (ID: D-402)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 39,
+  "fields": {
+    "action_time": "2026-02-07T08:05:11.915Z",
+    "user": 1,
+    "content_type": 12,
+    "object_id": "11",
+    "object_repr": "House 100/60 (ID: E-501)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 40,
+  "fields": {
+    "action_time": "2026-02-07T08:05:26.092Z",
+    "user": 1,
+    "content_type": 12,
+    "object_id": "12",
+    "object_repr": "House 100/61 (ID: E-402)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 41,
+  "fields": {
+    "action_time": "2026-02-07T08:05:33.816Z",
+    "user": 1,
+    "content_type": 12,
+    "object_id": "12",
+    "object_repr": "House 100/61 (ID: E-502)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"House id\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 42,
+  "fields": {
+    "action_time": "2026-02-07T08:15:53.438Z",
+    "user": 1,
+    "content_type": 6,
+    "object_id": "9",
+    "object_repr": "somchai_r (Resident)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 43,
+  "fields": {
+    "action_time": "2026-02-07T08:16:13.550Z",
+    "user": 1,
+    "content_type": 6,
+    "object_id": "9",
+    "object_repr": "somchai_r (Resident)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"First name\", \"Last name\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 44,
+  "fields": {
+    "action_time": "2026-02-07T08:24:27.742Z",
+    "user": 1,
+    "content_type": 12,
+    "object_id": "3",
+    "object_repr": "House 100/1 (ID: A-101)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Owner\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 45,
+  "fields": {
+    "action_time": "2026-02-07T08:25:34.108Z",
+    "user": 1,
+    "content_type": 12,
+    "object_id": "3",
+    "object_repr": "House 100/1 (ID: A-101)",
+    "action_flag": 2,
+    "change_message": "[]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 46,
+  "fields": {
+    "action_time": "2026-02-07T08:26:25.022Z",
+    "user": 1,
+    "content_type": 12,
+    "object_id": "3",
+    "object_repr": "House 100/1 (ID: A-101)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Owner\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 47,
+  "fields": {
+    "action_time": "2026-02-07T08:26:51.443Z",
+    "user": 1,
+    "content_type": 12,
+    "object_id": "4",
+    "object_repr": "House 100/2 (ID: A-102)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Owner\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 48,
+  "fields": {
+    "action_time": "2026-02-07T08:26:55.654Z",
+    "user": 1,
+    "content_type": 12,
+    "object_id": "5",
+    "object_repr": "House 100/15 (ID: B-201)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Owner\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 49,
+  "fields": {
+    "action_time": "2026-02-07T08:27:02.945Z",
+    "user": 1,
+    "content_type": 12,
+    "object_id": "6",
+    "object_repr": "House 100/16 (ID: B-202)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Owner\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 50,
+  "fields": {
+    "action_time": "2026-02-07T08:27:08.697Z",
+    "user": 1,
+    "content_type": 12,
+    "object_id": "7",
+    "object_repr": "House 100/30 (ID: C-301)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Owner\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 51,
+  "fields": {
+    "action_time": "2026-02-07T08:27:13.292Z",
+    "user": 1,
+    "content_type": 12,
+    "object_id": "8",
+    "object_repr": "House 100/31 (ID: C-302)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Owner\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 52,
+  "fields": {
+    "action_time": "2026-02-07T08:27:18.025Z",
+    "user": 1,
+    "content_type": 12,
+    "object_id": "9",
+    "object_repr": "House 100/45 (ID: D-401)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Owner\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 53,
+  "fields": {
+    "action_time": "2026-02-07T08:27:23.179Z",
+    "user": 1,
+    "content_type": 12,
+    "object_id": "10",
+    "object_repr": "House 100/46 (ID: D-402)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Owner\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 54,
+  "fields": {
+    "action_time": "2026-02-07T08:27:28.248Z",
+    "user": 1,
+    "content_type": 12,
+    "object_id": "11",
+    "object_repr": "House 100/60 (ID: E-501)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Owner\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 55,
+  "fields": {
+    "action_time": "2026-02-07T08:27:34.989Z",
+    "user": 1,
+    "content_type": 12,
+    "object_id": "12",
+    "object_repr": "House 100/61 (ID: E-502)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Owner\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 56,
+  "fields": {
+    "action_time": "2026-02-07T08:32:49.720Z",
+    "user": 1,
+    "content_type": 6,
+    "object_id": "11",
+    "object_repr": "prasert_m (Juristic Officer)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Role\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 57,
+  "fields": {
+    "action_time": "2026-02-07T08:33:13.301Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "1",
+    "object_repr": "Officer: prasert_m",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 58,
+  "fields": {
+    "action_time": "2026-02-08T13:16:38.531Z",
+    "user": 1,
+    "content_type": 6,
+    "object_id": "1",
+    "object_repr": "admin (Resident)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Profile image\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 59,
+  "fields": {
+    "action_time": "2026-02-08T13:19:44.492Z",
+    "user": 1,
+    "content_type": 15,
+    "object_id": "21",
+    "object_repr": "Maintenance: ซิงค์ล้างจานตัน",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Before image\", \"After image\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 60,
+  "fields": {
+    "action_time": "2026-02-08T13:19:51.314Z",
+    "user": 1,
+    "content_type": 15,
+    "object_id": "21",
+    "object_repr": "Maintenance: ซิงค์ล้างจานตัน",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Before image\", \"After image\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 61,
+  "fields": {
+    "action_time": "2026-02-08T13:20:03.496Z",
+    "user": 1,
+    "content_type": 15,
+    "object_id": "21",
+    "object_repr": "Maintenance: ซิงค์ล้างจานตัน",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Before image\", \"After image\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 62,
+  "fields": {
+    "action_time": "2026-02-08T13:20:13.597Z",
+    "user": 1,
+    "content_type": 15,
+    "object_id": "22",
+    "object_repr": "Maintenance: สวิตช์ไฟเสีย",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Before image\", \"After image\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 63,
+  "fields": {
+    "action_time": "2026-02-08T13:20:25.726Z",
+    "user": 1,
+    "content_type": 15,
+    "object_id": "23",
+    "object_repr": "Maintenance: หลังคารั่วซึม",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Before image\", \"After image\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 64,
+  "fields": {
+    "action_time": "2026-02-08T13:20:28.998Z",
+    "user": 1,
+    "content_type": 15,
+    "object_id": "23",
+    "object_repr": "Maintenance: หลังคารั่วซึม",
+    "action_flag": 2,
+    "change_message": "[]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 65,
+  "fields": {
+    "action_time": "2026-02-08T13:20:37.963Z",
+    "user": 1,
+    "content_type": 15,
+    "object_id": "24",
+    "object_repr": "Maintenance: กลอนประตูล็อคไม่ได้",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Before image\", \"After image\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 66,
+  "fields": {
+    "action_time": "2026-02-08T13:20:47.318Z",
+    "user": 1,
+    "content_type": 15,
+    "object_id": "25",
+    "object_repr": "Maintenance: ปั๊มน้ำเสียงดังผิดปกติ",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Before image\", \"After image\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 67,
+  "fields": {
+    "action_time": "2026-02-08T13:20:56.477Z",
+    "user": 1,
+    "content_type": 15,
+    "object_id": "26",
+    "object_repr": "Maintenance: น้ำประปาไม่ไหล",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Before image\", \"After image\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 68,
+  "fields": {
+    "action_time": "2026-02-08T13:20:59.418Z",
+    "user": 1,
+    "content_type": 15,
+    "object_id": "26",
+    "object_repr": "Maintenance: น้ำประปาไม่ไหล",
+    "action_flag": 2,
+    "change_message": "[]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 69,
+  "fields": {
+    "action_time": "2026-02-08T13:21:08.482Z",
+    "user": 1,
+    "content_type": 15,
+    "object_id": "27",
+    "object_repr": "Maintenance: แอร์ไม่เย็น",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Before image\", \"After image\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 70,
+  "fields": {
+    "action_time": "2026-02-08T13:21:17.245Z",
+    "user": 1,
+    "content_type": 15,
+    "object_id": "28",
+    "object_repr": "Maintenance: กระจกหน้าต่างร้าว",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Before image\", \"After image\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 71,
+  "fields": {
+    "action_time": "2026-02-08T13:21:26.753Z",
+    "user": 1,
+    "content_type": 15,
+    "object_id": "29",
+    "object_repr": "Maintenance: เต้ารับมีประกายไฟ",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Before image\", \"After image\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 72,
+  "fields": {
+    "action_time": "2026-02-08T13:21:35.135Z",
+    "user": 1,
+    "content_type": 15,
+    "object_id": "30",
+    "object_repr": "Maintenance: ท่อน้ำทิ้งระเบียงตัน",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Before image\", \"After image\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 73,
+  "fields": {
+    "action_time": "2026-02-08T13:21:44.099Z",
+    "user": 1,
+    "content_type": 15,
+    "object_id": "31",
+    "object_repr": "Maintenance: ราวบันไดโยก",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Before image\", \"After image\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 74,
+  "fields": {
+    "action_time": "2026-02-08T13:21:53.388Z",
+    "user": 1,
+    "content_type": 15,
+    "object_id": "32",
+    "object_repr": "Maintenance: สายอินเทอร์เน็ตขาด",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Before image\", \"After image\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 75,
+  "fields": {
+    "action_time": "2026-02-08T13:21:57.267Z",
+    "user": 1,
+    "content_type": 15,
+    "object_id": "32",
+    "object_repr": "Maintenance: สายอินเทอร์เน็ตขาด",
+    "action_flag": 2,
+    "change_message": "[]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 76,
+  "fields": {
+    "action_time": "2026-02-08T13:22:06.406Z",
+    "user": 1,
+    "content_type": 15,
+    "object_id": "33",
+    "object_repr": "Maintenance: เครื่องทำน้ำอุ่นไม่ทำงาน",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Before image\", \"After image\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 77,
+  "fields": {
+    "action_time": "2026-02-08T13:22:15.694Z",
+    "user": 1,
+    "content_type": 15,
+    "object_id": "34",
+    "object_repr": "Maintenance: ก๊อกสนามหัก",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Before image\", \"After image\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 78,
+  "fields": {
+    "action_time": "2026-02-08T13:22:26.172Z",
+    "user": 1,
+    "content_type": 15,
+    "object_id": "35",
+    "object_repr": "Maintenance: ประตูโรงรถเปิดไม่ได้",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Before image\", \"After image\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 79,
+  "fields": {
+    "action_time": "2026-02-08T13:22:35.817Z",
+    "user": 1,
+    "content_type": 15,
+    "object_id": "37",
+    "object_repr": "Maintenance: เบรกเกอร์ตัดบ่อย",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Before image\", \"After image\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 80,
+  "fields": {
+    "action_time": "2026-02-08T13:22:38.978Z",
+    "user": 1,
+    "content_type": 15,
+    "object_id": "37",
+    "object_repr": "Maintenance: เบรกเกอร์ตัดบ่อย",
+    "action_flag": 2,
+    "change_message": "[]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 81,
+  "fields": {
+    "action_time": "2026-02-08T13:22:47.333Z",
+    "user": 1,
+    "content_type": 15,
+    "object_id": "38",
+    "object_repr": "Maintenance: กระเบื้องพื้นระเบิด",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Before image\", \"After image\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 82,
+  "fields": {
+    "action_time": "2026-02-08T13:22:56.078Z",
+    "user": 1,
+    "content_type": 15,
+    "object_id": "39",
+    "object_repr": "Maintenance: ไฟกิ่งหน้าบ้านดับ",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Before image\", \"After image\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 83,
+  "fields": {
+    "action_time": "2026-02-08T13:23:03.633Z",
+    "user": 1,
+    "content_type": 15,
+    "object_id": "37",
+    "object_repr": "Maintenance: เบรกเกอร์ตัดบ่อย",
+    "action_flag": 2,
+    "change_message": "[]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 84,
+  "fields": {
+    "action_time": "2026-02-08T13:28:16.086Z",
+    "user": 1,
+    "content_type": 16,
+    "object_id": "2",
+    "object_repr": "Complaint: เสียงเพลงดังยามวิกาล",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Evidence image\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 85,
+  "fields": {
+    "action_time": "2026-02-08T13:28:29.482Z",
+    "user": 1,
+    "content_type": 16,
+    "object_id": "3",
+    "object_repr": "Complaint: กลิ่นบุหรี่รบกวน",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Evidence image\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 86,
+  "fields": {
+    "action_time": "2026-02-08T13:28:37.498Z",
+    "user": 1,
+    "content_type": 16,
+    "object_id": "4",
+    "object_repr": "Complaint: สุนัขถ่ายหน้าบ้าน",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Evidence image\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 87,
+  "fields": {
+    "action_time": "2026-02-08T13:28:45.419Z",
+    "user": 1,
+    "content_type": 16,
+    "object_id": "5",
+    "object_repr": "Complaint: จอดรถซ้อนคันใส่เบรกมือ",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Evidence image\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 88,
+  "fields": {
+    "action_time": "2026-02-08T13:30:29.091Z",
+    "user": 1,
+    "content_type": 16,
+    "object_id": "6",
+    "object_repr": "Complaint: เพื่อนบ้านต่อเติมบ้านเสียงดัง",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Evidence image\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 89,
+  "fields": {
+    "action_time": "2026-02-08T13:30:31.547Z",
+    "user": 1,
+    "content_type": 16,
+    "object_id": "5",
+    "object_repr": "Complaint: จอดรถซ้อนคันใส่เบรกมือ",
+    "action_flag": 2,
+    "change_message": "[]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 90,
+  "fields": {
+    "action_time": "2026-02-08T13:30:35.418Z",
+    "user": 1,
+    "content_type": 16,
+    "object_id": "6",
+    "object_repr": "Complaint: เพื่อนบ้านต่อเติมบ้านเสียงดัง",
+    "action_flag": 2,
+    "change_message": "[]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 91,
+  "fields": {
+    "action_time": "2026-02-08T13:30:42.267Z",
+    "user": 1,
+    "content_type": 16,
+    "object_id": "7",
+    "object_repr": "Complaint: กลิ่นขยะเหม็นเน่า",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Evidence image\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 92,
+  "fields": {
+    "action_time": "2026-02-08T13:30:45.427Z",
+    "user": 1,
+    "content_type": 16,
+    "object_id": "7",
+    "object_repr": "Complaint: กลิ่นขยะเหม็นเน่า",
+    "action_flag": 2,
+    "change_message": "[]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 93,
+  "fields": {
+    "action_time": "2026-02-08T13:30:51.457Z",
+    "user": 1,
+    "content_type": 16,
+    "object_id": "8",
+    "object_repr": "Complaint: รปภ. หลับยาม",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Evidence image\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 94,
+  "fields": {
+    "action_time": "2026-02-08T13:30:53.815Z",
+    "user": 1,
+    "content_type": 16,
+    "object_id": "7",
+    "object_repr": "Complaint: กลิ่นขยะเหม็นเน่า",
+    "action_flag": 2,
+    "change_message": "[]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 95,
+  "fields": {
+    "action_time": "2026-02-08T13:30:56.099Z",
+    "user": 1,
+    "content_type": 16,
+    "object_id": "8",
+    "object_repr": "Complaint: รปภ. หลับยาม",
+    "action_flag": 2,
+    "change_message": "[]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 96,
+  "fields": {
+    "action_time": "2026-02-08T13:31:01.686Z",
+    "user": 1,
+    "content_type": 16,
+    "object_id": "9",
+    "object_repr": "Complaint: วัยรุ่นมั่วสุมดื่มสุรา",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Evidence image\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 97,
+  "fields": {
+    "action_time": "2026-02-08T13:31:10.550Z",
+    "user": 1,
+    "content_type": 16,
+    "object_id": "10",
+    "object_repr": "Complaint: รถบุคคลภายนอกจอดค้างคืน",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Evidence image\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 98,
+  "fields": {
+    "action_time": "2026-02-08T13:31:13.178Z",
+    "user": 1,
+    "content_type": 16,
+    "object_id": "10",
+    "object_repr": "Complaint: รถบุคคลภายนอกจอดค้างคืน",
+    "action_flag": 2,
+    "change_message": "[]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 99,
+  "fields": {
+    "action_time": "2026-02-08T13:31:19.777Z",
+    "user": 1,
+    "content_type": 16,
+    "object_id": "11",
+    "object_repr": "Complaint: กลิ่นทำอาหารฉุนจัด",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Evidence image\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 100,
+  "fields": {
+    "action_time": "2026-02-08T13:31:28.832Z",
+    "user": 1,
+    "content_type": 16,
+    "object_id": "12",
+    "object_repr": "Complaint: สัตว์เลี้ยงเห่ารบกวน",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Evidence image\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 101,
+  "fields": {
+    "action_time": "2026-02-08T13:31:31.627Z",
+    "user": 1,
+    "content_type": 16,
+    "object_id": "12",
+    "object_repr": "Complaint: สัตว์เลี้ยงเห่ารบกวน",
+    "action_flag": 2,
+    "change_message": "[]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 102,
+  "fields": {
+    "action_time": "2026-02-08T13:31:40.555Z",
+    "user": 1,
+    "content_type": 16,
+    "object_id": "13",
+    "object_repr": "Complaint: วางสิ่งของกีดขวางทางเดิน",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Evidence image\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 103,
+  "fields": {
+    "action_time": "2026-02-08T13:31:46.171Z",
+    "user": 1,
+    "content_type": 16,
+    "object_id": "14",
+    "object_repr": "Complaint: จอดรถทับเส้น",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Evidence image\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 104,
+  "fields": {
+    "action_time": "2026-02-08T13:31:52.414Z",
+    "user": 1,
+    "content_type": 16,
+    "object_id": "15",
+    "object_repr": "Complaint: สระว่ายน้ำสกปรก",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Evidence image\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 105,
+  "fields": {
+    "action_time": "2026-02-08T13:31:57.815Z",
+    "user": 1,
+    "content_type": 16,
+    "object_id": "17",
+    "object_repr": "Complaint: เครื่องออกกำลังกายชำรุด",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Evidence image\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 106,
+  "fields": {
+    "action_time": "2026-02-08T13:32:03.994Z",
+    "user": 1,
+    "content_type": 16,
+    "object_id": "19",
+    "object_repr": "Complaint: ทะเลาะวิวาทเสียงดัง",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Evidence image\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 107,
+  "fields": {
+    "action_time": "2026-02-08T13:32:10.906Z",
+    "user": 1,
+    "content_type": 16,
+    "object_id": "20",
+    "object_repr": "Complaint: ไฟทางเดินดับมืด",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Evidence image\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 108,
+  "fields": {
+    "action_time": "2026-02-08T13:32:17.466Z",
+    "user": 1,
+    "content_type": 16,
+    "object_id": "18",
+    "object_repr": "Complaint: รถจักรยานยนต์บนทางเท้า",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Evidence image\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 109,
+  "fields": {
+    "action_time": "2026-02-08T13:32:19.825Z",
+    "user": 1,
+    "content_type": 16,
+    "object_id": "17",
+    "object_repr": "Complaint: เครื่องออกกำลังกายชำรุด",
+    "action_flag": 2,
+    "change_message": "[]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 110,
+  "fields": {
+    "action_time": "2026-02-08T13:32:26.181Z",
+    "user": 1,
+    "content_type": 14,
+    "object_id": "18",
+    "object_repr": "[RESOLVED] รถจักรยานยนต์บนทางเท้า (by Resident: amporn_r)",
+    "action_flag": 2,
+    "change_message": "[]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 111,
+  "fields": {
+    "action_time": "2026-02-08T13:32:37.656Z",
+    "user": 1,
+    "content_type": 6,
+    "object_id": "30",
+    "object_repr": "thongchai_s (Resident)",
+    "action_flag": 2,
+    "change_message": "[]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 112,
+  "fields": {
+    "action_time": "2026-02-08T13:32:53.157Z",
+    "user": 1,
+    "content_type": 6,
+    "object_id": "5",
+    "object_repr": "technician003 (Technician)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Staff status\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 113,
+  "fields": {
+    "action_time": "2026-02-08T13:32:58.581Z",
+    "user": 1,
+    "content_type": 6,
+    "object_id": "4",
+    "object_repr": "technician002 (Technician)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Staff status\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 114,
+  "fields": {
+    "action_time": "2026-02-08T13:33:04.248Z",
+    "user": 1,
+    "content_type": 6,
+    "object_id": "3",
+    "object_repr": "technician001 (Technician)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Staff status\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 115,
+  "fields": {
+    "action_time": "2026-02-09T09:44:36.647Z",
+    "user": 1,
+    "content_type": 14,
+    "object_id": "41",
+    "object_repr": "[PENDING] test1 (by Resident: wichai_t)",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 116,
+  "fields": {
+    "action_time": "2026-02-09T09:44:41.227Z",
+    "user": 1,
+    "content_type": 14,
+    "object_id": "40",
+    "object_repr": "[PENDING] test1 (by Resident: wichai_t)",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 117,
+  "fields": {
+    "action_time": "2026-02-09T12:21:40.653Z",
+    "user": 37,
+    "content_type": 6,
+    "object_id": "38",
+    "object_repr": "Pingpong (Resident)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 118,
+  "fields": {
+    "action_time": "2026-02-09T12:22:26.920Z",
+    "user": 37,
+    "content_type": 6,
+    "object_id": "38",
+    "object_repr": "pingpong (Resident)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Username\", \"Gender\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 119,
+  "fields": {
+    "action_time": "2026-02-09T13:16:58.067Z",
+    "user": 37,
+    "content_type": 6,
+    "object_id": "38",
+    "object_repr": "pingpong (Resident)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Email address\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 120,
+  "fields": {
+    "action_time": "2026-02-09T13:17:30.952Z",
+    "user": 37,
+    "content_type": 9,
+    "object_id": "26",
+    "object_repr": "Resident: pingpong",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "1epk9nizsf96ly00qav6rwbump6v9bm8",
+  "fields": {
+    "session_data": ".eJw9zcEKAiEQgOF3mbMEtru4eO3QKwQRMsxaSeaIumGJ715QdP7g_xtkJoceiXgNxeSCxWbQDXbX111ife7rwcU6zqCPDWJisvnj4PniAghYsCDosHovIN7IGuLFmodN7uxs-koXUikp1TSqYTNP2-HUxe9rkIrj8A_2N7gwMg0:1vrfeL:7FiqV-Hv-shFFE2mhfiUP7hFyMgy9XwU0mQBOQjEmBU",
+    "expire_date": "2026-03-01T17:11:13.852Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "3nerez5wgitgr0obic8dgkjuhli85541",
+  "fields": {
+    "session_data": ".eJxVjMEOgjAQRP-lZ9OsW0uLR-98Q7PLbi1qIKFwMv67kHDQOc57M2-TaF1KWqvOaRBzNWdz-u2Y-qeOO5AHjffJ9tO4zAPbXbEHrbabRF-3w_07KFTLtka8tMyh10yqWVonDQCh8xEjcM6Ot7joARip9egZpXFRNcQg6MF8vv-bOCY:1w1pDj:b1wfl9IUAnhe0Y7h-3UGfyAgtbh5HTZToNLri1oxre0",
+    "expire_date": "2026-03-29T17:25:43.799Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "54z5yvr7lnnathub334fnqftgmmoah2w",
+  "fields": {
+    "session_data": ".eJxVjMEOgyAQRP-Fc0PoUhQ99u43kF1Yqq2BRPBk_Pdq4sU5znszmyjZTzij93lN1ZWKlYvot_0hHK51dGvhxU1B9OIpbh2h_3E6Qfhi-mTpc6rLRPJU5EWLHHLg-X25t4MRy3isAV4dUes5InMMnQ6NUgjaWLCKYtR0RFujFAF2BgxBaLRlbm0bwCix_wE3F0Ij:1wLmKp:EEvd52GyU9xSExkcaqGf6nnqcwcj9Wl9eIda2zqqGno",
+    "expire_date": "2026-05-23T18:23:31.108Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "6en6j448lgds5pv031ta2kcudvl8ynkm",
+  "fields": {
+    "session_data": ".eJxVjDsOwyAQRO9CHSEwLItTpvcZEL8NTiKQjF1FuXtsyUVSjTTvzbyZ89ta3Nbz4ubErkxZdvktg4_PXA-SHr7eG4-trssc-KHwk3Y-tZRft9P9Oyi-l31t0ohR4QAU0EgakhAj7UFKIYIk6TVg1jZYrS15kMKiAW3QGAUqEft8AfTQNw4:1vqUmP:-JS8HqauLwYdmyTxfoA29OJdWHd2Mzc2itLIQy2T4Fo",
+    "expire_date": "2026-02-26T11:22:41.173Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "8zwv56zlm8cfdm6b0u9xxr30mvw1u6jg",
+  "fields": {
+    "session_data": ".eJxVjDsOwjAQBe_iGlkmjn-U9JzB2vWucQDZUpxUiLuTSCmgfTPz3iLCupS4dp7jROIizuL0uyGkJ9cd0APqvcnU6jJPKHdFHrTLWyN-XQ_376BAL1uNRqEdHejMRFlzcKQ4ZAqglUdOyjkYbDYIGzfEYE1mzyMNioLzID5fHYA5kg:1vqBvD:L30j65p1LnLdyZ6uzPLAPhEV5xrSv44DxlmFSwTSZos",
+    "expire_date": "2026-02-25T15:14:31.930Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "qbu2rc92zn0euue17u0sco1uuzq04bba",
+  "fields": {
+    "session_data": "e30:1vpRIi:OWmNjPPpcbRuqJptfuU8qJ1RhydGHUSj4LYGLdpORLA",
+    "expire_date": "2026-02-23T13:27:40.906Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "tamcjrhaoa8nd4euheuih7gq1gsqra0u",
+  "fields": {
+    "session_data": ".eJxVjDsOwyAQBe9CHSHA_Jwyvc-AloUNTiIsGbuKcvdgyUXSzpt5bxZg30rYW17DnNiVSXb5ZRHwmesxpAfU-8Jxqds6R34o_Fwbn5aUX7fT_Tso0EqvrSFB5DECqMFJL3EgmZAQx2R0p1qJZD0aAeSU8-DMmB2R7Y1GhezzBQsxOPk:1vpS42:AcL86y_z8qN4tx5rUCxSjcV_A_f51uVVof9NFQHZguQ",
+    "expire_date": "2026-02-23T14:16:34.913Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "y5eiper28lv086lxzkrw51sq371smqs6",
+  "fields": {
+    "session_data": ".eJxVjEEOwiAQRe_C2hBgSgdcuvcMBJhBqoYmpV0Z765NutDtf-_9lwhxW2vYOi9hInEWgOL0O6aYH9x2QvfYbrPMc1uXKcldkQft8joTPy-H-3dQY6_fGiEVxz4zaqMSY2atLKkCRDoDpYw0FFQEFp0fdTHo_UhWFUODB2fF-wMj9zgh:1vpQNX:iXlRZrza9hVMyRa5jD3dxx87D7J8_Hib1RZceDgJAKY",
+    "expire_date": "2026-02-23T12:28:35.317Z"
+  }
+},
+{
+  "model": "users.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$DdL3csUbP2UkbqZ23Fpb09$qktAWrgAF+QCehGdaxrUFt3B4Hgl/3ubQ2vzeCcDPN8=",
+    "last_login": "2026-05-09T18:23:31.107Z",
+    "is_superuser": true,
+    "username": "admin",
+    "first_name": "",
+    "last_name": "",
+    "email": "admin@gmail.com",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2026-01-28T07:34:15Z",
+    "line_id": null,
+    "phone_number": null,
+    "profile_image": "profile_images/baanhao_logo_White.png",
+    "role": "RESIDENT",
+    "gender": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.user",
+  "pk": 2,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$xm7i5WNWIFP50oRCsOgAtx$RD2/hFpBENMfqAkwCZ84MYJhXO6J0y1D8DQVRRUSrbc=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "athiphat",
+    "first_name": "",
+    "last_name": "",
+    "email": "athiphat@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-01-28T11:38:10Z",
+    "line_id": "Athiphat's",
+    "phone_number": "0855736421",
+    "profile_image": "",
+    "role": "RESIDENT",
+    "gender": "MALE",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.user",
+  "pk": 3,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$UL6gWF7lloKtSzakCiwbPx$5fOp/FlTtdk2hQl++yiWQHGISuFinLdaj3CGTlvKCvc=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "technician001",
+    "first_name": "ไมเคิล",
+    "last_name": "สก้อตต์",
+    "email": "technician001@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-02-07T07:26:43Z",
+    "line_id": "user00",
+    "phone_number": "0123456789",
+    "profile_image": "",
+    "role": "TECHNICIAN",
+    "gender": "MALE",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.user",
+  "pk": 4,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$6QGoXhKyBo86UkAgmArtYh$sek/sFY45uO47P31KDJe1TCsgkAVQRPsZgsAzk5woxI=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "technician002",
+    "first_name": "ลูก้า",
+    "last_name": "บาซี",
+    "email": "technician002@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-02-07T07:29:55Z",
+    "line_id": "teechnician002",
+    "phone_number": "0123456788",
+    "profile_image": "",
+    "role": "TECHNICIAN",
+    "gender": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.user",
+  "pk": 5,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$vGuv1CZqrcflydAIFRXRp9$mjoXFwtv/Lihy5/NVtdyRVyi3802GUA7EU+jz+M4Tn4=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "technician003",
+    "first_name": "วีโต้",
+    "last_name": "คอลีโอเน่",
+    "email": "technician003@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-02-07T07:38:14Z",
+    "line_id": "technicain003",
+    "phone_number": "0123456787",
+    "profile_image": "",
+    "role": "TECHNICIAN",
+    "gender": "MALE",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.user",
+  "pk": 6,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$79DuaS1EzNHoTvlzQrudzD$rEXSFekhhyhl1+XJQmNT1iAJj9hcTOm4VHX/2dr9X5o=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "security001",
+    "first_name": "ไมเคิล",
+    "last_name": "สกอฟิล",
+    "email": "security001@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-02-07T07:46:48Z",
+    "line_id": "security001",
+    "phone_number": "0123456666",
+    "profile_image": "",
+    "role": "SECURITY",
+    "gender": "MALE",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.user",
+  "pk": 7,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$qFNlgQeKSytIMORAfg3vuD$kX5RFi4fJBd/N5yIzU+ZDWTpawRnHbr80jG87uMj30E=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "security002",
+    "first_name": "",
+    "last_name": "",
+    "email": "security002@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-02-07T07:48:50.727Z",
+    "line_id": "security002",
+    "phone_number": "0123456781",
+    "profile_image": "",
+    "role": "SECURITY",
+    "gender": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.user",
+  "pk": 8,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$iw9pXotcVSrR6tJFOro4XP$5+jeZM4CiSpOcpxrhPeQQtiXXR7v8qUifw4WxHoQw2g=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "admin001",
+    "first_name": "",
+    "last_name": "",
+    "email": "admin001@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-02-07T07:55:12.935Z",
+    "line_id": "admin001",
+    "phone_number": "0000000001",
+    "profile_image": "",
+    "role": "ADMIN",
+    "gender": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.user",
+  "pk": 9,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$68fStJ3G3XoX4C1ibEyJQs$Wr3RY0vSXNRVkxAgZo0MzpJmDcEyTwV+Farje6m4AT4=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "somchai_r",
+    "first_name": "สมชาย",
+    "last_name": "รักชาติ",
+    "email": "somchai.r@email.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-02-07T08:15:53Z",
+    "line_id": "somchai.r",
+    "phone_number": "081-234-5678",
+    "profile_image": "",
+    "role": "RESIDENT",
+    "gender": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.user",
+  "pk": 10,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$qcCK2sbNyHxcuY4mAGO0UW$S/r4XyksMGLkn8+OkV9q9RVK63LI/O84Yonxo9Rq5sI=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "malee_s",
+    "first_name": "มาลี",
+    "last_name": "สวยสด",
+    "email": "malee_suay@email.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-02-07T08:22:16.256Z",
+    "line_id": "malee.s99",
+    "phone_number": "0899876543",
+    "profile_image": "",
+    "role": "RESIDENT",
+    "gender": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.user",
+  "pk": 11,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$AsXHGzScmyPwOzwiYbrOUY$uO9KeJmg8SaIMo8brzTn+vACqb16ieMLyQ6djEdqfK0=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "prasert_m",
+    "first_name": "ประเสริฐ",
+    "last_name": "มีชัย",
+    "email": "prasert.m@email.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-02-07T08:22:16Z",
+    "line_id": "ps_meechai",
+    "phone_number": "0611112222",
+    "profile_image": "",
+    "role": "JURISTIC",
+    "gender": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.user",
+  "pk": 12,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$rMljLMsSe98WuMc1vYqiDF$/X/w5SHQMZtmdnXHOwzfOH5mlKLLd6toZx7e0SqSsQQ=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "suda_j",
+    "first_name": "สุดา",
+    "last_name": "ใจดี",
+    "email": "suda.jai@email.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-02-07T08:22:16.657Z",
+    "line_id": "suda_j",
+    "phone_number": "0823334444",
+    "profile_image": "",
+    "role": "RESIDENT",
+    "gender": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.user",
+  "pk": 13,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$ODlWsQnB01J69uLHh3zzOr$JqgC+EC4/meV9xPEn+LWqQorXvYXoKve8UmGkSK+zOQ=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "wichai_t",
+    "first_name": "วิชัย",
+    "last_name": "เทพพิทักษ์",
+    "email": "wichai_t@email.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-02-07T08:22:16.894Z",
+    "line_id": "wichai.t",
+    "phone_number": "0905556666",
+    "profile_image": "",
+    "role": "RESIDENT",
+    "gender": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.user",
+  "pk": 14,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$B6pRJEaTSf8ERA7HUdHI3a$r/lnnR3QNy/EQwM8K/Vp7MzbxeAmf2Sf1QdhFcN0xQQ=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "kanya_w",
+    "first_name": "กัญญา",
+    "last_name": "วงศ์สวัสดิ์",
+    "email": "kanya.w@email.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-02-07T08:22:17.085Z",
+    "line_id": "kanya.wong",
+    "phone_number": "0857778888",
+    "profile_image": "",
+    "role": "RESIDENT",
+    "gender": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.user",
+  "pk": 15,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$G3jUhn5y1F7VUpfAXza50M$1fx6n00KdRmMqcbq8PDIIkYDmNPnquvU8AIPU6pnPWw=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "tanapon_s",
+    "first_name": "ธนพล",
+    "last_name": "สุขสันต์",
+    "email": "tanapon.suk@email.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-02-07T08:22:17.272Z",
+    "line_id": "tanapon_s",
+    "phone_number": "0929990000",
+    "profile_image": "",
+    "role": "RESIDENT",
+    "gender": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.user",
+  "pk": 16,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$Tsbt6lWeLkSQGLLgRCEp14$IRaWKAeQSzoA6hnVURn/BtP7sxl168VKRBEid8fiytc=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "pimchanok_l",
+    "first_name": "พิมพ์ชนก",
+    "last_name": "เลิศล้ำ",
+    "email": "pimchanok@email.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-02-07T08:22:17.462Z",
+    "line_id": "pim.chanok",
+    "phone_number": "0831234567",
+    "profile_image": "",
+    "role": "RESIDENT",
+    "gender": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.user",
+  "pk": 17,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$Jr3v21zZYTB6sxxvlpaqql$l7/EKXpCc3Et6rTyn/yTUzqdE0IM1EJt22BBwcU84iE=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "arthit_s",
+    "first_name": "อาทิตย์",
+    "last_name": "แสงทอง",
+    "email": "arthit.s@email.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-02-07T08:22:17.654Z",
+    "line_id": "sunny_art",
+    "phone_number": "0862345678",
+    "profile_image": "",
+    "role": "RESIDENT",
+    "gender": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.user",
+  "pk": 18,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$gIxdhCKi3HxMhN7KAxhsa4$4xZ1WsFcoMls0RqalZ6dpc0G6HgpesVhM8qdy6ovB5w=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "siriporn_n",
+    "first_name": "ศิริพร",
+    "last_name": "นามสกุล",
+    "email": "siriporn.n@email.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-02-07T08:22:17.841Z",
+    "line_id": "siri_porn",
+    "phone_number": "0958765432",
+    "profile_image": "",
+    "role": "RESIDENT",
+    "gender": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.user",
+  "pk": 19,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$jxYIP44dGF2QCgJGUjxFdh$Rmd8elCYrz+Xs0F3H4rytjUhcgpG/hKJrzVsCkAJiIs=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "weerachat_c",
+    "first_name": "วีระชาติ",
+    "last_name": "ชาญชัย",
+    "email": "weerachat@email.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-02-07T08:22:18.032Z",
+    "line_id": "weera_c",
+    "phone_number": "0845678901",
+    "profile_image": "",
+    "role": "RESIDENT",
+    "gender": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.user",
+  "pk": 20,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$p08KDrj7YplfgFf15AvCVU$iNKPZeHMGaY+cRkulSDWWj8ovg4vKoqw2RulHqdfKOw=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "duangdao_p",
+    "first_name": "ดวงดาว",
+    "last_name": "พราวแสง",
+    "email": "duangdao@email.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-02-07T08:22:18.218Z",
+    "line_id": "dao_prow",
+    "phone_number": "0623456789",
+    "profile_image": "",
+    "role": "RESIDENT",
+    "gender": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.user",
+  "pk": 21,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$hQcQ5oSwBndqtGCSeHfLVT$Ehh3WCb/iQM6tDfnM9R9MQ5X64xdVzvvixmQPqSFS7c=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "natthapong_s",
+    "first_name": "ณัฐพงศ์",
+    "last_name": "สมบูรณ์",
+    "email": "natthapong@email.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-02-07T08:22:18.406Z",
+    "line_id": "nat_pong",
+    "phone_number": "0876543210",
+    "profile_image": "",
+    "role": "RESIDENT",
+    "gender": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.user",
+  "pk": 22,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$jVRn7jAWExuL3SBAX3gnKE$46Ww5rH0K3Up/Il4HmXfSwqNR6sRA2NtXNlwJC5JQVw=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "waraporn_k",
+    "first_name": "วราภรณ์",
+    "last_name": "เกียรติยศ",
+    "email": "waraporn.k@email.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-02-07T08:22:18.601Z",
+    "line_id": "wara_k",
+    "phone_number": "0934567890",
+    "profile_image": "",
+    "role": "RESIDENT",
+    "gender": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.user",
+  "pk": 23,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$u2Ytn7myOPakEx8pTacdNn$014LaDzNubQ29TmFlUfAMiAW/01zg2EOqDiUsTTh8zk=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "somsak_p",
+    "first_name": "สมศักดิ์",
+    "last_name": "ภักดี",
+    "email": "somsak_p@email.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-02-07T08:22:18.786Z",
+    "line_id": "somsak.p",
+    "phone_number": "0818889999",
+    "profile_image": "",
+    "role": "RESIDENT",
+    "gender": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.user",
+  "pk": 24,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$aCNSjcS726YHAU5ZwNK7Gq$ItQdo54CMUrqKkN7NMtVSeZCGCohQ3bs4m9ETw3nsZA=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "ratana_t",
+    "first_name": "รัตนา",
+    "last_name": "ทรัพย์สิน",
+    "email": "ratana.sub@email.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-02-07T08:22:18.977Z",
+    "line_id": "ratana_t",
+    "phone_number": "0890001111",
+    "profile_image": "",
+    "role": "RESIDENT",
+    "gender": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.user",
+  "pk": 25,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$2JOflVrf9aDEOjJ6LnxnUd$W0eJ88zS/sxv6uERHxMftrRGE7zwuF9e/MchPSpg7uk=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "chaiyot_w",
+    "first_name": "ชัยยศ",
+    "last_name": "วรเวช",
+    "email": "chaiyot.w@email.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-02-07T08:22:19.162Z",
+    "line_id": "chaiyot_v",
+    "phone_number": "0632223333",
+    "profile_image": "",
+    "role": "RESIDENT",
+    "gender": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.user",
+  "pk": 26,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$eVzHphslT9uRTcqQHwfgnt$pjO92Q1ggHV9CuaG3kAfmIr7HsaAEcwAiZ8DiE1QEu0=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "amporn_r",
+    "first_name": "อัมพร",
+    "last_name": "รุ่งเรือง",
+    "email": "amporn.r@email.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-02-07T08:22:19.347Z",
+    "line_id": "am_porn",
+    "phone_number": "0854445555",
+    "profile_image": "",
+    "role": "RESIDENT",
+    "gender": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.user",
+  "pk": 27,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$m8WUtsnQhg4D35K0Tn1TXi$U9zWSJbZ/Vh3EqD6W9Z8IShLfuUvnF8QsAELCoLFyms=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "supachai_m",
+    "first_name": "ศุภชัย",
+    "last_name": "มั่นคง",
+    "email": "supachai@email.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-02-07T08:22:19.532Z",
+    "line_id": "supachai.m",
+    "phone_number": "0916667777",
+    "profile_image": "",
+    "role": "RESIDENT",
+    "gender": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.user",
+  "pk": 28,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$1Bis1ZWalNUH18yqCJM4Nc$R9j0adncSgGMVxsqt4DgyvwF3JfC0pvvLn186gXrnLI=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "narong_k",
+    "first_name": "ณรงค์",
+    "last_name": "ก้องเกียรติ",
+    "email": "narong.k@email.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-02-07T08:22:19.721Z",
+    "line_id": "narong_k",
+    "phone_number": "0828887777",
+    "profile_image": "",
+    "role": "RESIDENT",
+    "gender": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.user",
+  "pk": 29,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$oRzL4mPWYzkF9PjuWGepBD$BU/mc4GJDQgYcWjrWQTvSd4SW4fIYRq16HSix7lHJeQ=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "uraiwan_j",
+    "first_name": "อุไรวรรณ",
+    "last_name": "จันทร์เพ็ญ",
+    "email": "uraiwan.j@email.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-02-07T08:22:19.913Z",
+    "line_id": "urai_wan",
+    "phone_number": "0941113333",
+    "profile_image": "",
+    "role": "RESIDENT",
+    "gender": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.user",
+  "pk": 30,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$T6GPveBPeIiIdoZuWZ9G9N$N1KRFGlZZLWLZRRhW2WSw3zCJzN9eopGYC66uDLcZFY=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "thongchai_s",
+    "first_name": "ธงชัย",
+    "last_name": "ศรีสุข",
+    "email": "thongchai@email.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-02-07T08:22:20Z",
+    "line_id": "thong_chai",
+    "phone_number": "0869998888",
+    "profile_image": "",
+    "role": "RESIDENT",
+    "gender": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.user",
+  "pk": 31,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$1WE6cUh3BL2taIKNXR5LJk$H2RpqlZXdwu06nooii10svWjQ9eQHzh6JvM3r2+CAUM=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "busaba_p",
+    "first_name": "บุษบา",
+    "last_name": "พารวย",
+    "email": "busaba.p@email.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-02-07T08:22:20.283Z",
+    "line_id": "busaba.pa",
+    "phone_number": "0835554444",
+    "profile_image": "",
+    "role": "RESIDENT",
+    "gender": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.user",
+  "pk": 32,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$829aqBxmanDqGQJ4yCjTQv$6FYM4oL5u+a2JqTm0P8k3/lCAbNr63QCqZQFGMwR7n0=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "kasem_t",
+    "first_name": "เกษม",
+    "last_name": "ธรรมรงค์",
+    "email": "kasem.t@email.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-02-07T08:22:20.473Z",
+    "line_id": "kasem_t",
+    "phone_number": "0902221111",
+    "profile_image": "",
+    "role": "RESIDENT",
+    "gender": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.user",
+  "pk": 33,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$aVDJMzroTECl2Ha6ja2HaB$IY9Vdln+YHf4sPS2vYTl5tpyzzYizk1ij5psFAdOgIQ=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "nipa_r",
+    "first_name": "นิภา",
+    "last_name": "รักดี",
+    "email": "nipa.r@email.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-02-07T08:22:20.664Z",
+    "line_id": "nipa_rak",
+    "phone_number": "0817776666",
+    "profile_image": "",
+    "role": "RESIDENT",
+    "gender": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.user",
+  "pk": 34,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$KzjcwXP221MtlckBy83Bo7$idjxCpwcH8oNYuK/Hd1rnmr7u1+egXcJTcOZjZPt9N0=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "tech_1",
+    "first_name": "สมชาย",
+    "last_name": "งานช่าง",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-02-07T08:41:53.299Z",
+    "line_id": null,
+    "phone_number": null,
+    "profile_image": "",
+    "role": "TECHNICIAN",
+    "gender": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.user",
+  "pk": 35,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$FRfZQ7VynLa1E8umLbSbp7$7d+iKGuzKn52UNIC5wyon0/9YMRHVzQSAEkpn2y3REI=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "tech_2",
+    "first_name": "วิชัย",
+    "last_name": "การไฟฟ้า",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-02-07T08:43:20.230Z",
+    "line_id": null,
+    "phone_number": null,
+    "profile_image": "",
+    "role": "TECHNICIAN",
+    "gender": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.user",
+  "pk": 36,
+  "fields": {
+    "password": "Tech@2024",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "tech_3",
+    "first_name": "ปรีชา",
+    "last_name": "ประปา",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-02-07T08:45:20.957Z",
+    "line_id": null,
+    "phone_number": null,
+    "profile_image": "",
+    "role": "RESIDENT",
+    "gender": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.user",
+  "pk": 37,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$xfZAG9THz2axVbBj9wmDcR$Pq8m/q/Pqs0rTnCnDoHAPTeQC2ccNm+SsFLfpV9QaSo=",
+    "last_login": "2026-02-09T13:16:24.270Z",
+    "is_superuser": true,
+    "username": "admin_pp",
+    "first_name": "",
+    "last_name": "",
+    "email": "admin99@gmail.com",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2026-02-09T12:19:12.503Z",
+    "line_id": null,
+    "phone_number": null,
+    "profile_image": "",
+    "role": "RESIDENT",
+    "gender": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.user",
+  "pk": 38,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$QqiAcNtvtNFZmqx4krVr0u$smEx+ehvxJjuGLV7MX1/outC9k7yi5grA7Jj6NE4Qfc=",
+    "last_login": "2026-02-12T11:22:41.162Z",
+    "is_superuser": false,
+    "username": "pingpong",
+    "first_name": "",
+    "last_name": "",
+    "email": "test3@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-02-09T12:21:39Z",
+    "line_id": "ad",
+    "phone_number": "0123",
+    "profile_image": "",
+    "role": "RESIDENT",
+    "gender": "MALE",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.resident",
+  "pk": 2,
+  "fields": {
+    "user": 10,
+    "house": null,
+    "is_owner": false
+  }
+},
+{
+  "model": "users.resident",
+  "pk": 3,
+  "fields": {
+    "user": 11,
+    "house": null,
+    "is_owner": false
+  }
+},
+{
+  "model": "users.resident",
+  "pk": 4,
+  "fields": {
+    "user": 12,
+    "house": null,
+    "is_owner": false
+  }
+},
+{
+  "model": "users.resident",
+  "pk": 5,
+  "fields": {
+    "user": 13,
+    "house": null,
+    "is_owner": false
+  }
+},
+{
+  "model": "users.resident",
+  "pk": 6,
+  "fields": {
+    "user": 14,
+    "house": null,
+    "is_owner": false
+  }
+},
+{
+  "model": "users.resident",
+  "pk": 7,
+  "fields": {
+    "user": 15,
+    "house": null,
+    "is_owner": false
+  }
+},
+{
+  "model": "users.resident",
+  "pk": 8,
+  "fields": {
+    "user": 16,
+    "house": null,
+    "is_owner": false
+  }
+},
+{
+  "model": "users.resident",
+  "pk": 9,
+  "fields": {
+    "user": 17,
+    "house": null,
+    "is_owner": false
+  }
+},
+{
+  "model": "users.resident",
+  "pk": 10,
+  "fields": {
+    "user": 18,
+    "house": null,
+    "is_owner": false
+  }
+},
+{
+  "model": "users.resident",
+  "pk": 11,
+  "fields": {
+    "user": 19,
+    "house": null,
+    "is_owner": false
+  }
+},
+{
+  "model": "users.resident",
+  "pk": 12,
+  "fields": {
+    "user": 20,
+    "house": null,
+    "is_owner": false
+  }
+},
+{
+  "model": "users.resident",
+  "pk": 13,
+  "fields": {
+    "user": 21,
+    "house": null,
+    "is_owner": false
+  }
+},
+{
+  "model": "users.resident",
+  "pk": 14,
+  "fields": {
+    "user": 22,
+    "house": null,
+    "is_owner": false
+  }
+},
+{
+  "model": "users.resident",
+  "pk": 15,
+  "fields": {
+    "user": 23,
+    "house": null,
+    "is_owner": false
+  }
+},
+{
+  "model": "users.resident",
+  "pk": 16,
+  "fields": {
+    "user": 24,
+    "house": null,
+    "is_owner": false
+  }
+},
+{
+  "model": "users.resident",
+  "pk": 17,
+  "fields": {
+    "user": 25,
+    "house": null,
+    "is_owner": false
+  }
+},
+{
+  "model": "users.resident",
+  "pk": 18,
+  "fields": {
+    "user": 26,
+    "house": null,
+    "is_owner": false
+  }
+},
+{
+  "model": "users.resident",
+  "pk": 19,
+  "fields": {
+    "user": 27,
+    "house": null,
+    "is_owner": false
+  }
+},
+{
+  "model": "users.resident",
+  "pk": 20,
+  "fields": {
+    "user": 28,
+    "house": null,
+    "is_owner": false
+  }
+},
+{
+  "model": "users.resident",
+  "pk": 21,
+  "fields": {
+    "user": 29,
+    "house": null,
+    "is_owner": false
+  }
+},
+{
+  "model": "users.resident",
+  "pk": 22,
+  "fields": {
+    "user": 30,
+    "house": null,
+    "is_owner": false
+  }
+},
+{
+  "model": "users.resident",
+  "pk": 23,
+  "fields": {
+    "user": 31,
+    "house": null,
+    "is_owner": false
+  }
+},
+{
+  "model": "users.resident",
+  "pk": 24,
+  "fields": {
+    "user": 32,
+    "house": null,
+    "is_owner": false
+  }
+},
+{
+  "model": "users.resident",
+  "pk": 25,
+  "fields": {
+    "user": 33,
+    "house": null,
+    "is_owner": false
+  }
+},
+{
+  "model": "users.resident",
+  "pk": 26,
+  "fields": {
+    "user": 38,
+    "house": null,
+    "is_owner": false
+  }
+},
+{
+  "model": "users.technician",
+  "pk": 1,
+  "fields": {
+    "user": 3,
+    "skill_set": "ประปา",
+    "current_status": "AVAILABLE"
+  }
+},
+{
+  "model": "users.technician",
+  "pk": 2,
+  "fields": {
+    "user": 4,
+    "skill_set": "ไฟฟ้า",
+    "current_status": "AVAILABLE"
+  }
+},
+{
+  "model": "users.technician",
+  "pk": 3,
+  "fields": {
+    "user": 5,
+    "skill_set": "ช่าง tech",
+    "current_status": "AVAILABLE"
+  }
+},
+{
+  "model": "users.technician",
+  "pk": 4,
+  "fields": {
+    "user": 34,
+    "skill_set": "",
+    "current_status": "AVAILABLE"
+  }
+},
+{
+  "model": "users.technician",
+  "pk": 5,
+  "fields": {
+    "user": 35,
+    "skill_set": "",
+    "current_status": "AVAILABLE"
+  }
+},
+{
+  "model": "users.technician",
+  "pk": 6,
+  "fields": {
+    "user": 36,
+    "skill_set": "",
+    "current_status": "AVAILABLE"
+  }
+},
+{
+  "model": "users.juristicofficer",
+  "pk": 1,
+  "fields": {
+    "user": 11,
+    "officer_id": "001",
+    "department": "admin"
+  }
+},
+{
+  "model": "users.security",
+  "pk": 1,
+  "fields": {
+    "is_on_duty": false,
+    "user": 6,
+    "station_id": "001",
+    "shift_time": "07.00 am"
+  }
+},
+{
+  "model": "users.security",
+  "pk": 2,
+  "fields": {
+    "is_on_duty": false,
+    "user": 7,
+    "station_id": "002",
+    "shift_time": "05.00 pm"
+  }
+},
+{
+  "model": "users.admin",
+  "pk": 1,
+  "fields": {
+    "user": 8,
+    "permission_level": "CEO"
+  }
+},
+{
+  "model": "properties.house",
+  "pk": 3,
+  "fields": {
+    "house_id": "A-101",
+    "house_number": "100/1",
+    "owner": 15
+  }
+},
+{
+  "model": "properties.house",
+  "pk": 4,
+  "fields": {
+    "house_id": "A-102",
+    "house_number": "100/2",
+    "owner": 2
+  }
+},
+{
+  "model": "properties.house",
+  "pk": 5,
+  "fields": {
+    "house_id": "B-201",
+    "house_number": "100/15",
+    "owner": 3
+  }
+},
+{
+  "model": "properties.house",
+  "pk": 6,
+  "fields": {
+    "house_id": "B-202",
+    "house_number": "100/16",
+    "owner": 4
+  }
+},
+{
+  "model": "properties.house",
+  "pk": 7,
+  "fields": {
+    "house_id": "C-301",
+    "house_number": "100/30",
+    "owner": 5
+  }
+},
+{
+  "model": "properties.house",
+  "pk": 8,
+  "fields": {
+    "house_id": "C-302",
+    "house_number": "100/31",
+    "owner": 6
+  }
+},
+{
+  "model": "properties.house",
+  "pk": 9,
+  "fields": {
+    "house_id": "D-401",
+    "house_number": "100/45",
+    "owner": 7
+  }
+},
+{
+  "model": "properties.house",
+  "pk": 10,
+  "fields": {
+    "house_id": "D-402",
+    "house_number": "100/46",
+    "owner": 8
+  }
+},
+{
+  "model": "properties.house",
+  "pk": 11,
+  "fields": {
+    "house_id": "E-501",
+    "house_number": "100/60",
+    "owner": 9
+  }
+},
+{
+  "model": "properties.house",
+  "pk": 12,
+  "fields": {
+    "house_id": "E-502",
+    "house_number": "100/61",
+    "owner": 10
+  }
+},
+{
+  "model": "issues.issue",
+  "pk": 2,
+  "fields": {
+    "reporter": 2,
+    "title": "เสียงเพลงดังยามวิกาล",
+    "description": "บ้านตรงข้ามเปิดเพลงเสียงดังหลังเที่ยงคืน รบกวนการนอน",
+    "priority": "MEDIUM",
+    "status": "IN_PROGRESS",
+    "created_date": "2026-02-07T08:40:33.314Z",
+    "location": "บ้านเลขที่ 100/3",
+    "analysis_json": null
+  }
+},
+{
+  "model": "issues.issue",
+  "pk": 3,
+  "fields": {
+    "reporter": 3,
+    "title": "กลิ่นบุหรี่รบกวน",
+    "description": "เพื่อนบ้านสูบบุหรี่ที่ระเบียง กลิ่นลอยเข้ามาในห้องนอนเด็ก",
+    "priority": "MEDIUM",
+    "status": "PENDING",
+    "created_date": "2026-02-07T08:40:33.317Z",
+    "location": "ระเบียงหลังบ้าน",
+    "analysis_json": null
+  }
+},
+{
+  "model": "issues.issue",
+  "pk": 4,
+  "fields": {
+    "reporter": 4,
+    "title": "สุนัขถ่ายหน้าบ้าน",
+    "description": "มีคนจูงสุนัขมาเดินแล้วไม่เก็บมูลสุนัข เลอะเทอะหน้าบ้าน",
+    "priority": "LOW",
+    "status": "RESOLVED",
+    "created_date": "2026-02-07T08:40:33.318Z",
+    "location": "ทางเดินเท้า",
+    "analysis_json": null
+  }
+},
+{
+  "model": "issues.issue",
+  "pk": 5,
+  "fields": {
+    "reporter": 5,
+    "title": "จอดรถซ้อนคันใส่เบรกมือ",
+    "description": "รถทะเบียน กข-1234 จอดซ้อนคันเข็นไม่ได้ รีบออกไปทำงาน",
+    "priority": "HIGH",
+    "status": "IN_PROGRESS",
+    "created_date": "2026-02-07T08:40:33.319Z",
+    "location": "ลานจอดรถโซน A",
+    "analysis_json": null
+  }
+},
+{
+  "model": "issues.issue",
+  "pk": 6,
+  "fields": {
+    "reporter": 6,
+    "title": "เพื่อนบ้านต่อเติมบ้านเสียงดัง",
+    "description": "มีการก่อสร้างเจาะผนังวันอาทิตย์ เสียงดังรบกวน",
+    "priority": "MEDIUM",
+    "status": "CLOSED",
+    "created_date": "2026-02-07T08:40:33.320Z",
+    "location": "บ้านเลขที่ 100/5",
+    "analysis_json": null
+  }
+},
+{
+  "model": "issues.issue",
+  "pk": 7,
+  "fields": {
+    "reporter": 7,
+    "title": "กลิ่นขยะเหม็นเน่า",
+    "description": "ถังขยะเปียกแตก ส่งกลิ่นเหม็นเน่าไปทั่วบริเวณทางเดิน",
+    "priority": "HIGH",
+    "status": "RESOLVED",
+    "created_date": "2026-02-07T08:40:33.321Z",
+    "location": "จุดทิ้งขยะรวม",
+    "analysis_json": null
+  }
+},
+{
+  "model": "issues.issue",
+  "pk": 8,
+  "fields": {
+    "reporter": 8,
+    "title": "รปภ. หลับยาม",
+    "description": "ขับรถเข้ามาตอนตี 2 เห็น รปภ. นอนหลับ ไม่เปิดไม้กั้นให้",
+    "priority": "CRITICAL",
+    "status": "PENDING",
+    "created_date": "2026-02-07T08:40:33.323Z",
+    "location": "ป้อมหน้าหมู่บ้าน",
+    "analysis_json": null
+  }
+},
+{
+  "model": "issues.issue",
+  "pk": 9,
+  "fields": {
+    "reporter": 9,
+    "title": "วัยรุ่นมั่วสุมดื่มสุรา",
+    "description": "กลุ่มวัยรุ่นส่งเสียงดังและดื่มสุราที่สนามเด็กเล่น กลัวไม่ปลอดภัย",
+    "priority": "HIGH",
+    "status": "IN_PROGRESS",
+    "created_date": "2026-02-07T08:40:33.324Z",
+    "location": "สวนสาธารณะ",
+    "analysis_json": null
+  }
+},
+{
+  "model": "issues.issue",
+  "pk": 10,
+  "fields": {
+    "reporter": 10,
+    "title": "รถบุคคลภายนอกจอดค้างคืน",
+    "description": "มีรถไม่มีสติ๊กเกอร์หมู่บ้านมาจอดทิ้งไว้ 2 วันแล้ว",
+    "priority": "LOW",
+    "status": "PENDING",
+    "created_date": "2026-02-07T08:40:33.325Z",
+    "location": "ที่จอดรถส่วนกลาง",
+    "analysis_json": null
+  }
+},
+{
+  "model": "issues.issue",
+  "pk": 11,
+  "fields": {
+    "reporter": 11,
+    "title": "กลิ่นทำอาหารฉุนจัด",
+    "description": "ห้องข้างๆ ผัดพริกแกง กลิ่นฟุ้งกระจายเข้าห้อง แสบจมูกมาก",
+    "priority": "LOW",
+    "status": "PENDING",
+    "created_date": "2026-02-07T08:40:33.326Z",
+    "location": "โถงทางเดิน",
+    "analysis_json": null
+  }
+},
+{
+  "model": "issues.issue",
+  "pk": 12,
+  "fields": {
+    "reporter": 12,
+    "title": "สัตว์เลี้ยงเห่ารบกวน",
+    "description": "สุนัขบ้านตรงข้ามเห่าตลอดเวลาที่เจ้าของไม่อยู่บ้าน",
+    "priority": "MEDIUM",
+    "status": "RESOLVED",
+    "created_date": "2026-02-07T08:40:33.327Z",
+    "location": "บ้านเลขที่ 100/4",
+    "analysis_json": null
+  }
+},
+{
+  "model": "issues.issue",
+  "pk": 13,
+  "fields": {
+    "reporter": 13,
+    "title": "วางสิ่งของกีดขวางทางเดิน",
+    "description": "บ้านตรงข้ามเอาราวตากผ้ามาวางขวางทางเดินส่วนกลาง",
+    "priority": "MEDIUM",
+    "status": "IN_PROGRESS",
+    "created_date": "2026-02-07T08:40:33.327Z",
+    "location": "ทางเดินชั้น 2",
+    "analysis_json": null
+  }
+},
+{
+  "model": "issues.issue",
+  "pk": 14,
+  "fields": {
+    "reporter": 14,
+    "title": "จอดรถทับเส้น",
+    "description": "รถกระบะจอดกินเลน ทำให้รถสวนลำบาก เสี่ยงเฉี่ยวชน",
+    "priority": "LOW",
+    "status": "PENDING",
+    "created_date": "2026-02-07T08:40:33.328Z",
+    "location": "ลานจอดรถโซน B",
+    "analysis_json": null
+  }
+},
+{
+  "model": "issues.issue",
+  "pk": 15,
+  "fields": {
+    "reporter": 15,
+    "title": "สระว่ายน้ำสกปรก",
+    "description": "น้ำในสระขุ่นมากและมีเศษใบไม้เยอะ ไม่กล้าลงเล่น",
+    "priority": "MEDIUM",
+    "status": "PENDING",
+    "created_date": "2026-02-07T08:40:33.329Z",
+    "location": "สระว่ายน้ำ",
+    "analysis_json": null
+  }
+},
+{
+  "model": "issues.issue",
+  "pk": 16,
+  "fields": {
+    "reporter": 16,
+    "title": "เผาขยะควันโขมง",
+    "description": "มีการเผาขยะในที่รกร้างข้างหมู่บ้าน ควันลอยเข้ามาเยอะมาก",
+    "priority": "CRITICAL",
+    "status": "PENDING",
+    "created_date": "2026-02-07T08:40:33.330Z",
+    "location": "ที่รกร้างข้างหมู่บ้าน",
+    "analysis_json": null
+  }
+},
+{
+  "model": "issues.issue",
+  "pk": 17,
+  "fields": {
+    "reporter": 17,
+    "title": "เครื่องออกกำลังกายชำรุด",
+    "description": "ลู่วิ่งไฟฟ้าเครื่องที่ 2 ปุ่มกด Start ไม่ทำงาน",
+    "priority": "LOW",
+    "status": "CLOSED",
+    "created_date": "2026-02-07T08:40:33.331Z",
+    "location": "ฟิตเนส",
+    "analysis_json": null
+  }
+},
+{
+  "model": "issues.issue",
+  "pk": 18,
+  "fields": {
+    "reporter": 18,
+    "title": "รถจักรยานยนต์บนทางเท้า",
+    "description": "มีมอเตอร์ไซค์ขับขี่และจอดบนทางเท้า อันตรายต่อคนเดิน",
+    "priority": "MEDIUM",
+    "status": "RESOLVED",
+    "created_date": "2026-02-07T08:40:33.331Z",
+    "location": "ทางเดินเข้าตึก",
+    "analysis_json": null
+  }
+},
+{
+  "model": "issues.issue",
+  "pk": 19,
+  "fields": {
+    "reporter": 19,
+    "title": "ทะเลาะวิวาทเสียงดัง",
+    "description": "ได้ยินเสียงคนทะเลาะกันรุนแรงและปาสิ่งของ น่ากลัวมาก",
+    "priority": "HIGH",
+    "status": "CLOSED",
+    "created_date": "2026-02-07T08:40:33.332Z",
+    "location": "บ้านเลขที่ 100/8",
+    "analysis_json": null
+  }
+},
+{
+  "model": "issues.issue",
+  "pk": 20,
+  "fields": {
+    "reporter": 20,
+    "title": "ไฟทางเดินดับมืด",
+    "description": "ไฟกิ่งดับทั้งซอย กลัวเกิดอันตรายตอนกลางคืน",
+    "priority": "HIGH",
+    "status": "PENDING",
+    "created_date": "2026-02-07T08:40:33.333Z",
+    "location": "ซอย 5",
+    "analysis_json": null
+  }
+},
+{
+  "model": "issues.issue",
+  "pk": 21,
+  "fields": {
+    "reporter": 2,
+    "title": "ซิงค์ล้างจานตัน",
+    "description": "น้ำระบายช้ามาก ส่งกลิ่นเหม็น",
+    "priority": "MEDIUM",
+    "status": "IN_PROGRESS",
+    "created_date": "2026-02-07T08:45:20.959Z",
+    "location": "ห้องครัว",
+    "analysis_json": null
+  }
+},
+{
+  "model": "issues.issue",
+  "pk": 22,
+  "fields": {
+    "reporter": 3,
+    "title": "สวิตช์ไฟเสีย",
+    "description": "กดเปิดไฟห้องนอนไม่ติด น่าจะสวิตช์พัง",
+    "priority": "LOW",
+    "status": "PENDING",
+    "created_date": "2026-02-07T08:45:20.960Z",
+    "location": "ห้องนอนเล็ก",
+    "analysis_json": null
+  }
+},
+{
+  "model": "issues.issue",
+  "pk": 23,
+  "fields": {
+    "reporter": 4,
+    "title": "หลังคารั่วซึม",
+    "description": "ฝนตกหนักแล้วมีน้ำซึมลงมาจากฝ้า",
+    "priority": "CRITICAL",
+    "status": "IN_PROGRESS",
+    "created_date": "2026-02-07T08:45:20.962Z",
+    "location": "โถงชั้น 2",
+    "analysis_json": null
+  }
+},
+{
+  "model": "issues.issue",
+  "pk": 24,
+  "fields": {
+    "reporter": 5,
+    "title": "กลอนประตูล็อคไม่ได้",
+    "description": "ประตูล็อคฝืดมาก บางทีไขไม่ออก",
+    "priority": "HIGH",
+    "status": "RESOLVED",
+    "created_date": "2026-02-07T08:45:20.963Z",
+    "location": "ประตูหน้าบ้าน",
+    "analysis_json": null
+  }
+},
+{
+  "model": "issues.issue",
+  "pk": 25,
+  "fields": {
+    "reporter": 6,
+    "title": "ปั๊มน้ำเสียงดังผิดปกติ",
+    "description": "ปั๊มน้ำทำงานตลอดเวลาและเสียงดังมาก",
+    "priority": "MEDIUM",
+    "status": "PENDING",
+    "created_date": "2026-02-07T08:45:20.963Z",
+    "location": "หลังบ้าน",
+    "analysis_json": null
+  }
+},
+{
+  "model": "issues.issue",
+  "pk": 26,
+  "fields": {
+    "reporter": 7,
+    "title": "น้ำประปาไม่ไหล",
+    "description": "น้ำในห้องน้ำชั้น 2 ไม่ไหลเลย",
+    "priority": "HIGH",
+    "status": "IN_PROGRESS",
+    "created_date": "2026-02-07T08:45:20.964Z",
+    "location": "ห้องน้ำชั้น 2",
+    "analysis_json": null
+  }
+},
+{
+  "model": "issues.issue",
+  "pk": 27,
+  "fields": {
+    "reporter": 8,
+    "title": "แอร์ไม่เย็น",
+    "description": "เปิด 18 องศาแล้วก็ยังมีแต่ลม",
+    "priority": "HIGH",
+    "status": "CLOSED",
+    "created_date": "2026-02-07T08:45:20.965Z",
+    "location": "ห้องนอนใหญ่",
+    "analysis_json": null
+  }
+},
+{
+  "model": "issues.issue",
+  "pk": 28,
+  "fields": {
+    "reporter": 9,
+    "title": "กระจกหน้าต่างร้าว",
+    "description": "โดนกิ่งไม้ฟาดตอนพายุเข้า กระจกร้าว",
+    "priority": "MEDIUM",
+    "status": "PENDING",
+    "created_date": "2026-02-07T08:45:20.966Z",
+    "location": "ห้องนั่งเล่น",
+    "analysis_json": null
+  }
+},
+{
+  "model": "issues.issue",
+  "pk": 29,
+  "fields": {
+    "reporter": 10,
+    "title": "เต้ารับมีประกายไฟ",
+    "description": "เสียบปลั๊กแล้วมีเสียงดังเปรี๊ยะและประกายไฟ",
+    "priority": "CRITICAL",
+    "status": "RESOLVED",
+    "created_date": "2026-02-07T08:45:20.966Z",
+    "location": "ห้องครัว",
+    "analysis_json": null
+  }
+},
+{
+  "model": "issues.issue",
+  "pk": 30,
+  "fields": {
+    "reporter": 11,
+    "title": "ท่อน้ำทิ้งระเบียงตัน",
+    "description": "ฝนตกแล้วน้ำขังที่ระเบียง ไม่ระบาย",
+    "priority": "LOW",
+    "status": "PENDING",
+    "created_date": "2026-02-07T08:45:20.968Z",
+    "location": "ระเบียง",
+    "analysis_json": null
+  }
+},
+{
+  "model": "issues.issue",
+  "pk": 31,
+  "fields": {
+    "reporter": 12,
+    "title": "ราวบันไดโยก",
+    "description": "จับราวบันไดแล้วรู้สึกไม่แน่น กลัวล้ม",
+    "priority": "MEDIUM",
+    "status": "IN_PROGRESS",
+    "created_date": "2026-02-07T08:45:20.968Z",
+    "location": "บันได",
+    "analysis_json": null
+  }
+},
+{
+  "model": "issues.issue",
+  "pk": 32,
+  "fields": {
+    "reporter": 13,
+    "title": "สายอินเทอร์เน็ตขาด",
+    "description": "หนูกัดสายเน็ตที่เดินลอยไว้ข้างกำแพง",
+    "priority": "MEDIUM",
+    "status": "RESOLVED",
+    "created_date": "2026-02-07T08:45:20.969Z",
+    "location": "ห้องทำงาน",
+    "analysis_json": null
+  }
+},
+{
+  "model": "issues.issue",
+  "pk": 33,
+  "fields": {
+    "reporter": 14,
+    "title": "เครื่องทำน้ำอุ่นไม่ทำงาน",
+    "description": "ไฟไม่เข้าเครื่องทำน้ำอุ่น",
+    "priority": "HIGH",
+    "status": "PENDING",
+    "created_date": "2026-02-07T08:45:20.970Z",
+    "location": "ห้องน้ำ 1",
+    "analysis_json": null
+  }
+},
+{
+  "model": "issues.issue",
+  "pk": 34,
+  "fields": {
+    "reporter": 15,
+    "title": "ก๊อกสนามหัก",
+    "description": "เกลียวก๊อกน้ำที่สวนหน้าบ้านหัก น้ำพุ่ง",
+    "priority": "HIGH",
+    "status": "CLOSED",
+    "created_date": "2026-02-07T08:45:20.971Z",
+    "location": "สวนหน้าบ้าน",
+    "analysis_json": null
+  }
+},
+{
+  "model": "issues.issue",
+  "pk": 35,
+  "fields": {
+    "reporter": 16,
+    "title": "ประตูโรงรถเปิดไม่ได้",
+    "description": "กดรีโมทแล้วประตูม้วนไม่ทำงาน",
+    "priority": "MEDIUM",
+    "status": "PENDING",
+    "created_date": "2026-02-07T08:45:20.972Z",
+    "location": "โรงรถ",
+    "analysis_json": null
+  }
+},
+{
+  "model": "issues.issue",
+  "pk": 36,
+  "fields": {
+    "reporter": 17,
+    "title": "พัดลมเพดานแกว่ง",
+    "description": "พัดลมหมุนแล้วส่ายไปมา น่ากลัวจะหลุด",
+    "priority": "LOW",
+    "status": "RESOLVED",
+    "created_date": "2026-02-07T08:45:20.973Z",
+    "location": "ห้องรับแขก",
+    "analysis_json": null
+  }
+},
+{
+  "model": "issues.issue",
+  "pk": 37,
+  "fields": {
+    "reporter": 18,
+    "title": "เบรกเกอร์ตัดบ่อย",
+    "description": "เปิดแอร์พร้อมกัน 2 ตัวแล้วไฟตัดทันที",
+    "priority": "HIGH",
+    "status": "IN_PROGRESS",
+    "created_date": "2026-02-07T08:45:20.973Z",
+    "location": "ตู้ไฟหลัก",
+    "analysis_json": null
+  }
+},
+{
+  "model": "issues.issue",
+  "pk": 38,
+  "fields": {
+    "reporter": 19,
+    "title": "กระเบื้องพื้นระเบิด",
+    "description": "กระเบื้องห้องครัวร่อนออกมา 3 แผ่น",
+    "priority": "MEDIUM",
+    "status": "PENDING",
+    "created_date": "2026-02-07T08:45:20.974Z",
+    "location": "ห้องครัว",
+    "analysis_json": null
+  }
+},
+{
+  "model": "issues.issue",
+  "pk": 39,
+  "fields": {
+    "reporter": 20,
+    "title": "ไฟกิ่งหน้าบ้านดับ",
+    "description": "เปลี่ยนหลอดแล้วก็ยังไม่ติด น่าจะขั้วเสีย",
+    "priority": "LOW",
+    "status": "RESOLVED",
+    "created_date": "2026-02-07T08:45:20.975Z",
+    "location": "รั้วหน้าบ้าน",
+    "analysis_json": null
+  }
+},
+{
+  "model": "issues.complaint",
+  "pk": 2,
+  "fields": {
+    "category": "NOISE",
+    "evidence_image": "complaints/3.jpg"
+  }
+},
+{
+  "model": "issues.complaint",
+  "pk": 3,
+  "fields": {
+    "category": "SMELL",
+    "evidence_image": "complaints/3_tKwQmb4.jpg"
+  }
+},
+{
+  "model": "issues.complaint",
+  "pk": 4,
+  "fields": {
+    "category": "OTHER",
+    "evidence_image": "complaints/3_P5XC5vI.jpg"
+  }
+},
+{
+  "model": "issues.complaint",
+  "pk": 5,
+  "fields": {
+    "category": "PARKING",
+    "evidence_image": "complaints/3_f0mY6GP.jpg"
+  }
+},
+{
+  "model": "issues.complaint",
+  "pk": 6,
+  "fields": {
+    "category": "NOISE",
+    "evidence_image": "complaints/3_On1F7KU.jpg"
+  }
+},
+{
+  "model": "issues.complaint",
+  "pk": 7,
+  "fields": {
+    "category": "SMELL",
+    "evidence_image": "complaints/3_JAmX0aN.jpg"
+  }
+},
+{
+  "model": "issues.complaint",
+  "pk": 8,
+  "fields": {
+    "category": "OTHER",
+    "evidence_image": "complaints/3_2qagdED.jpg"
+  }
+},
+{
+  "model": "issues.complaint",
+  "pk": 9,
+  "fields": {
+    "category": "NOISE",
+    "evidence_image": "complaints/3_8FSgjja.jpg"
+  }
+},
+{
+  "model": "issues.complaint",
+  "pk": 10,
+  "fields": {
+    "category": "PARKING",
+    "evidence_image": "complaints/3_UIqX8nY.jpg"
+  }
+},
+{
+  "model": "issues.complaint",
+  "pk": 11,
+  "fields": {
+    "category": "SMELL",
+    "evidence_image": "complaints/3_QaYiwtR.jpg"
+  }
+},
+{
+  "model": "issues.complaint",
+  "pk": 12,
+  "fields": {
+    "category": "NOISE",
+    "evidence_image": "complaints/3_ACvoCLb.jpg"
+  }
+},
+{
+  "model": "issues.complaint",
+  "pk": 13,
+  "fields": {
+    "category": "OTHER",
+    "evidence_image": "complaints/3_JOjQoUw.jpg"
+  }
+},
+{
+  "model": "issues.complaint",
+  "pk": 14,
+  "fields": {
+    "category": "PARKING",
+    "evidence_image": "complaints/3_12dkW0k.jpg"
+  }
+},
+{
+  "model": "issues.complaint",
+  "pk": 15,
+  "fields": {
+    "category": "OTHER",
+    "evidence_image": "complaints/3_U2kpwBi.jpg"
+  }
+},
+{
+  "model": "issues.complaint",
+  "pk": 16,
+  "fields": {
+    "category": "SMELL",
+    "evidence_image": ""
+  }
+},
+{
+  "model": "issues.complaint",
+  "pk": 17,
+  "fields": {
+    "category": "OTHER",
+    "evidence_image": "complaints/3_7MaVU9G.jpg"
+  }
+},
+{
+  "model": "issues.complaint",
+  "pk": 18,
+  "fields": {
+    "category": "PARKING",
+    "evidence_image": "complaints/3_3BH2flx.jpg"
+  }
+},
+{
+  "model": "issues.complaint",
+  "pk": 19,
+  "fields": {
+    "category": "NOISE",
+    "evidence_image": "complaints/3_G9bLoeT.jpg"
+  }
+},
+{
+  "model": "issues.complaint",
+  "pk": 20,
+  "fields": {
+    "category": "OTHER",
+    "evidence_image": "complaints/3_Kpc2lkW.jpg"
+  }
+},
+{
+  "model": "issues.maintenance",
+  "pk": 21,
+  "fields": {
+    "equipment_type": "Pipe/Sink",
+    "technician": 6,
+    "appointment_date": "2026-02-08T08:45:20Z",
+    "before_image": "maintenance/before/1_gvlz05H.jpg",
+    "after_image": "maintenance/after/2_r2Lp172.jpg"
+  }
+},
+{
+  "model": "issues.maintenance",
+  "pk": 22,
+  "fields": {
+    "equipment_type": "Electrical",
+    "technician": null,
+    "appointment_date": null,
+    "before_image": "maintenance/before/1_mjPuWx4.jpg",
+    "after_image": "maintenance/after/2_9mDsgIi.jpg"
+  }
+},
+{
+  "model": "issues.maintenance",
+  "pk": 23,
+  "fields": {
+    "equipment_type": "Roof/Ceiling",
+    "technician": 6,
+    "appointment_date": "2026-02-08T08:45:20Z",
+    "before_image": "maintenance/before/1_N4zxY2q.jpg",
+    "after_image": "maintenance/after/2_1JYlFR0.jpg"
+  }
+},
+{
+  "model": "issues.maintenance",
+  "pk": 24,
+  "fields": {
+    "equipment_type": "Door Lock",
+    "technician": 5,
+    "appointment_date": "2026-02-05T08:45:20Z",
+    "before_image": "maintenance/before/1_1AGbARy.jpg",
+    "after_image": "maintenance/after/2_Xc9Ms5Y.jpg"
+  }
+},
+{
+  "model": "issues.maintenance",
+  "pk": 25,
+  "fields": {
+    "equipment_type": "Water Pump",
+    "technician": null,
+    "appointment_date": null,
+    "before_image": "maintenance/before/1_fACFfcM.jpg",
+    "after_image": "maintenance/after/2_A4cFmfe.jpg"
+  }
+},
+{
+  "model": "issues.maintenance",
+  "pk": 26,
+  "fields": {
+    "equipment_type": "Pipe",
+    "technician": 4,
+    "appointment_date": "2026-02-08T08:45:20Z",
+    "before_image": "maintenance/before/1_KNvgqxN.jpg",
+    "after_image": "maintenance/after/2_F6Psv6u.jpg"
+  }
+},
+{
+  "model": "issues.maintenance",
+  "pk": 27,
+  "fields": {
+    "equipment_type": "Air Conditioner",
+    "technician": 6,
+    "appointment_date": "2026-02-05T08:45:20Z",
+    "before_image": "maintenance/before/1_Wq0jses.jpg",
+    "after_image": "maintenance/after/2_4ltOO7Q.jpg"
+  }
+},
+{
+  "model": "issues.maintenance",
+  "pk": 28,
+  "fields": {
+    "equipment_type": "Window",
+    "technician": null,
+    "appointment_date": null,
+    "before_image": "maintenance/before/1_N8AXOcR.jpg",
+    "after_image": "maintenance/after/2_OZ7ZuRc.jpg"
+  }
+},
+{
+  "model": "issues.maintenance",
+  "pk": 29,
+  "fields": {
+    "equipment_type": "Electrical",
+    "technician": 5,
+    "appointment_date": "2026-02-05T08:45:20Z",
+    "before_image": "maintenance/before/1_PFBoabY.jpg",
+    "after_image": "maintenance/after/2_WdHwHvo.jpg"
+  }
+},
+{
+  "model": "issues.maintenance",
+  "pk": 30,
+  "fields": {
+    "equipment_type": "Pipe",
+    "technician": null,
+    "appointment_date": null,
+    "before_image": "maintenance/before/1_tKraLnP.jpg",
+    "after_image": "maintenance/after/2_HRz0iOz.jpg"
+  }
+},
+{
+  "model": "issues.maintenance",
+  "pk": 31,
+  "fields": {
+    "equipment_type": "Structure",
+    "technician": 6,
+    "appointment_date": "2026-02-08T08:45:20Z",
+    "before_image": "maintenance/before/1_OSUpInK.jpg",
+    "after_image": "maintenance/after/2_JkVmWRU.jpg"
+  }
+},
+{
+  "model": "issues.maintenance",
+  "pk": 32,
+  "fields": {
+    "equipment_type": "Wiring",
+    "technician": 4,
+    "appointment_date": "2026-02-05T08:45:20Z",
+    "before_image": "maintenance/before/1_VzVzwBO.jpg",
+    "after_image": "maintenance/after/2_dKcOPN2.jpg"
+  }
+},
+{
+  "model": "issues.maintenance",
+  "pk": 33,
+  "fields": {
+    "equipment_type": "Appliance",
+    "technician": null,
+    "appointment_date": null,
+    "before_image": "maintenance/before/1_0iYAdqu.jpg",
+    "after_image": "maintenance/after/2_H7QVjYF.jpg"
+  }
+},
+{
+  "model": "issues.maintenance",
+  "pk": 34,
+  "fields": {
+    "equipment_type": "Pipe",
+    "technician": 6,
+    "appointment_date": "2026-02-05T08:45:20Z",
+    "before_image": "maintenance/before/1_hGR2EvX.jpg",
+    "after_image": "maintenance/after/2_0ecspM9.jpg"
+  }
+},
+{
+  "model": "issues.maintenance",
+  "pk": 35,
+  "fields": {
+    "equipment_type": "Remote/Door",
+    "technician": null,
+    "appointment_date": null,
+    "before_image": "maintenance/before/1_DaCxZFR.jpg",
+    "after_image": "maintenance/after/2_LJicLlm.jpg"
+  }
+},
+{
+  "model": "issues.maintenance",
+  "pk": 36,
+  "fields": {
+    "equipment_type": "Appliance",
+    "technician": 6,
+    "appointment_date": "2026-02-05T08:45:20.973Z",
+    "before_image": "",
+    "after_image": ""
+  }
+},
+{
+  "model": "issues.maintenance",
+  "pk": 37,
+  "fields": {
+    "equipment_type": "Electrical",
+    "technician": 4,
+    "appointment_date": "2026-02-08T08:45:20Z",
+    "before_image": "maintenance/before/1_2wU5wkN.jpg",
+    "after_image": "maintenance/after/2_IgKqmCJ.jpg"
+  }
+},
+{
+  "model": "issues.maintenance",
+  "pk": 38,
+  "fields": {
+    "equipment_type": "Floor",
+    "technician": null,
+    "appointment_date": null,
+    "before_image": "maintenance/before/1_bMQokZq.jpg",
+    "after_image": "maintenance/after/2_mpqbzh1.jpg"
+  }
+},
+{
+  "model": "issues.maintenance",
+  "pk": 39,
+  "fields": {
+    "equipment_type": "Electrical",
+    "technician": 5,
+    "appointment_date": "2026-02-05T08:45:20Z",
+    "before_image": "maintenance/before/1_mR9Fhjx.jpg",
+    "after_image": "maintenance/after/2_JchglfQ.jpg"
+  }
+},
+{
+  "model": "sites.site",
+  "pk": 1,
+  "fields": {
+    "domain": "example.com",
+    "name": "example.com"
+  }
+}
+]
