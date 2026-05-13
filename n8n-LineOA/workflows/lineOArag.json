@@ -1,0 +1,740 @@
+{
+    "id":  "yAKmq3QBkU0tatqe",
+    "name":  "lineOArag",
+    "description":  null,
+    "active":  true,
+    "isArchived":  false,
+    "nodes":  [
+                  {
+                      "parameters":  {
+                                         "formTitle":  "Upload your data to test RAG",
+                                         "formFields":  {
+                                                            "values":  [
+                                                                           {
+                                                                               "fieldLabel":  "Upload your file(s)",
+                                                                               "fieldType":  "file",
+                                                                               "acceptFileTypes":  ".pdf, .csv",
+                                                                               "requiredField":  true
+                                                                           }
+                                                                       ]
+                                                        },
+                                         "options":  {
+
+                                                     }
+                                     },
+                      "type":  "n8n-nodes-base.formTrigger",
+                      "typeVersion":  2.2,
+                      "position":  [
+                                       -128,
+                                       0
+                                   ],
+                      "id":  "f7a656ec-83fc-4ed2-a089-57a9def662b7",
+                      "name":  "Upload your file here",
+                      "webhookId":  "f30a5b02-7333-4009-94c3-7c5c15bcfa14"
+                  },
+                  {
+                      "parameters":  {
+                                         "dataType":  "binary",
+                                         "loader":  "csvLoader",
+                                         "options":  {
+
+                                                     }
+                                     },
+                      "type":  "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+                      "typeVersion":  1.1,
+                      "position":  [
+                                       320,
+                                       160
+                                   ],
+                      "id":  "94aecac0-03f9-4915-932b-d14a2576607b",
+                      "name":  "Default Data Loader"
+                  },
+                  {
+                      "parameters":  {
+                                         "content":  "### Readme\nLoad your data into a vector database with the ๐“ **Load Data** flow, and then use your data as chat context with the ๐• **Retriever** flow.\n\n**Quick start**\n1. Click on the `Execute Workflow` button to run the ๐“ **Load Data** flow.\n2. Click on `Open Chat` button to run the ๐• **Retriever** flow. Then ask a question about content from your document(s)\n\n\nFor more info, check [our docs on RAG in n8n](https://docs.n8n.io/advanced-ai/rag-in-n8n/).",
+                                         "height":  300,
+                                         "width":  440,
+                                         "color":  4
+                                     },
+                      "type":  "n8n-nodes-base.stickyNote",
+                      "position":  [
+                                       -656,
+                                       -64
+                                   ],
+                      "typeVersion":  1,
+                      "id":  "0d07742b-0b36-4c2e-990c-266cbe6e2d4d",
+                      "name":  "Sticky Note"
+                  },
+                  {
+                      "parameters":  {
+                                         "content":  "### ๐“ Load Data Flow",
+                                         "height":  460,
+                                         "width":  700,
+                                         "color":  7
+                                     },
+                      "type":  "n8n-nodes-base.stickyNote",
+                      "position":  [
+                                       -176,
+                                       -64
+                                   ],
+                      "typeVersion":  1,
+                      "id":  "d19d04f3-5231-4e47-bed7-9f24a4a8f582",
+                      "name":  "Sticky Note1"
+                  },
+                  {
+                      "parameters":  {
+                                         "promptType":  "define",
+                                         "text":  "=คุณคือ \"ผู้ช่วยนิติบุคคลหมู่บ้าน\" หน้าที่ของคุณคือคัดกรองความต้องการของลูกบ้าน (Intent Classification)\n\nกฎการทำงาน:\n1. การระบุเจตนา (Intent) ให้ตั้งค่า intent ตามเจตนา:\n   - \u0027visitor\u0027: ลูกบ้านต้องการลงทะเบียนคนมาหา\n   - \u0027complaint\u0027: ลูกบ้านต้องการแจ้งปัญหา/ร้องเรียน (เช่น ไฟเสีย, ท่อแตก, เสียงดัง)\n   - \u0027general\u0027: ถามคำถามทั่วไปเกี่ยวกับหมู่บ้าน\n\n2. เงื่อนไข Smart Ticket (intent: \u0027visitor\u0027):\n   - ต้องได้ \"ชื่อและนามสกุลจริง\" และ \"ทะเบียนรถ\" ครบถ้วนเท่านั้น\n   - หากครบแล้ว ให้ตั้งค่า is_ticket_ready = true หากลูกบ้านให้ข้อมูลไม่ครบให้ถามจนกว่าจะได้ข้อมูลจนครบ\n\n3. เงื่อนไขการรับเรื่องร้องเรียน (intent: \u0027complaint\u0027):\n   - ต้องเก็บข้อมูล 3 อย่าง: \"หัวข้อ\", \"สถานที่เกิดเหตุ\", และ \"รายละเอียด\"\n   - หากครบแล้ว ให้ตั้งค่า is_complaint_ready = true\n   - หากข้อมูลไม่ครบ ให้ถามลูกบ้านอย่างสุภาพเพื่อขอข้อมูลที่ขาดไป\n\n4. การตอบคำถามทั่วไป (intent: \u0027general\u0027):\n   - ใช้เครื่องมือ Supabase vector search เพื่อค้นหาข้อมูลกฎระเบียบและตอบกลับ\n\n5. การจัดลำดับความสำคัญของข้อร้องเรียน (Complaint Priority):\n   - วิเคราะห์เนื้อหาข้อร้องเรียนและกำหนด priority:\n     - \u0027critical\u0027: เหตุฉุกเฉินที่ต้องดำเนินการทันที (เช่น ไฟไหม้, ก๊าซรั่ว, อุบัติเหตุร้ายแรง)\n     - \u0027high\u0027: ปัญหารุนแรงที่ต้องดำเนินการด่วน (เช่น ไฟดับทั้งหมู่บ้าน, ท่อประปาแตก, เหตุทะเลาะวิวาท)\n     - \u0027medium\u0027: ปัญหาทั่วไปที่ต้องดำเนินการภายใน 1-2 วัน (เช่น ไฟถนนเสีย, เสียงรบกวน)\n     - \u0027low\u0027: ปัญหาเล็กน้อยที่สามารถรอได้ (เช่น ต้นไม้รก, สุนัขเห่า)\n   - ค่าเริ่มต้น: \u0027medium\u0027 หากไม่แน่ใจ\n\nข้อมูลจากลูกบ้าน: {{ $(\u0027Line Messaging Trigger\u0027).item.json.message.text }}\n\n\nสำคัญ: ตอบกลับเป็นภาษาไทยที่สุภาพ ลงท้ายด้วย \"ครับ\" \nalways output as:\n{\n  \"intent\": \"string\",\n  \"is_ticket_ready\": \"boolean\",\n  \"is_complaint_ready\": \"boolean\",\n  \"visitor_name\": \"string\",\n  \"license_plate\": \"string\",\n  \"complaint_subject\": \"string\",\n  \"complaint_location\": \"string\",\n  \"complaint_description\": \"string\",\n  \"complaint_priority\": \"string\",\n  \"reply\": \"string\"\n}",
+                                         "hasOutputParser":  true,
+                                         "options":  {
+
+                                                     }
+                                     },
+                      "type":  "@n8n/n8n-nodes-langchain.agent",
+                      "typeVersion":  2,
+                      "position":  [
+                                       944,
+                                       -16
+                                   ],
+                      "id":  "579aed76-9644-42d1-ac13-7369059ff1c2",
+                      "name":  "AI Agent"
+                  },
+                  {
+                      "parameters":  {
+                                         "content":  "### ๐• 2. Retriever Flow",
+                                         "height":  732,
+                                         "width":  1352,
+                                         "color":  7
+                                     },
+                      "type":  "n8n-nodes-base.stickyNote",
+                      "position":  [
+                                       608,
+                                       -176
+                                   ],
+                      "typeVersion":  1,
+                      "id":  "28bc73a1-e64a-47bf-ac1c-ffe644894ea5",
+                      "name":  "Sticky Note2"
+                  },
+                  {
+                      "parameters":  {
+                                         "content":  "### Embeddings\n\nThe Insert and Retrieve operation use the same embedding node.\n\nThis is to ensure that they are using the **exact same embeddings and settings**.\n\nDifferent embeddings might not work at all, or have unintended consequences.\n",
+                                         "height":  240,
+                                         "width":  320,
+                                         "color":  4
+                                     },
+                      "type":  "n8n-nodes-base.stickyNote",
+                      "position":  [
+                                       -544,
+                                       352
+                                   ],
+                      "typeVersion":  1,
+                      "id":  "0cf8c647-418c-4d1a-8952-766145afca72",
+                      "name":  "Sticky Note3"
+                  },
+                  {
+                      "parameters":  {
+                                         "modelName":  "models/gemini-embedding-001"
+                                     },
+                      "type":  "@n8n/n8n-nodes-langchain.embeddingsGoogleGemini",
+                      "typeVersion":  1,
+                      "position":  [
+                                       512,
+                                       480
+                                   ],
+                      "id":  "6613a5de-9b4b-4dce-88a6-beb1b8502ca9",
+                      "name":  "Embeddings",
+                      "credentials":  {
+                                          "googlePalmApi":  {
+                                                                "id":  "hLjHScCCvHUwaXNS",
+                                                                "name":  "Google Gemini(PaLM) Api account"
+                                                            }
+                                      }
+                  },
+                  {
+                      "parameters":  {
+                                         "modelName":  "models/gemini-2.5-flash-lite",
+                                         "options":  {
+
+                                                     }
+                                     },
+                      "type":  "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+                      "typeVersion":  1,
+                      "position":  [
+                                       672,
+                                       240
+                                   ],
+                      "id":  "0b9559b4-0eb2-456b-b1db-adf2e564ce9f",
+                      "name":  "Google Gemini Chat Model",
+                      "retryOnFail":  true,
+                      "waitBetweenTries":  2000,
+                      "maxTries":  5,
+                      "credentials":  {
+                                          "googlePalmApi":  {
+                                                                "id":  "hLjHScCCvHUwaXNS",
+                                                                "name":  "Google Gemini(PaLM) Api account"
+                                                            }
+                                      }
+                  },
+                  {
+                      "parameters":  {
+                                         "mode":  "insert",
+                                         "tableName":  {
+                                                           "__rl":  true,
+                                                           "value":  "documents",
+                                                           "mode":  "list",
+                                                           "cachedResultName":  "documents"
+                                                       },
+                                         "options":  {
+
+                                                     }
+                                     },
+                      "type":  "@n8n/n8n-nodes-langchain.vectorStoreSupabase",
+                      "typeVersion":  1.3,
+                      "position":  [
+                                       112,
+                                       0
+                                   ],
+                      "id":  "a80dd1c2-57be-4f67-87fa-d3a4307d0124",
+                      "name":  "Supabase Vector Store",
+                      "credentials":  {
+                                          "supabaseApi":  {
+                                                              "id":  "FHS54I5H3pEBZHaN",
+                                                              "name":  "Supabase account 2"
+                                                          }
+                                      }
+                  },
+                  {
+                      "parameters":  {
+                                         "events":  [
+                                                        "message"
+                                                    ]
+                                     },
+                      "type":  "@aotoki/n8n-nodes-line-messaging.lineMessagingTrigger",
+                      "typeVersion":  1,
+                      "position":  [
+                                       672,
+                                       -16
+                                   ],
+                      "id":  "d283e9d4-0e11-4c61-9b4f-36ece23846e1",
+                      "name":  "Line Messaging Trigger",
+                      "webhookId":  "fa3426df-3d1e-480a-8705-96f3d00d1466",
+                      "credentials":  {
+                                          "lineMessagingApi":  {
+                                                                   "id":  "cred-line-001",
+                                                                   "name":  "Line Messaging account"
+                                                               }
+                                      }
+                  },
+                  {
+                      "parameters":  {
+                                         "mode":  "retrieve-as-tool",
+                                         "toolDescription":  "work with data in the vector database",
+                                         "tableName":  {
+                                                           "__rl":  true,
+                                                           "value":  "documents",
+                                                           "mode":  "list",
+                                                           "cachedResultName":  "documents"
+                                                       },
+                                         "options":  {
+
+                                                     }
+                                     },
+                      "type":  "@n8n/n8n-nodes-langchain.vectorStoreSupabase",
+                      "typeVersion":  1.3,
+                      "position":  [
+                                       960,
+                                       256
+                                   ],
+                      "id":  "5f05683a-45ac-4dad-a31b-bd6acf719ded",
+                      "name":  "Supabase vector search",
+                      "credentials":  {
+                                          "supabaseApi":  {
+                                                              "id":  "FHS54I5H3pEBZHaN",
+                                                              "name":  "Supabase account 2"
+                                                          }
+                                      }
+                  },
+                  {
+                      "parameters":  {
+                                         "jsonSchemaExample":  "{\n  \"intent\": \"string\",\n  \"is_ticket_ready\": \"boolean\",\n  \"is_complaint_ready\": \"boolean\",\n  \"visitor_name\": \"string\",\n  \"license_plate\": \"string\",\n  \"complaint_subject\": \"string\",\n  \"complaint_location\": \"string\",\n  \"complaint_description\": \"string\",\n  \"complaint_priority\": \"string\",\n  \"reply\": \"string\"\n}"
+                                     },
+                      "type":  "@n8n/n8n-nodes-langchain.outputParserStructured",
+                      "typeVersion":  1.3,
+                      "position":  [
+                                       1248,
+                                       256
+                                   ],
+                      "id":  "dc29c68b-4add-44b0-8a7d-654340b034a2",
+                      "name":  "Structured Output Parser"
+                  },
+                  {
+                      "parameters":  {
+                                         "sessionIdType":  "customKey",
+                                         "sessionKey":  "={{ $(\u0027Line Messaging Trigger\u0027).item.json.source.userId }}",
+                                         "contextWindowLength":  "={{ 5 }}"
+                                     },
+                      "type":  "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+                      "typeVersion":  1.3,
+                      "position":  [
+                                       832,
+                                       240
+                                   ],
+                      "id":  "64df2dda-8c5f-430e-83e9-3a686e7fe4d7",
+                      "name":  "Simple Memory"
+                  },
+                  {
+                      "parameters":  {
+                                         "operation":  "send",
+                                         "to":  "={{ $(\u0027Line Messaging Trigger\u0027).item.json.source.userId }}",
+                                         "messages":  {
+                                                          "values":  [
+                                                                         {
+                                                                             "altText":  "your smart ticket",
+                                                                             "flexJson":  "{\n  \"type\": \"bubble\",\n  \"hero\": {\n    \"type\": \"image\",\n    \"url\": \"https://api.qrserver.com/v1/create-qr-code/?size=300x300\u0026data={{ encodeURIComponent($json.output.visitor_name + \u0027 \u0027 + $json.output.license_plate) }}\",\n    \"size\": \"full\",\n    \"aspectRatio\": \"1:1\",\n    \"aspectMode\": \"cover\"\n  },\n  \"body\": {\n    \"type\": \"box\",\n    \"layout\": \"vertical\",\n    \"contents\": [\n      {\n        \"type\": \"text\",\n        \"text\": \"SMART TICKET\",\n        \"weight\": \"bold\",\n        \"color\": \"#1DB446\",\n        \"size\": \"sm\"\n      },\n      {\n        \"type\": \"text\",\n        \"text\": \"{{ $json.output.visitor_name }}\",\n        \"weight\": \"bold\",\n        \"size\": \"xl\",\n        \"margin\": \"md\"\n      },\n      {\n        \"type\": \"text\",\n        \"text\": \"เธ—เธฐเน€เธเธตเธขเธ: {{ $json.output.license_plate }}\",\n        \"size\": \"md\",\n        \"color\": \"#666666\"\n      },\n      {\n        \"type\": \"separator\",\n        \"margin\": \"xxl\"\n      },\n      {\n        \"type\": \"box\",\n        \"layout\": \"vertical\",\n        \"margin\": \"md\",\n        \"contents\": [\n          {\n            \"type\": \"text\",\n            \"text\": \"เธเธฃเธธเธ“เธฒเนเธชเธ”เธ QR Code เธเธตเนเนเธซเนเธฃเธเธ . เธชเนเธเธเธ—เธตเนเธซเธเนเธฒเธเนเธญเธก\",\n            \"size\": \"xs\",\n            \"color\": \"#aaaaaa\",\n            \"wrap\": true\n          }\n        ]\n      }\n    ]\n  }\n}",
+                                                                             "type":  "flex"
+                                                                         }
+                                                                     ]
+                                                      }
+                                     },
+                      "type":  "@aotoki/n8n-nodes-line-messaging.lineMessaging",
+                      "typeVersion":  1,
+                      "position":  [
+                                       1728,
+                                       -144
+                                   ],
+                      "id":  "8a4d7700-53b6-44cf-aa73-a2a2bd188398",
+                      "name":  "Line Messaging QR",
+                      "credentials":  {
+                                          "lineMessagingApi":  {
+                                                                   "id":  "cred-line-001",
+                                                                   "name":  "Line Messaging account"
+                                                               }
+                                      }
+                  },
+                  {
+                      "parameters":  {
+                                         "operation":  "send",
+                                         "to":  "={{ $(\u0027Line Messaging Trigger\u0027).item.json.source.userId }}",
+                                         "messages":  {
+                                                          "values":  [
+                                                                         {
+                                                                             "quoteToken":  "={{ $json.output.replytoken }}",
+                                                                             "text":  "={{ $json.output.reply }}"
+                                                                         }
+                                                                     ]
+                                                      }
+                                     },
+                      "type":  "@aotoki/n8n-nodes-line-messaging.lineMessaging",
+                      "typeVersion":  1,
+                      "position":  [
+                                       1728,
+                                       272
+                                   ],
+                      "id":  "3a4644c8-34b6-4bd8-b677-449fbc12a1e4",
+                      "name":  "Line Messaging chat",
+                      "credentials":  {
+                                          "lineMessagingApi":  {
+                                                                   "id":  "cred-line-001",
+                                                                   "name":  "Line Messaging account"
+                                                               }
+                                      }
+                  },
+                  {
+                      "parameters":  {
+                                         "rules":  {
+                                                       "values":  [
+                                                                      {
+                                                                          "conditions":  {
+                                                                                             "options":  {
+                                                                                                             "caseSensitive":  true,
+                                                                                                             "leftValue":  "",
+                                                                                                             "typeValidation":  "strict",
+                                                                                                             "version":  3
+                                                                                                         },
+                                                                                             "conditions":  [
+                                                                                                                {
+                                                                                                                    "leftValue":  "={{ $json.output.is_ticket_ready.toBoolean() }}",
+                                                                                                                    "rightValue":  "",
+                                                                                                                    "operator":  {
+                                                                                                                                     "type":  "boolean",
+                                                                                                                                     "operation":  "true",
+                                                                                                                                     "singleValue":  true
+                                                                                                                                 },
+                                                                                                                    "id":  "14b5d70c-d0ec-4201-ae7a-bb84cf0b8d20"
+                                                                                                                }
+                                                                                                            ],
+                                                                                             "combinator":  "and"
+                                                                                         }
+                                                                      },
+                                                                      {
+                                                                          "conditions":  {
+                                                                                             "options":  {
+                                                                                                             "caseSensitive":  true,
+                                                                                                             "leftValue":  "",
+                                                                                                             "typeValidation":  "strict",
+                                                                                                             "version":  3
+                                                                                                         },
+                                                                                             "conditions":  [
+                                                                                                                {
+                                                                                                                    "id":  "9463e22e-f190-4a52-8d31-8d3cc8050421",
+                                                                                                                    "leftValue":  "={{ $json.output.is_complaint_ready.toBoolean() }}",
+                                                                                                                    "rightValue":  "",
+                                                                                                                    "operator":  {
+                                                                                                                                     "type":  "boolean",
+                                                                                                                                     "operation":  "true",
+                                                                                                                                     "singleValue":  true
+                                                                                                                                 }
+                                                                                                                }
+                                                                                                            ],
+                                                                                             "combinator":  "and"
+                                                                                         }
+                                                                      },
+                                                                      {
+                                                                          "conditions":  {
+                                                                                             "options":  {
+                                                                                                             "caseSensitive":  true,
+                                                                                                             "leftValue":  "",
+                                                                                                             "typeValidation":  "strict",
+                                                                                                             "version":  3
+                                                                                                         },
+                                                                                             "conditions":  [
+                                                                                                                {
+                                                                                                                    "id":  "a8050d16-fff9-4910-83f6-a566bb01d6f6",
+                                                                                                                    "leftValue":  "={{ $json.output.intent }}",
+                                                                                                                    "rightValue":  "general",
+                                                                                                                    "operator":  {
+                                                                                                                                     "type":  "string",
+                                                                                                                                     "operation":  "equals",
+                                                                                                                                     "name":  "filter.operator.equals"
+                                                                                                                                 }
+                                                                                                                }
+                                                                                                            ],
+                                                                                             "combinator":  "and"
+                                                                                         }
+                                                                      }
+                                                                  ]
+                                                   },
+                                         "options":  {
+
+                                                     }
+                                     },
+                      "type":  "n8n-nodes-base.switch",
+                      "typeVersion":  3.4,
+                      "position":  [
+                                       1312,
+                                       -16
+                                   ],
+                      "id":  "508fe520-4e82-4ef7-8196-c792d810cdf8",
+                      "name":  "Switch"
+                  },
+                  {
+                      "parameters":  {
+                                         "tableId":  "visit_logs"
+                                     },
+                      "type":  "n8n-nodes-base.supabase",
+                      "typeVersion":  1,
+                      "position":  [
+                                       1952,
+                                       -400
+                                   ],
+                      "id":  "3cc0f481-c763-49b3-8ec4-ec5b1a8298f0",
+                      "name":  "Store Visitor Log",
+                      "credentials":  {
+                                          "supabaseApi":  {
+                                                              "id":  "jfmg0n16FAnuIMtP",
+                                                              "name":  "Supabase - Django DB"
+                                                          }
+                                      }
+                  },
+                  {
+                      "parameters":  {
+                                         "tableId":  "issues_issue"
+                                     },
+                      "type":  "n8n-nodes-base.supabase",
+                      "typeVersion":  1,
+                      "position":  [
+                                       1728,
+                                       64
+                                   ],
+                      "id":  "251d0ea2-b86b-42cb-a350-1d3b9298d251",
+                      "name":  "Store Issue",
+                      "credentials":  {
+                                          "supabaseApi":  {
+                                                              "id":  "jfmg0n16FAnuIMtP",
+                                                              "name":  "Supabase - Django DB"
+                                                          }
+                                      }
+                  },
+                  {
+                      "parameters":  {
+                                         "tableId":  "issues_complaint"
+                                     },
+                      "type":  "n8n-nodes-base.supabase",
+                      "typeVersion":  1,
+                      "position":  [
+                                       1952,
+                                       64
+                                   ],
+                      "id":  "b14d08d8-8949-47ed-b362-bdca7a938f3c",
+                      "name":  "Store Complaint Record",
+                      "credentials":  {
+                                          "supabaseApi":  {
+                                                              "id":  "jfmg0n16FAnuIMtP",
+                                                              "name":  "Supabase - Django DB"
+                                                          }
+                                      }
+                  },
+                  {
+                      "parameters":  {
+                                         "tableId":  "notifications_notification"
+                                     },
+                      "type":  "n8n-nodes-base.supabase",
+                      "typeVersion":  1,
+                      "position":  [
+                                       2176,
+                                       64
+                                   ],
+                      "id":  "79846015-ae45-4fc9-b9cd-6a0e972465a6",
+                      "name":  "Create Admin Notification",
+                      "credentials":  {
+                                          "supabaseApi":  {
+                                                              "id":  "jfmg0n16FAnuIMtP",
+                                                              "name":  "Supabase - Django DB"
+                                                          }
+                                      }
+                  },
+                  {
+                      "parameters":  {
+                                         "operation":  "send",
+                                         "to":  "={{ $(\"Line Messaging Trigger\").item.json.source.userId }}",
+                                         "messages":  {
+                                                          "values":  [
+                                                                         {
+                                                                             "text":  "={{ $(\"Switch\").item.json.output.reply }}"
+                                                                         }
+                                                                     ]
+                                                      }
+                                     },
+                      "type":  "@aotoki/n8n-nodes-line-messaging.lineMessaging",
+                      "typeVersion":  1,
+                      "position":  [
+                                       2176,
+                                       304
+                                   ],
+                      "id":  "46230eb7-89c1-4971-898f-1f16b1e9e8f6",
+                      "name":  "Complaint Reply",
+                      "credentials":  {
+                                          "lineMessagingApi":  {
+                                                                   "id":  "cred-line-001",
+                                                                   "name":  "Line Messaging account"
+                                                               }
+                                      }
+                  }
+              ],
+    "connections":  {
+                        "Upload your file here":  {
+                                                      "main":  [
+                                                                   [
+                                                                       {
+                                                                           "node":  "Supabase Vector Store",
+                                                                           "type":  "main",
+                                                                           "index":  0
+                                                                       }
+                                                                   ]
+                                                               ]
+                                                  },
+                        "Default Data Loader":  {
+                                                    "ai_document":  [
+                                                                        [
+                                                                            {
+                                                                                "node":  "Supabase Vector Store",
+                                                                                "type":  "ai_document",
+                                                                                "index":  0
+                                                                            }
+                                                                        ]
+                                                                    ]
+                                                },
+                        "Embeddings":  {
+                                           "ai_embedding":  [
+                                                                [
+                                                                    {
+                                                                        "node":  "Supabase vector search",
+                                                                        "type":  "ai_embedding",
+                                                                        "index":  0
+                                                                    },
+                                                                    {
+                                                                        "node":  "Supabase Vector Store",
+                                                                        "type":  "ai_embedding",
+                                                                        "index":  0
+                                                                    }
+                                                                ]
+                                                            ]
+                                       },
+                        "Google Gemini Chat Model":  {
+                                                         "ai_languageModel":  [
+                                                                                  [
+                                                                                      {
+                                                                                          "node":  "AI Agent",
+                                                                                          "type":  "ai_languageModel",
+                                                                                          "index":  0
+                                                                                      }
+                                                                                  ]
+                                                                              ]
+                                                     },
+                        "AI Agent":  {
+                                         "main":  [
+                                                      [
+                                                          {
+                                                              "node":  "Switch",
+                                                              "type":  "main",
+                                                              "index":  0
+                                                          }
+                                                      ]
+                                                  ]
+                                     },
+                        "Line Messaging Trigger":  {
+                                                       "main":  [
+                                                                    [
+                                                                        {
+                                                                            "node":  "AI Agent",
+                                                                            "type":  "main",
+                                                                            "index":  0
+                                                                        }
+                                                                    ]
+                                                                ]
+                                                   },
+                        "Supabase vector search":  {
+                                                       "ai_tool":  [
+                                                                       [
+                                                                           {
+                                                                               "node":  "AI Agent",
+                                                                               "type":  "ai_tool",
+                                                                               "index":  0
+                                                                           }
+                                                                       ]
+                                                                   ]
+                                                   },
+                        "Structured Output Parser":  {
+                                                         "ai_outputParser":  [
+                                                                                 [
+                                                                                     {
+                                                                                         "node":  "AI Agent",
+                                                                                         "type":  "ai_outputParser",
+                                                                                         "index":  0
+                                                                                     }
+                                                                                 ]
+                                                                             ]
+                                                     },
+                        "Simple Memory":  {
+                                              "ai_memory":  [
+                                                                [
+                                                                    {
+                                                                        "node":  "AI Agent",
+                                                                        "type":  "ai_memory",
+                                                                        "index":  0
+                                                                    }
+                                                                ]
+                                                            ]
+                                          },
+                        "Switch":  {
+                                       "main":  [
+                                                    [
+                                                        {
+                                                            "node":  "Line Messaging QR",
+                                                            "type":  "main",
+                                                            "index":  0
+                                                        }
+                                                    ],
+                                                    [
+                                                        {
+                                                            "node":  "Store Issue",
+                                                            "type":  "main",
+                                                            "index":  0
+                                                        }
+                                                    ],
+                                                    [
+                                                        {
+                                                            "node":  "Line Messaging chat",
+                                                            "type":  "main",
+                                                            "index":  0
+                                                        }
+                                                    ],
+                                                    [
+
+                                                    ],
+                                                    [
+
+                                                    ]
+                                                ]
+                                   },
+                        "Line Messaging QR":  {
+                                                  "main":  [
+                                                               [
+                                                                   {
+                                                                       "node":  "Store Visitor Log",
+                                                                       "type":  "main",
+                                                                       "index":  0
+                                                                   }
+                                                               ]
+                                                           ]
+                                              },
+                        "Store Visitor Log":  {
+                                                  "main":  [
+                                                               [
+
+                                                               ]
+                                                           ]
+                                              },
+                        "Store Issue":  {
+                                            "main":  [
+                                                         [
+                                                             {
+                                                                 "node":  "Store Complaint Record",
+                                                                 "type":  "main",
+                                                                 "index":  0
+                                                             }
+                                                         ]
+                                                     ]
+                                        },
+                        "Store Complaint Record":  {
+                                                       "main":  [
+                                                                    [
+                                                                        {
+                                                                            "node":  "Create Admin Notification",
+                                                                            "type":  "main",
+                                                                            "index":  0
+                                                                        }
+                                                                    ]
+                                                                ]
+                                                   },
+                        "Create Admin Notification":  {
+                                                          "main":  [
+                                                                       [
+                                                                           {
+                                                                               "node":  "Complaint Reply",
+                                                                               "type":  "main",
+                                                                               "index":  0
+                                                                           }
+                                                                       ]
+                                                                   ]
+                                                      },
+                        "Complaint Reply":  {
+                                                "main":  [
+                                                             [
+
+                                                             ]
+                                                         ]
+                                            }
+                    },
+    "settings":  {
+                     "executionOrder":  "v1",
+                     "binaryMode":  "separate",
+                     "availableInMCP":  false,
+                     "callerPolicy":  "workflowsFromSameOwner"
+                 },
+    "staticData":  null,
+    "meta":  {
+                 "templateId":  "rag-starter-template",
+                 "templateCredsSetupCompleted":  true
+             }
+}

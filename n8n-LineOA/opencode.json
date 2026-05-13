@@ -1,0 +1,13 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "n8n": {
+      "type": "local",
+      "command": ["n8n-mcp-server"],
+      "environment": {
+        "N8N_API_URL": "http://localhost:1234/api/v1",
+        "N8N_API_KEY": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2ZjJhOGI2MC05ZDgzLTQwNTYtYjAwMy1lOWQwZDE4OWRkYmIiLCJpc3MiOiJuOG4iLCJhdWQiOiJwdWJsaWMtYXBpIiwianRpIjoiZjNhOGJhNzEtMGM5NC00MDcwLWFlZGQtYTkwYzAzOGM5NDAxIiwiaWF0IjoxNzc4NjgzMTE2LCJleHAiOjE3ODEyMzY4MDB9.R-rB23rxPo3ciWlvsMj-7uE_ij-KB6B7jkfj6q5R920"
+      }
+    }
+  }
+}
