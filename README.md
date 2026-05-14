@@ -98,21 +98,11 @@ Our team uses **GitHub Projects** (Kanban Board) to manage tasks, sprints, and o
 | @athiphat67 | 29 | 23 | 1 | 5 |
 | @theepop66 | 24 | 18 | 1 | 5 |
 | @6710615185 | 23 | 17 | 1 | 5 |
-| @Phatcharaphon-work | 18 | 12 | 1 | 5 |
-| @Chotiwit67 | 16 | 10 | 1 | 5 |
 | @panifield | 16 | 10 | 1 | 5 |
 | @napattiral276 | 15 | 9 | 1 | 5 |
 
-* Lastest Update 16 Mar 2026
+* Latest Update 16 Mar 2026
 
-### Overall Status Summary
-
-> Current count of items across all workflow stages
-
-![Status Summary](Documents/image_project_track/image1.png)
-
-* Lastest Update 16 Mar 2026
----
 
 # Software Design Artifacts
 
@@ -138,7 +128,7 @@ Our team uses **GitHub Projects** (Kanban Board) to manage tasks, sprints, and o
 
 **1. Clone the repository:**
 ```bash
-git clone [https://github.com/theepop66/CN332-group-project.git](https://github.com/theepop66/CN332-group-project.git) CN332
+git clone https://github.com/theepop66/CN332-group-project.git CN332
 cd CN332/myproject
 ```
 
@@ -150,7 +140,6 @@ venv\Scripts\activate
 
 # For macOS/Linux
 python3 -m venv venv
-
 source venv/bin/activate
 ```
 
@@ -227,16 +216,8 @@ CN332-group-project/              # Root directory of the project
 | Student ID | Name | Roles |
 | :---: | :--- | :--- |
 | `6710615292` | athiphat sunsit | Project Manager, Front-end, Back-end, QA |
-| `6710615060` | โชติวิชช์ ดังสะท้าน | Front-end |
 | `6710615185` | ภูริช อัมพะวา | Front-end, Back-end |
 | `6710545010` | นพัตธีรา เหลาเกิ้มหุ่ง | Front-end |
 | `6710615144` | ปณิธาน ตันตื้อ | Front-end |
-| `6710685055` | พัชรพล มาลัยศรี | Back-end, QA |
 | `6710685014` | ธีภพ รัตนทรัพย์ศิริ | Back-end |
-
----
-
-
-
-
 
