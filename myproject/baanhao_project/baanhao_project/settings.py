@@ -47,6 +47,11 @@ INSTALLED_APPS = [
     'dashboard',
     'analytics',
     'notifications',
+    'events',
+    'invoices',
+    'regulations',
+    'skills',
+    'visitors',
     'django.contrib.sites',  # Required for allauth
     'allauth',
     'allauth.account',

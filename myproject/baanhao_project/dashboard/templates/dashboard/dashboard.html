@@ -86,32 +86,19 @@
             <div class="white-box">
                 <div class="box-header">
                     <h5 class="box-title">การแจ้งเตือนล่าสุด</h5>
-                    <small class="text-muted">อัปเดต: 12.00 น.</small>
                 </div>
 
+                {% for noti in recent_notifications %}
                 <div class="list-item d-flex justify-content-between">
                     <div>
-                        <div class="fw-bold">(ประจำวัน) ระวังฝุ่น PM 2.5</div>
-                        <small class="text-muted">โปรดใส่หน้ากากอนามัย...</small>
+                        <div class="fw-bold">{{ noti.title }}</div>
+                        <small class="text-muted">{{ noti.message|truncatechars:30 }}</small>
                     </div>
-                    <span class="text-muted small">07:00 น.</span>
+                    <span class="text-muted small">{{ noti.created_at|timesince }} ago</span>
                 </div>
-
-                <div class="list-item d-flex justify-content-between">
-                    <div>
-                        <div class="fw-bold text-dark"><i class="bi bi-tools text-warning me-1"></i> แจ้งซ่อมถนน</div>
-                        <small class="text-muted">หน้าบ้านเลขที่ 55/99 ซอย 5...</small>
-                    </div>
-                    <span class="text-muted small">เมื่อวาน</span>
-                </div>
-
-                <div class="list-item d-flex justify-content-between">
-                    <div>
-                        <div class="fw-bold">ประกาศเก็บค่าส่วนกลาง</div>
-                        <small class="text-muted">รอบเดือนมีนาคม 2569...</small>
-                    </div>
-                    <span class="text-muted small">2 วันก่อน</span>
-                </div>
+                {% empty %}
+                <div class="text-muted p-3 text-center">ไม่มีการแจ้งเตือนใหม่</div>
+                {% endfor %}
             </div>
         </div>
 
@@ -134,27 +121,20 @@
                     <a href="#" class="small text-muted text-decoration-none">ดูปฏิทิน</a>
                 </div>
 
-                <div class="event-row">
+                {% for event in upcoming_events %}
+                <div class="event-row {% if forloop.first %}highlight{% endif %}">
                     <div class="date-box">
-                        <div class="date-num">1</div>
-                        <div class="date-month">ธ.ค.</div>
+                        <div class="date-num {% if forloop.first %}text-danger{% endif %}">{{ event.event_date.day }}</div>
+                        <div class="date-month {% if forloop.first %}text-danger{% endif %}">{{ event.event_date|date:"M" }}</div>
                     </div>
                     <div>
-                        <div class="fw-bold">ประชุมหมู่บ้าน</div>
-                        <small class="text-muted">09:00 น. - ห้องประชุม</small>
+                        <div class="fw-bold">{{ event.title }}</div>
+                        <small class="text-muted">{{ event.event_date|date:"H:i" }} น. - {{ event.location }}</small>
                     </div>
                 </div>
-
-                <div class="event-row highlight">
-                    <div class="date-box">
-                        <div class="date-num text-danger">9</div>
-                        <div class="date-month text-danger">ธ.ค.</div>
-                    </div>
-                    <div>
-                        <div class="fw-bold">กิจกรรม Big Cleaning</div>
-                        <small class="text-muted">08:00 น. - สวนส่วนกลาง</small>
-                    </div>
-                </div>
+                {% empty %}
+                <div class="text-muted p-3 text-center">ไม่มีกิจกรรมที่กำลังจะมาถึง</div>
+                {% endfor %}
 
             </div>
         </div>
@@ -165,14 +145,13 @@
 {% block extra_js %}
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-    // โค้ดส่วนกราฟเหมือนเดิมครับ
     const ctx = document.getElementById('tasksChart').getContext('2d');
     new Chart(ctx, {
         type: 'doughnut',
         data: {
             labels: ['รอทำ', 'กำลังทำ', 'เลยกำหนด'],
             datasets: [{
-                data: [30, 50, 20], // ใส่ค่าตัวแปร Django ตรงนี้ได้
+                data: [{{ waiting_tasks|default:0 }}, {{ progress_inprogress|default:0 }}, {{ overdue_tasks|default:0 }}],
                 backgroundColor: ['#FFCA28', '#42A5F5', '#EF5350'],
                 borderWidth: 0,
                 hoverOffset: 4

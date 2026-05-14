@@ -92,6 +92,13 @@
             <span>Analytics</span>
         </a>
 
+        <!-- Visitors -->
+        <a class="sidebar-link {% if request.resolver_match.app_name == 'visitors' %}active{% endif %}"
+           href="{% url 'visitors:visitor_list' %}">
+            <i class="bi bi-person-badge-fill"></i>
+            <span>Visitors</span>
+        </a>
+
         <!-- Staff -->
         <a class="sidebar-link"
            href="{% url 'users:staff_list' %}">

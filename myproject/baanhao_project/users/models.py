@@ -55,8 +55,8 @@ class Resident(models.Model):
 
 class Technician(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='technician_profile')
-    skill_set = models.TextField(help_text="Comma-separated skills or JSON") # Diagram: List<Skill>
     current_status = models.CharField(max_length=20, default="AVAILABLE") # Diagram: currentStatus
+    current_maintenance = models.ForeignKey('issues.Maintenance', null=True, blank=True, on_delete=models.SET_NULL, related_name='+')
     
     def __str__(self):
         return f"Tech: {self.user.username}"

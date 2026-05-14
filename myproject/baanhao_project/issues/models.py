@@ -33,11 +33,15 @@ class Issue(models.Model):
     status = models.CharField(max_length=20, choices=IssueStatus.choices, default=IssueStatus.PENDING) # Diagram: status
     
     created_date = models.DateTimeField(auto_now_add=True) # Diagram: createdDate
+    updated_at = models.DateTimeField(auto_now=True, null=True, blank=True)
     location = models.CharField(max_length=100, help_text="Ex. Living Room, Kitchen") # Diagram: location
     
     # Diagram: analysisJSON: JSONField (สำหรับเก็บผลจาก AI)
     # ต้องใช้ database ที่รองรับ JSON เช่น PostgreSQL หรือ SQLite (Django 3.1+)
     analysis_json = models.JSONField(null=True, blank=True) 
+
+    assigned_officer = models.ForeignKey('users.JuristicOfficer', null=True, blank=True, on_delete=models.SET_NULL)
+    reporter_line_id = models.CharField(max_length=100, null=True, blank=True)
 
     def __str__(self):
         return f"[{self.status}] {self.title} (by {self.reporter})"

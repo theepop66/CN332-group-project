@@ -5,17 +5,8 @@ class House(models.Model):
     # houseID อาจจะใช้ ID อัตโนมัติของ Django หรือถ้ามีรหัสบ้านเฉพาะก็ใช้ Field นี้ครับ
     house_id = models.CharField(max_length=20, unique=True, help_text="Ex. A-101") 
     house_number = models.CharField(max_length=20, help_text="Ex. 99/101")
-    
-    # Diagram: owner: Resident
-    # เราใช้ 'users.Resident' เพื่ออ้างอิงข้าม App
-    # related_name='owned_houses' ทำให้เรียกจาก Resident กลับมาหาบ้านที่ตัวเองเป็นเจ้าของได้
-    owner = models.ForeignKey(
-        'users.Resident', 
-        on_delete=models.SET_NULL, 
-        null=True, 
-        blank=True, 
-        related_name='owned_houses'
-    )
+    created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+    updated_at = models.DateTimeField(auto_now=True, null=True, blank=True)
 
     def __str__(self):
         return f"House {self.house_number} (ID: {self.house_id})"
@@ -29,5 +20,8 @@ class Vehicle(models.Model):
     # รถผูกกับบ้านหลังไหน
     house = models.ForeignKey(House, on_delete=models.CASCADE, related_name='vehicles')
     
+    created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+    updated_at = models.DateTimeField(auto_now=True, null=True, blank=True)
+
     def __str__(self):
         return f"{self.license_plate} ({self.house.house_number})"

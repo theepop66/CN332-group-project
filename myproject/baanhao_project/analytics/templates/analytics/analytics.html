@@ -35,28 +35,28 @@
         <div class="col-md-3">
             <div class="stat-card shadow-sm">
                 <h6>Total Tasks</h6>
-                <h3 class="fw-bold">64</h3>
+                <h3 class="fw-bold">{{ total_tasks }}</h3>
             </div>
         </div>
 
         <div class="col-md-3">
             <div class="stat-card shadow-sm">
                 <h6>Completed</h6>
-                <h3 class="text-success fw-bold">13</h3>
+                <h3 class="text-success fw-bold">{{ completed_tasks }}</h3>
             </div>
         </div>
 
         <div class="col-md-3">
             <div class="stat-card shadow-sm">
                 <h6>Processing</h6>
-                <h3 class="text-primary fw-bold">20</h3>
+                <h3 class="text-primary fw-bold">{{ processing_tasks }}</h3>
             </div>
         </div>
 
         <div class="col-md-3">
             <div class="stat-card shadow-sm">
                 <h6>Overdue</h6>
-                <h3 class="text-danger fw-bold">16</h3>
+                <h3 class="text-danger fw-bold">{{ overdue_tasks }}</h3>
             </div>
         </div>
 
@@ -171,7 +171,7 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
-    const totalTasks = 13 + 15 + 20 + 16;
+    const totalTasks = {{ total_tasks|default:0 }};
 
     const centerTextPlugin = {
         id: 'centerText',
@@ -204,9 +204,9 @@
     new Chart(ctx1, {
         type: 'doughnut',
         data: {
-            labels: ['Done', 'Late', 'Processing', 'Overdue'],
+            labels: ['Done', 'Pending', 'Processing', 'Overdue'],
             datasets: [{
-                data: [13, 15, 20, 16],
+                data: [{{ completed_tasks|default:0 }}, {{ pending_tasks|default:0 }}, {{ processing_tasks|default:0 }}, {{ overdue_tasks|default:0 }}],
                 backgroundColor: [
                     '#28a745',
                     '#ffc107',

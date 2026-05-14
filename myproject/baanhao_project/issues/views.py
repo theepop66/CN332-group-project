@@ -354,28 +354,15 @@ def maintenance_calendar(request):
         appointment_date__month=month
     )
 
-    fake_events = [
-        {"title": "Fix Aircon", "day": 14, "color": "red"},
-        {"title": "Repair Elevator", "day": 14, "color": "red"},
-        {"title": "Water System Check", "day": 9, "color": "green"},
-        {"title": "Electric Inspection", "day": 20, "color": "purple"},
-    ]
-
     events_by_day = {}
 
     for m in maintenances:
-        d = m.appointment_date.day
-        events_by_day.setdefault(d, []).append({
-            "title": m.title,
-            "color": "blue"
-        })
-
-    for e in fake_events:
-        d = e["day"]
-        events_by_day.setdefault(d, []).append({
-            "title": e["title"],
-            "color": e["color"]
-        })
+        if m.appointment_date:
+            d = m.appointment_date.day
+            events_by_day.setdefault(d, []).append({
+                "title": m.title,
+                "color": "blue"
+            })
 
     context = {
         "calendar": month_days,
