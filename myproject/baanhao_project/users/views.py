@@ -257,9 +257,15 @@ def staff_detail(request, staff_id):
         previous_staff = None
         next_staff = None
 
+    recent_tasks = []
+    if staff.role == UserRole.TECHNICIAN and hasattr(staff, 'technician_profile'):
+        from issues.models import Maintenance
+        recent_tasks = Maintenance.objects.filter(technician=staff.technician_profile).order_by('-created_at')[:5]
+
     context = {
         'staff': staff,
         'previous_staff': previous_staff,
         'next_staff': next_staff,
+        'recent_tasks': recent_tasks,
     }
     return render(request, 'users/staff_detail.html', context)

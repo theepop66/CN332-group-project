@@ -85,28 +85,24 @@
                 <div class="info-card">
                     <h5 class="card-title-custom">Recent Tasks</h5>
                     
-                    <div class="task-item">
-                        <div class="task-icon">
-                            <i class="bi bi-wrench"></i>
+                    {% if staff.role == 'TECHNICIAN' %}
+                        {% for task in recent_tasks %}
+                        <div class="task-item">
+                            <div class="task-icon">
+                                <i class="bi bi-wrench"></i>
+                            </div>
+                            <div class="task-info">
+                                <h6>{{ task.title }}</h6>
+                                <span>Assigned: {{ task.created_at|date:"d M Y" }}</span>
+                            </div>
+                            <span class="task-status">{{ task.get_status_display }}</span>
                         </div>
-                        <div class="task-info">
-                            <h6>ซ่อมท่อประปา อาคาร 3</h6>
-                            <span>Assigned: 10 Dec 2025</span>
-                        </div>
-                        <span class="task-status">Completed</span>
-                    </div>
-
-                    <div class="task-item">
-                        <div class="task-icon" style="background-color: #E3F2FD; color: #1976D2;">
-                            <i class="bi bi-shield-check"></i>
-                        </div>
-                        <div class="task-info">
-                            <h6>ตรวจสอบความปลอดภัยกะดึก</h6>
-                            <span>Assigned: 12 Dec 2025</span>
-                        </div>
-                        <span class="task-status" style="background-color: #FFF3E0; color: #E65100;">In Progress</span>
-                    </div>
-
+                        {% empty %}
+                        <div class="text-muted text-center py-3">No recent tasks.</div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="text-muted text-center py-3">Task assignment is only available for Technicians.</div>
+                    {% endif %}
                 </div>
 
             </div>

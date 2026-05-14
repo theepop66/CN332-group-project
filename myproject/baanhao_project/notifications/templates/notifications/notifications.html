@@ -21,7 +21,6 @@
                 <!-- Top Bar -->
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h5 class="fw-bold">New for you!</h5>
-                    <a href="#" class="text-decoration-none">Mark as all read</a>
                 </div>
 
                 <!-- ===== Notification List ===== -->
@@ -46,13 +45,7 @@
                             </div>
                         </div>
 
-                        <div>
-                            {% if notification.is_read %}
-                                <span class="text-success fs-5">✔</span>
-                            {% else %}
-                                <span class="text-danger fs-5">●</span>
-                            {% endif %}
-                        </div>
+                        <!-- Read status removed as no DB field exists yet -->
 
                     </div>
                     {% empty %}

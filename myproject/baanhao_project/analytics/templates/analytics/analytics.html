@@ -35,28 +35,28 @@
         <div class="col-md-3">
             <div class="stat-card shadow-sm">
                 <h6>Total Tasks</h6>
-                <h3 class="fw-bold">64</h3>
+                <h3 class="fw-bold">{{ total_tasks }}</h3>
             </div>
         </div>
 
         <div class="col-md-3">
             <div class="stat-card shadow-sm">
                 <h6>Completed</h6>
-                <h3 class="text-success fw-bold">13</h3>
+                <h3 class="text-success fw-bold">{{ completed_tasks }}</h3>
             </div>
         </div>
 
         <div class="col-md-3">
             <div class="stat-card shadow-sm">
                 <h6>Processing</h6>
-                <h3 class="text-primary fw-bold">20</h3>
+                <h3 class="text-primary fw-bold">{{ processing_tasks }}</h3>
             </div>
         </div>
 
         <div class="col-md-3">
             <div class="stat-card shadow-sm">
                 <h6>Overdue</h6>
-                <h3 class="text-danger fw-bold">16</h3>
+                <h3 class="text-danger fw-bold">{{ overdue_tasks }}</h3>
             </div>
         </div>
 
@@ -80,7 +80,9 @@
         <div class="col-lg-6">
             <div class="card shadow-sm rounded-4 p-4 analytics-card">
                 <h6 class="fw-bold mb-3">Daily Trend</h6>
-                <canvas id="trendChart" height="250"></canvas>
+                <div class="d-flex align-items-center justify-content-center h-100 text-muted" style="min-height: 200px;">
+                    ยังไม่มีข้อมูลย้อนหลังสำหรับแสดงแนวโน้มรายวัน
+                </div>
             </div>
         </div>
 
@@ -93,34 +95,8 @@
             <div class="card shadow-sm rounded-4 p-4 analytics-card">
                 <h6 class="fw-bold mb-3">High Performance</h6>
 
-                <div class="mb-3">
-                    <div class="d-flex justify-content-between">
-                        <span>งานประปา</span>
-                        <span>95%</span>
-                    </div>
-                    <div class="progress rounded-pill">
-                        <div class="progress-bar bg-success" style="width:95%"></div>
-                    </div>
-                </div>
-
-                <div class="mb-3">
-                    <div class="d-flex justify-content-between">
-                        <span>งานสวน</span>
-                        <span>92%</span>
-                    </div>
-                    <div class="progress rounded-pill">
-                        <div class="progress-bar bg-success" style="width:92%"></div>
-                    </div>
-                </div>
-
-                <div>
-                    <div class="d-flex justify-content-between">
-                        <span>งานทำความสะอาด</span>
-                        <span>85%</span>
-                    </div>
-                    <div class="progress rounded-pill">
-                        <div class="progress-bar bg-success" style="width:85%"></div>
-                    </div>
+                <div class="text-muted py-3">
+                    ยังไม่มีข้อมูลประสิทธิภาพแยกตามหมวดหมู่
                 </div>
             </div>
         </div>
@@ -129,34 +105,8 @@
             <div class="card shadow-sm rounded-4 p-4 analytics-card">
                 <h6 class="fw-bold mb-3">Need Attention</h6>
 
-                <div class="mb-3">
-                    <div class="d-flex justify-content-between">
-                        <span>งานไฟฟ้า</span>
-                        <span>60%</span>
-                    </div>
-                    <div class="progress rounded-pill">
-                        <div class="progress-bar bg-danger" style="width:60%"></div>
-                    </div>
-                </div>
-
-                <div class="mb-3">
-                    <div class="d-flex justify-content-between">
-                        <span>งานส่วนกลาง</span>
-                        <span>55%</span>
-                    </div>
-                    <div class="progress rounded-pill">
-                        <div class="progress-bar bg-danger" style="width:55%"></div>
-                    </div>
-                </div>
-
-                <div>
-                    <div class="d-flex justify-content-between">
-                        <span>การระบายน้ำ</span>
-                        <span>50%</span>
-                    </div>
-                    <div class="progress rounded-pill">
-                        <div class="progress-bar bg-danger" style="width:50%"></div>
-                    </div>
+                <div class="text-muted py-3">
+                    ยังไม่มีข้อมูลประสิทธิภาพแยกตามหมวดหมู่
                 </div>
 
             </div>
@@ -171,7 +121,7 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
-    const totalTasks = 13 + 15 + 20 + 16;
+    const totalTasks = {{ total_tasks|default:0 }};
 
     const centerTextPlugin = {
         id: 'centerText',
@@ -204,9 +154,9 @@
     new Chart(ctx1, {
         type: 'doughnut',
         data: {
-            labels: ['Done', 'Late', 'Processing', 'Overdue'],
+            labels: ['Done', 'Pending', 'Processing', 'Overdue'],
             datasets: [{
-                data: [13, 15, 20, 16],
+                data: [{{ completed_tasks|default:0 }}, {{ waiting_tasks|default:0 }}, {{ processing_tasks|default:0 }}, {{ overdue_tasks|default:0 }}],
                 backgroundColor: [
                     '#28a745',
                     '#ffc107',
@@ -225,21 +175,6 @@
         plugins: [centerTextPlugin]
     });
 
-    const ctx2 = document.getElementById('trendChart');
-    new Chart(ctx2, {
-        type: 'line',
-        data: {
-            labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-            datasets: [{
-                label: 'Tasks',
-                data: [5, 8, 6, 10, 12, 7, 9],
-                tension: 0.4,
-                fill: true
-            }]
-        },
-        options: {
-            responsive: true
-        }
-    });
+
 </script>
 {% endblock %}
