@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container-fluid py-4">
+    <h2 class="fw-bold mb-4">Visitor passes</h2>
+    <p class="text-muted">ข้อมูลจากตาราง visitors_visitorpass</p>
+    <div class="table-responsive card shadow-sm rounded-4">
+        <table class="table table-hover mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th>pass_id</th>
+                    <th>visitor_name</th>
+                    <th>house</th>
+                    <th>schedule_date</th>
+                    <th>status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for p in visitor_passes %}
+                <tr>
+                    <td>{{ p.pass_id }}</td>
+                    <td>{{ p.visitor_name }}</td>
+                    <td>{{ p.house.house_id }}</td>
+                    <td>{{ p.schedule_date|date:"Y-m-d H:i" }}</td>
+                    <td>{{ p.get_status_display }}</td>
+                </tr>
+                {% empty %}
+                <tr><td colspan="5" class="text-muted">ยังไม่มีข้อมูลในระบบ</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

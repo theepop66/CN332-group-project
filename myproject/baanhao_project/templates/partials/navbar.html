@@ -16,12 +16,16 @@
 
     <!-- PROFILE -->
     <div class="sidebar-profile">
+        {% if user.profile_image %}
+        <img src="{{ user.profile_image.url }}" alt="Profile" class="profile-avatar">
+        {% else %}
         <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80"
              alt="Profile" class="profile-avatar">
+        {% endif %}
 
         <div class="profile-status">On duty</div>
         <h6 class="profile-name">{{ user.username|default:"Jaidee Meekwamsuk" }}</h6>
-        <span class="profile-role-badge">Admin</span>
+        <span class="profile-role-badge">{{ user.get_role_display|default:"Guest" }}</span>
         <span class="profile-work-time">8:00 AM - 8:00 PM</span>
     </div>
 
@@ -105,6 +109,24 @@
     <div class="sidebar-menu-title mt-4">OTHERS</div>
 
     <div class="nav flex-column w-100 mt-auto pb-3">
+
+        <a class="sidebar-link {% if request.resolver_match.app_name == 'regulations' %}active{% endif %}"
+           href="{% url 'regulations:list' %}">
+            <i class="bi bi-journal-text"></i>
+            <span>Regulations</span>
+        </a>
+
+        <a class="sidebar-link {% if request.resolver_match.app_name == 'visitors' %}active{% endif %}"
+           href="{% url 'visitors:list' %}">
+            <i class="bi bi-person-badge"></i>
+            <span>Visitor passes</span>
+        </a>
+
+        <a class="sidebar-link {% if request.resolver_match.app_name == 'invoices' %}active{% endif %}"
+           href="{% url 'invoices:list' %}">
+            <i class="bi bi-receipt"></i>
+            <span>Invoices</span>
+        </a>
 
         <a class="sidebar-link" href="#">
             <i class="bi bi-gear-fill"></i>

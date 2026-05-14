@@ -1,305 +1,254 @@
-from django.shortcuts import render
-from .models import Issue
+import calendar
+from datetime import date, datetime, timedelta
 
-from django.shortcuts import render, redirect, get_object_or_404
 from django.core.paginator import Paginator
 from django.db.models import Q
-from .models import Issue, IssueStatus, Complaint, Maintenance
-from .forms import ComplaintForm, MaintenanceForm
+from django.shortcuts import get_object_or_404, redirect, render
 
-import calendar
-from datetime import date,datetime, timedelta
-from .models import Maintenance
+from .forms import ComplaintForm, MaintenanceForm
+from .models import Complaint, Issue, IssueStatus, Maintenance
+from .query import completed_q, overdue_issue_queryset
+
+
+def _issue_counts(base_qs):
+    overdue_qs = overdue_issue_queryset()
+    return {
+        'all': base_qs.count(),
+        'waiting': base_qs.filter(status=IssueStatus.OPEN).count(),
+        'in_process': base_qs.filter(status=IssueStatus.IN_PROGRESS).count(),
+        'overdue': base_qs.filter(pk__in=overdue_qs.values_list('pk', flat=True)).count(),
+        'complete': base_qs.filter(completed_q()).count(),
+    }
+
+
+def _apply_status_filter(task_list, status_filter):
+    if status_filter == 'waiting':
+        return task_list.filter(status=IssueStatus.OPEN)
+    if status_filter == 'in_process':
+        return task_list.filter(status=IssueStatus.IN_PROGRESS)
+    if status_filter == 'overdue':
+        od = overdue_issue_queryset()
+        return task_list.filter(pk__in=od.values_list('pk', flat=True))
+    if status_filter == 'complete':
+        return task_list.filter(completed_q())
+    return task_list
+
 
 def all_tasks(request):
-    # --- 1. Base Query ---
-    # เรียกจากตารางแม่ (Issue)
-    # order_by('-created_date') ให้ตรงกับ field ใน model
-    task_list = Issue.objects.all().select_related('reporter').order_by('-created_date')
+    task_list = Issue.objects.all().select_related('reporter', 'assigned_officer__user').order_by('-created_date')
 
-    # --- 2. Search Logic (Title, Description, Location) ---
     search_query = request.GET.get('q')
     if search_query:
         task_list = task_list.filter(
-            Q(title__icontains=search_query) | 
-            Q(location__icontains=search_query) |
-            Q(description__icontains=search_query)
+            Q(title__icontains=search_query)
+            | Q(location__icontains=search_query)
+            | Q(description__icontains=search_query)
         )
 
-    # --- 3. Filter Logic (Status Tabs) ---
-    # Map ค่าจาก URL ให้ตรงกับ Enum ใน models.py (IssueStatus)
     status_filter = request.GET.get('status')
-    
-    if status_filter == 'waiting':
-        task_list = task_list.filter(status=IssueStatus.PENDING)
-    elif status_filter == 'in_process':
-        task_list = task_list.filter(status=IssueStatus.IN_PROGRESS)
-    elif status_filter == 'overdue':
-        task_list = task_list.filter(status=IssueStatus.OVERDUE)
-    elif status_filter == 'complete': 
-        task_list = task_list.filter(status=IssueStatus.SUCCESS)
+    task_list = _apply_status_filter(task_list, status_filter)
 
-    # --- 4. Count Data (สำหรับ Badge บน Tabs) ---
-    counts = {
-        'all': Issue.objects.count(),
-        'waiting': Issue.objects.filter(status=IssueStatus.PENDING).count(),
-        'in_process': Issue.objects.filter(status=IssueStatus.IN_PROGRESS).count(),
-        'overdue': Issue.objects.filter(status=IssueStatus.OVERDUE).count(),
-        'complete': Issue.objects.filter(status=IssueStatus.SUCCESS).count(),
-    }
+    counts = _issue_counts(Issue.objects.all())
 
-    # --- 5. Pagination ---
-    # UI เขียนว่า Showing 1 to 8 -> ใช้ 8 รายการต่อหน้า
-    paginator = Paginator(task_list, 30) 
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
+    paginator = Paginator(task_list, 30)
+    page_obj = paginator.get_page(request.GET.get('page'))
 
-    # --- 6. Data Transformation Logic ---
-    # แปลงข้อมูลเพื่อส่งไปแสดงผลให้ตรงกับ Design
     final_tasks = []
-    
     for task in page_obj:
-        # ข้อมูลพื้นฐานจาก Issue (Parent)
         item = {
             'id': task.id,
             'title': task.title,
             'location': task.location,
             'created_date': task.created_date,
-            'status': task.status, # ค่าจะเป็น 'PENDING', 'IN_PROGRESS' ฯลฯ
-            'status_display': task.get_status_display(), # ค่าที่อ่านรู้เรื่อง เช่น 'Pending', 'In Progress'
-            'type': 'Issue',      # Default
+            'status': task.status,
+            'status_display': task.get_status_display(),
+            'type': 'Issue',
             'assign_to': '-',
-            'type_badge_class': 'badge-secondary' # Default CSS Class
+            'type_badge_class': 'badge-secondary',
         }
 
-        # ตรวจสอบว่าเป็น Complaint หรือ Maintenance
-        # โดยใช้ hasattr เช็คว่า task instance นี้มี attributes ของลูกไหม
-        
-        if hasattr(task, 'complaint'):
+        if isinstance(task, Complaint):
             item['type'] = 'Complaint'
-            item['type_badge_class'] = 'badge-complaint' # ไว้ไปเขียน CSS
-            # ใน Model Complaint ของคุณไม่มี field assignee
-            # แต่ใน UI มีคำว่า Security -> เราจึง Hardcode ไว้ก่อน
-            item['assign_to'] = 'Security' 
-            
-        elif hasattr(task, 'maintenance'):
-            item['type'] = 'Maintenance'
-            item['type_badge_class'] = 'badge-maintenance' # ไว้ไปเขียน CSS
-            
-            # ดึงข้อมูล Technician
-            # เข้าถึงผ่าน task.maintenance.technician
-            tech = task.maintenance.technician
-            if tech:
-                # ใช้ str(tech) ถ้า Technician model มี def __str__ 
-                # หรือ tech.user.get_full_name() ถ้าเชื่อมกับ User
-                item['assign_to'] = str(tech) 
+            item['type_badge_class'] = 'badge-complaint'
+            if task.assigned_officer:
+                item['assign_to'] = task.assigned_officer.user.get_full_name() or task.assigned_officer.user.username
             else:
-                item['assign_to'] = 'Unassigned'
+                item['assign_to'] = '—'
+        elif isinstance(task, Maintenance):
+            item['type'] = 'Maintenance'
+            item['type_badge_class'] = 'badge-maintenance'
+            tech = task.technician
+            item['assign_to'] = (
+                (tech.user.get_full_name() or tech.user.username) if tech else 'Unassigned'
+            )
 
         final_tasks.append(item)
 
-    context = {
-        'tasks': final_tasks,
-        'page_obj': page_obj,
-        'counts': counts,
-        'current_status': status_filter if status_filter else 'all',
-    }
-
-    return render(request, 'issues/all_tasks.html', context)
+    return render(
+        request,
+        'issues/all_tasks.html',
+        {
+            'tasks': final_tasks,
+            'page_obj': page_obj,
+            'counts': counts,
+            'current_status': status_filter if status_filter else 'all',
+        },
+    )
 
 
 def complaint_tasks(request):
-    # 1. Query: ดึงเฉพาะ Complaint เท่านั้น!
-    tasks = Complaint.objects.select_related('issue_ptr', 'reporter').order_by('-created_date')
+    tasks = Complaint.objects.select_related('issue_ptr', 'reporter', 'assigned_officer__user').order_by('-created_date')
 
-    # 2. Search Logic
     search_query = request.GET.get('q')
     if search_query:
-        tasks = tasks.filter(
-            Q(title__icontains=search_query) | 
-            Q(location__icontains=search_query)
-        )
+        tasks = tasks.filter(Q(title__icontains=search_query) | Q(location__icontains=search_query))
 
-    # 3. Count Data (นับแยกประเภท)
-    base_qs = Complaint.objects.all()
-    counts = {
-        'all': base_qs.count(),
-        'waiting': base_qs.filter(status=IssueStatus.PENDING).count(),
-        'in_process': base_qs.filter(status=IssueStatus.IN_PROGRESS).count(),
-        'overdue': base_qs.filter(status=IssueStatus.OVERDUE).count(),
-        'complete': base_qs.filter(status=IssueStatus.SUCCESS).count(),
-    }
+    status_filter = request.GET.get('status')
+    tasks = _apply_status_filter(tasks, status_filter)
 
-    # 4. Pagination
+    counts = _issue_counts(Complaint.objects.all())
+
     paginator = Paginator(tasks, 30)
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
+    page_obj = paginator.get_page(request.GET.get('page'))
 
-    # 5. Data Transformation
     final_tasks = []
     for task in page_obj:
-        item = {
-            'id': task.id,
-            'title': task.title,
-            'location': task.location,
-            'created_date': task.created_date,
-            'status': task.status,
-            'assign_to': 'Security',
-        }
-        final_tasks.append(item)
+        assign_to = '—'
+        if task.assigned_officer:
+            assign_to = task.assigned_officer.user.get_full_name() or task.assigned_officer.user.username
+        final_tasks.append(
+            {
+                'id': task.id,
+                'title': task.title,
+                'location': task.location,
+                'created_date': task.created_date,
+                'status': task.status,
+                'assign_to': assign_to,
+            }
+        )
 
-    context = {
-        'tasks': final_tasks,
-        'page_obj': page_obj,
-        'counts': counts,
-        'current_status': request.GET.get('status') or 'all',
-    }
+    return render(
+        request,
+        'issues/all_tasks_complaints.html',
+        {
+            'tasks': final_tasks,
+            'page_obj': page_obj,
+            'counts': counts,
+            'current_status': status_filter if status_filter else 'all',
+        },
+    )
 
-    return render(request, 'issues/all_tasks_complaints.html', context)
 
 def maintenance_tasks(request):
-    # --- 1. Base Query ---
-    # เรียกจากตาราง Maintenance โดยตรง
-    # select_related 'technician' เพื่อดึงชื่อช่างมาด้วยในคำสั่งเดียว (ลด Query)
-    tasks = Maintenance.objects.select_related('issue_ptr', 'reporter', 'technician').order_by('-created_date')
+    tasks = Maintenance.objects.select_related('issue_ptr', 'reporter', 'technician__user').order_by('-created_date')
 
-    # --- 2. Search Logic ---
     search_query = request.GET.get('q')
     if search_query:
-        tasks = tasks.filter(
-            Q(title__icontains=search_query) | 
-            Q(location__icontains=search_query)
-        )
+        tasks = tasks.filter(Q(title__icontains=search_query) | Q(location__icontains=search_query))
 
-    # --- 3. Filter Logic (Status) ---
     status_filter = request.GET.get('status')
-    if status_filter == 'waiting':
-        tasks = tasks.filter(status=IssueStatus.PENDING)
-    elif status_filter == 'in_process':
-        tasks = tasks.filter(status=IssueStatus.IN_PROGRESS)
-    elif status_filter == 'overdue':
-        tasks = tasks.filter(status=IssueStatus.OVERDUE)
-    elif status_filter == 'complete': 
-        tasks = tasks.filter(status=IssueStatus.SUCCESS)
+    tasks = _apply_status_filter(tasks, status_filter)
 
-    # --- 4. Count Data (เฉพาะ Maintenance) ---
-    base_qs = Maintenance.objects.all()
-    counts = {
-        'all': base_qs.count(),
-        'waiting': base_qs.filter(status=IssueStatus.PENDING).count(),
-        'in_process': base_qs.filter(status=IssueStatus.IN_PROGRESS).count(),
-        'overdue': base_qs.filter(status=IssueStatus.OVERDUE).count(),
-        'complete': base_qs.filter(status=IssueStatus.SUCCESS).count(),
-    }
+    counts = _issue_counts(Maintenance.objects.all())
 
-    # --- 5. Pagination ---
-    paginator = Paginator(tasks, 8) # 8 รายการต่อหน้า
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
+    paginator = Paginator(tasks, 8)
+    page_obj = paginator.get_page(request.GET.get('page'))
 
-    # --- 6. Prepare Data ---
     final_tasks = []
     for task in page_obj:
-        # หาชื่อช่าง
         tech_name = 'Unassigned'
         if task.technician:
-            # เข้าถึง User ผ่าน Technician model
             tech_name = task.technician.user.get_full_name() or task.technician.user.username
 
-        item = {
-            'id': task.id,
-            'title': task.title,
-            'location': task.location,
-            'created_date': task.created_date,
-            'status': task.status,
-            'assign_to': tech_name, # ส่งชื่อช่างไปแสดง
-            'image': task.before_image.url if task.before_image else None
-        }
-        final_tasks.append(item)
+        final_tasks.append(
+            {
+                'id': task.id,
+                'title': task.title,
+                'location': task.location,
+                'created_date': task.created_date,
+                'status': task.status,
+                'assign_to': tech_name,
+                'image': task.before_image.url if task.before_image else None,
+            }
+        )
 
-    context = {
-        'tasks': final_tasks,
-        'page_obj': page_obj,
-        'counts': counts,
-        'current_status': status_filter if status_filter else 'all',
-    }
+    return render(
+        request,
+        'issues/all_tasks_maintenance.html',
+        {
+            'tasks': final_tasks,
+            'page_obj': page_obj,
+            'counts': counts,
+            'current_status': status_filter if status_filter else 'all',
+        },
+    )
 
-    # Render ไฟล์ HTML ใหม่สำหรับ Maintenance
-    return render(request, 'issues/all_tasks_maintenance.html', context)
 
 def create_complaint(request):
     if request.method == 'POST':
         form = ComplaintForm(request.POST, request.FILES)
         if form.is_valid():
             task = form.save(commit=False)
-            task.status = 'PENDING' # กำหนดค่าเริ่มต้น
+            task.status = IssueStatus.OPEN
             task.save()
-            return redirect('complaint_tasks')
+            return redirect('issues:complaint_tasks')
     else:
         form = ComplaintForm()
-    
+
     return render(request, 'issues/create_complaint.html', {'form': form})
+
 
 def create_maintenance(request):
     if request.method == 'POST':
         form = MaintenanceForm(request.POST, request.FILES)
         if form.is_valid():
             task = form.save(commit=False)
-            task.status = 'PENDING'
+            task.status = IssueStatus.OPEN
             task.save()
-            return redirect('maintenance_tasks')
+            return redirect('issues:maintenance_tasks')
     else:
         form = MaintenanceForm()
 
     return render(request, 'issues/create_maintenance.html', {'form': form})
 
+
 def maintenance_detail(request, pk):
     task = get_object_or_404(Maintenance, pk=pk)
-    
-    # Logic สำหรับปุ่มกดเปลี่ยนสถานะ (Action Buttons)
+
     if request.method == 'POST':
         action = request.POST.get('action')
         if action == 'complete':
-            task.status = IssueStatus.SUCCESS
+            task.status = IssueStatus.RESOLVED
             task.save()
         elif action == 'cancel':
-            # เนื่องจากใน Enum เดิมไม่มี CANCELLED อาจจะใช้การลบ หรือเพิ่ม Status ใหม่ใน models.py
-            # ในที่นี้สมมติว่าให้เป็น SUCCESS ไปก่อน หรือคุณไปเพิ่ม Status 'CANCELLED' เองนะครับ
-            pass 
-        return redirect('maintenance_detail', pk=pk)
+            task.status = IssueStatus.CLOSED
+            task.save()
+        return redirect('issues:maintenance_detail', pk=pk)
 
     return render(request, 'issues/maintenance_detail.html', {'task': task})
 
+
 def complaint_detail(request, pk):
     task = get_object_or_404(Complaint, pk=pk)
-    
+
     if request.method == 'POST':
         action = request.POST.get('action')
         if action == 'complete':
-            task.status = IssueStatus.SUCCESS
+            task.status = IssueStatus.RESOLVED
             task.save()
-        # Complaint อาจไม่มีปุ่ม Cancel หรือมี Logic ต่างกัน
-        return redirect('complaint_detail', pk=pk)
+        return redirect('issues:complaint_detail', pk=pk)
 
     return render(request, 'issues/complaint_detail.html', {'task': task})
 
-def maintenance_calendar(request):
 
+def _calendar_context(request, *, use_appointment):
     today = date.today()
-
-    # ==========================
-    # 1. รับ view ก่อนเลย (กัน error)
-    # ==========================
-    view_mode = request.GET.get("view", "month")
-
-    # ==========================
-    # 2. รับ date อย่างปลอดภัย
-    # ==========================
-    date_param = request.GET.get("date")
+    view_mode = request.GET.get('view', 'month')
+    date_param = request.GET.get('date')
 
     if date_param:
         try:
-            selected_date = datetime.strptime(date_param, "%Y-%m-%d").date()
+            selected_date = datetime.strptime(date_param, '%Y-%m-%d').date()
         except ValueError:
             selected_date = today
     else:
@@ -309,88 +258,65 @@ def maintenance_calendar(request):
     month = selected_date.month
     day = selected_date.day
 
-    # ==========================
-    # 3. prev / next (ใช้ selected_date)
-    # ==========================
-    if view_mode == "month":
+    if view_mode == 'month':
         prev_date = selected_date.replace(day=1) - timedelta(days=1)
         next_date = (selected_date.replace(day=28) + timedelta(days=4)).replace(day=1)
-
-    elif view_mode == "week":
+    elif view_mode == 'week':
         prev_date = selected_date - timedelta(days=7)
         next_date = selected_date + timedelta(days=7)
-
-    elif view_mode == "day":
+    elif view_mode == 'day':
         prev_date = selected_date - timedelta(days=1)
         next_date = selected_date + timedelta(days=1)
-
     else:
         prev_date = selected_date
         next_date = selected_date
 
-    # ==========================
-    # 4. Calendar logic
-    # ==========================
     cal = calendar.Calendar(firstweekday=0)
 
-    if view_mode == "month":
+    if view_mode == 'month':
         month_days = cal.monthdayscalendar(year, month)
-
-    elif view_mode == "week":
+    elif view_mode == 'week':
         start_week = selected_date - timedelta(days=selected_date.weekday())
         month_days = [[(start_week + timedelta(days=i)).day for i in range(7)]]
-
-    elif view_mode == "day":
+    elif view_mode == 'day':
         month_days = [[day]]
-
     else:
         month_days = cal.monthdayscalendar(year, month)
 
-    # ==========================
-    # 5. Data
-    # ==========================
-    maintenances = Maintenance.objects.filter(
-        appointment_date__year=year,
-        appointment_date__month=month
-    )
-
-    fake_events = [
-        {"title": "Fix Aircon", "day": 14, "color": "red"},
-        {"title": "Repair Elevator", "day": 14, "color": "red"},
-        {"title": "Water System Check", "day": 9, "color": "green"},
-        {"title": "Electric Inspection", "day": 20, "color": "purple"},
-    ]
-
     events_by_day = {}
 
-    for m in maintenances:
-        d = m.appointment_date.day
-        events_by_day.setdefault(d, []).append({
-            "title": m.title,
-            "color": "blue"
-        })
+    if use_appointment:
+        qs = Maintenance.objects.filter(appointment_date__year=year, appointment_date__month=month)
+        for m in qs:
+            if not m.appointment_date:
+                continue
+            d = m.appointment_date.day
+            events_by_day.setdefault(d, []).append({'title': m.title, 'color': 'blue'})
+    else:
+        qs = Complaint.objects.filter(created_date__year=year, created_date__month=month)
+        for c in qs:
+            d = c.created_date.day
+            events_by_day.setdefault(d, []).append({'title': c.title, 'color': 'orange'})
 
-    for e in fake_events:
-        d = e["day"]
-        events_by_day.setdefault(d, []).append({
-            "title": e["title"],
-            "color": e["color"]
-        })
-
-    context = {
-        "calendar": month_days,
-        "month_name": calendar.month_name[month],
-        "month_number": month,
-        "year": year,
-        "current_day": today.day,
-        "events_by_day": events_by_day,
-        "view_mode": view_mode,
-        "selected_date": selected_date,
-        "prev_date": prev_date.strftime("%Y-%m-%d"),
-        "next_date": next_date.strftime("%Y-%m-%d"),
+    return {
+        'calendar': month_days,
+        'month_name': calendar.month_name[month],
+        'month_number': month,
+        'year': year,
+        'current_day': today.day,
+        'events_by_day': events_by_day,
+        'view_mode': view_mode,
+        'selected_date': selected_date,
+        'prev_date': prev_date.strftime('%Y-%m-%d'),
+        'next_date': next_date.strftime('%Y-%m-%d'),
     }
 
-    return render(request, "issues/calendar_maintenance.html", context)
+
+def maintenance_calendar(request):
+    ctx = _calendar_context(request, use_appointment=True)
+    return render(request, 'issues/calendar_maintenance.html', ctx)
+
 
 def complaint_calendar(request):
-    return render(request, "issues/complaint_calendar.html")
+    ctx = _calendar_context(request, use_appointment=False)
+    return render(request, 'issues/complaint_calendar.html', ctx)

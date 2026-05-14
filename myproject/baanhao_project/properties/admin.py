@@ -10,17 +10,19 @@ class VehicleInline(admin.TabularInline):
 # 2. ลงทะเบียน House (บ้าน)
 @admin.register(House)
 class HouseAdmin(admin.ModelAdmin):
-    # หน้าตารางรวม
-    list_display = ('house_number', 'house_id', 'owner', 'get_vehicle_count')
-    search_fields = ('house_number', 'house_id', 'owner__user__username') # ค้นหาจากเลขบ้าน หรือชื่อเจ้าของได้
-    list_filter = ('owner',) # ตัวกรองด้านขวา
-    
-    # เอา VehicleInline มาแปะไว้ในหน้านี้
+    list_display = ('house_number', 'house_id', 'display_owner', 'get_vehicle_count')
+    search_fields = ('house_number', 'house_id', 'residents__user__username')
     inlines = [VehicleInline]
 
-    # ฟังก์ชันแถม: โชว์จำนวนรถในหน้าตารางรวม
+    def display_owner(self, obj):
+        r = obj.residents.filter(is_owner=True).select_related('user').first()
+        return r.user.username if r else '—'
+
+    display_owner.short_description = 'Owner (resident)'
+
     def get_vehicle_count(self, obj):
         return obj.vehicles.count()
+
     get_vehicle_count.short_description = 'Vehicles'
 
 # 3. ลงทะเบียน Vehicle (รถ) แยกต่างหากด้วย (เผื่ออยากดู list รถทั้งหมู่บ้าน)

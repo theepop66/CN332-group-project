@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load custom_tags %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/all_tasks_maintenance.css' %}">
+
+<div class="calendar-top">
+
+    <div class="calendar-left">
+        <div class="dashboard-label">Admin Dashboard</div>
+        <h1 class="main-title">Complaints (by created date)</h1>
+
+        <div class="month-navigation">
+            <a class="nav-btn"
+               href="?view={{ view_mode }}&date={{ prev_date }}">
+                ←
+            </a>
+
+            <span class="month-text">
+                {{ month_name }} {{ year }}
+            </span>
+
+            <a class="nav-btn"
+               href="?view={{ view_mode }}&date={{ next_date }}">
+                →
+            </a>
+        </div>
+    </div>
+
+    <div class="view-toggle">
+        <a href="?view=month&date={{ selected_date|date:'Y-m-d' }}"
+           class="{% if view_mode == 'month' %}active{% endif %}">
+           Month
+        </a>
+
+        <a href="?view=week&date={{ selected_date|date:'Y-m-d' }}"
+           class="{% if view_mode == 'week' %}active{% endif %}">
+           Week
+        </a>
+
+        <a href="?view=day&date={{ selected_date|date:'Y-m-d' }}"
+           class="{% if view_mode == 'day' %}active{% endif %}">
+           Day
+        </a>
+    </div>
+
+</div>
+
+<div class="calendar-divider"></div>
+
+<div class="calendar-header">
+    <div>MON</div>
+    <div>TUE</div>
+    <div>WED</div>
+    <div>THU</div>
+    <div>FRI</div>
+    <div>SAT</div>
+    <div>SUN</div>
+</div>
+
+<div class="calendar-grid">
+    {% for week in calendar %}
+        {% for day in week %}
+            <div class="calendar-day {% if day == current_day %}today{% endif %}">
+
+                {% if day != 0 %}
+                    <a class="day-number"
+                       href="?view=day&date={{ year }}-{{ month_number|stringformat:'02d' }}-{{ day|stringformat:'02d' }}">
+                       {{ day }}
+                    </a>
+
+                    {% if day in events_by_day %}
+                        {% for event in events_by_day|get_item:day %}
+                            <div class="event-badge {{ event.color }}">
+                                {{ event.title }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endif %}
+
+            </div>
+        {% endfor %}
+    {% endfor %}
+</div>
+
+{% endblock %}

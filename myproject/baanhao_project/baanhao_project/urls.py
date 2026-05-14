@@ -43,4 +43,8 @@ urlpatterns = [
 
     #notifications
     path('notifications/', include('notifications.urls')),
+
+    path('regulations/', include('regulations.urls')),
+    path('visitors/', include('visitors.urls')),
+    path('invoices/', include('invoices.urls')),
 ]

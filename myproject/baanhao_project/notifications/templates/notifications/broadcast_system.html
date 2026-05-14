@@ -7,99 +7,52 @@
 
 <div class="broadcast-container">
 
-    <!-- LEFT SIDE -->
-    <div class="broadcast-left">
-        <h2>Broadcast System</h2>
+    <form method="post">
+        {% csrf_token %}
 
-        <div class="form-group">
-            <label>Title / Subject</label>
-            <input type="text" id="broadcastTitle" placeholder="e.g. แจ้งซ่อมด่วน">
-        </div>
-
-        <div class="form-group">
-            <label>Message</label>
-            <textarea rows="5" id="broadcastMessage"></textarea>
-        </div>
-
-        <div class="calendar-box">
-            <label>Select Date</label>
-            <input type="date" id="broadcastDate">
-        </div>
-    </div>
-
-    <!-- RIGHT SIDE -->
-    <div class="broadcast-right">
-        <h3>Select Broadcast Time</h3>
-
-        <div class="time-grid">
-            {% for hour in time_slots %}
-                <button type="button" class="time-btn">{{ hour }}</button>
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">{{ message }}</div>
             {% endfor %}
-        </div>
+        {% endif %}
 
-        <button type="button" class="send-btn" id="sendBroadcast">
-            Send Broadcast
-        </button>
-    </div>
+        <div class="d-flex flex-wrap gap-4">
+            <div class="broadcast-left flex-grow-1">
+                <h2>Broadcast System</h2>
+
+                <div class="form-group">
+                    <label>Title / Subject</label>
+                    <input type="text" name="title" required placeholder="e.g. แจ้งซ่อมด่วน">
+                </div>
+
+                <div class="form-group">
+                    <label>Message</label>
+                    <textarea rows="5" name="message" required></textarea>
+                </div>
+
+                <div class="calendar-box">
+                    <label>Select Date (optional)</label>
+                    <input type="date" name="scheduled_date">
+                </div>
+            </div>
+
+            <div class="broadcast-right flex-grow-1">
+                <h3>Broadcast time (optional)</h3>
+
+                <select name="scheduled_time" class="form-select mb-3">
+                    <option value="">— not specified —</option>
+                    {% for hour in time_slots %}
+                        <option value="{{ hour }}">{{ hour }}</option>
+                    {% endfor %}
+                </select>
+
+                <button type="submit" class="send-btn">
+                    Send Broadcast
+                </button>
+            </div>
+        </div>
+    </form>
 
 </div>
-
-
-<!-- ================= SCRIPTS ================= -->
-
-<!-- SweetAlert CDN ต้องมาก่อนใช้ -->
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-
-    // ===== เลือกเวลา =====
-    const buttons = document.querySelectorAll(".time-btn");
-    let selectedTime = null;
-
-    buttons.forEach(btn => {
-        btn.addEventListener("click", function() {
-            buttons.forEach(b => b.classList.remove("active"));
-            this.classList.add("active");
-            selectedTime = this.innerText;
-        });
-    });
-
-    // ===== กด Send Broadcast =====
-    document.getElementById("sendBroadcast").addEventListener("click", function() {
-
-        const title = document.getElementById("broadcastTitle").value.trim();
-        const message = document.getElementById("broadcastMessage").value.trim();
-        const date = document.getElementById("broadcastDate").value;
-
-        // ตรวจสอบข้อมูลก่อน
-        if (!title || !message || !date || !selectedTime) {
-            Swal.fire({
-                title: "Missing Information",
-                text: "Please fill all fields and select a time.",
-                icon: "warning",
-                confirmButtonColor: "#d33"
-            });
-            return;
-        }
-
-        // Popup success
-        Swal.fire({
-            title: "Broadcast Sent!",
-            html: `
-                <b>Title:</b> ${title}<br>
-                <b>Date:</b> ${date}<br>
-                <b>Time:</b> ${selectedTime}
-            `,
-            icon: "success",
-            confirmButtonText: "OK",
-            confirmButtonColor: "#2DA44E",
-            borderRadius: "16px"
-        });
-
-    });
-
-});
-</script>
 
 {% endblock %}

@@ -7,3 +7,6 @@ __pycache__/
 .DS_Store
 my_backup.json
 media/
+
+# Local virtualenv (created for Django tooling)
+myproject/baanhao_project/.venv/
