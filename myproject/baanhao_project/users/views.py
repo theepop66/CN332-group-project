@@ -3,8 +3,13 @@ from django.core.paginator import Paginator
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.core.exceptions import ObjectDoesNotExist
 from django.utils import timezone
-from .models import User, UserRole, RegistrationRequest, RequestStatus
+
+from issues.models import Complaint, Maintenance
+from issues.query import overdue_issue_queryset
+
+from .models import RegistrationRequest, RequestStatus, User, UserRole
 from .forms import RegistrationForm
 
 
@@ -245,10 +250,10 @@ def staff_list(request):
 
 def staff_detail(request, staff_id):
     staff = get_object_or_404(User, id=staff_id)
-    
+
     all_staff = User.objects.exclude(role=UserRole.RESIDENT).order_by('role', 'first_name')
     staff_list_qs = list(all_staff)
-    
+
     try:
         current_index = staff_list_qs.index(staff)
         previous_staff = staff_list_qs[current_index - 1] if current_index > 0 else None
@@ -257,9 +262,81 @@ def staff_detail(request, staff_id):
         previous_staff = None
         next_staff = None
 
+    overdue_pks = set(overdue_issue_queryset().values_list('pk', flat=True))
+    recent_tasks = []
+    technician_skills = []
+    officer_profile = None
+    security_profile = None
+    admin_profile = None
+
+    if staff.role == UserRole.TECHNICIAN:
+        try:
+            tech = staff.technician_profile
+        except ObjectDoesNotExist:
+            tech = None
+        if tech:
+            technician_skills = list(tech.skills.all())
+            for m in (
+                Maintenance.objects.filter(technician=tech)
+                .select_related('reporter__user')
+                .order_by('-created_date')[:12]
+            ):
+                recent_tasks.append(
+                    {
+                        'title': m.title,
+                        'date': m.created_date,
+                        'status_display': m.get_status_display(),
+                        'is_overdue': m.pk in overdue_pks,
+                        'detail_name': 'issues:maintenance_detail',
+                        'pk': m.pk,
+                        'icon': 'wrench',
+                    }
+                )
+
+    elif staff.role == UserRole.JURISTIC:
+        try:
+            jo = staff.juristic_profile
+        except ObjectDoesNotExist:
+            jo = None
+        if jo:
+            officer_profile = jo
+            for c in (
+                Complaint.objects.filter(assigned_officer=jo)
+                .select_related('reporter__user')
+                .order_by('-created_date')[:12]
+            ):
+                recent_tasks.append(
+                    {
+                        'title': c.title,
+                        'date': c.created_date,
+                        'status_display': c.get_status_display(),
+                        'is_overdue': c.pk in overdue_pks,
+                        'detail_name': 'issues:complaint_detail',
+                        'pk': c.pk,
+                        'icon': 'file-text',
+                    }
+                )
+
+    elif staff.role == UserRole.SECURITY:
+        try:
+            security_profile = staff.security_profile
+        except ObjectDoesNotExist:
+            security_profile = None
+
+    elif staff.role == UserRole.ADMIN:
+        try:
+            admin_profile = staff.admin_profile
+        except ObjectDoesNotExist:
+            admin_profile = None
+
     context = {
         'staff': staff,
         'previous_staff': previous_staff,
         'next_staff': next_staff,
+        'recent_tasks': recent_tasks,
+        'technician_skills': technician_skills,
+        'officer_profile': officer_profile,
+        'security_profile': security_profile,
+        'admin_profile': admin_profile,
     }
     return render(request, 'users/staff_detail.html', context)

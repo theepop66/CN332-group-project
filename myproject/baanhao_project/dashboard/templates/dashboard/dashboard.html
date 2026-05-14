@@ -15,7 +15,9 @@
             <small class="text-muted">ภาพรวมระบบ</small>
         </div>
         <div class="d-none d-md-block">
-            <input type="text" class="form-control rounded-pill" placeholder="ค้นหา..." style="width: 250px;">
+            <form method="get" action="{% url 'issues:all_tasks' %}" class="d-flex">
+                <input type="text" name="q" class="form-control rounded-pill" placeholder="ค้นหา..." style="width: 250px;" value="">
+            </form>
         </div>
     </div>
 
@@ -24,7 +26,11 @@
             <div class="stat-card">
                 <div class="d-flex justify-content-between mb-3">
                     <span class="text-muted">งานทั้งหมด</span>
-                    <span class="badge-green">+5.2%</span>
+                    {% if trend_issues_created is not None %}
+                    <span class="{% if trend_issues_created >= 0 %}badge-green{% else %}badge-red{% endif %}">{% if trend_issues_created > 0 %}+{% endif %}{{ trend_issues_created }}%</span>
+                    {% else %}
+                    <span class="text-muted small">—</span>
+                    {% endif %}
                 </div>
                 <div class="d-flex align-items-center">
                     <div class="stat-icon bg-dark text-white">
@@ -39,7 +45,11 @@
             <div class="stat-card">
                 <div class="d-flex justify-content-between mb-3">
                     <span class="text-muted">กำลังทำ</span>
-                    <span class="badge-green">+2.5%</span>
+                    {% if trend_inprogress_created is not None %}
+                    <span class="{% if trend_inprogress_created >= 0 %}badge-green{% else %}badge-red{% endif %}">{% if trend_inprogress_created > 0 %}+{% endif %}{{ trend_inprogress_created }}%</span>
+                    {% else %}
+                    <span class="text-muted small">—</span>
+                    {% endif %}
                 </div>
                 <div class="d-flex align-items-center">
                     <div class="stat-icon border bg-white">
@@ -54,7 +64,11 @@
             <div class="stat-card">
                 <div class="d-flex justify-content-between mb-3">
                     <span class="text-muted">รอเริ่มงาน</span>
-                    <span class="badge-red">-1.2%</span>
+                    {% if trend_waiting_new is not None %}
+                    <span class="{% if trend_waiting_new <= 0 %}badge-green{% else %}badge-red{% endif %}">{% if trend_waiting_new > 0 %}+{% endif %}{{ trend_waiting_new }}%</span>
+                    {% else %}
+                    <span class="text-muted small">—</span>
+                    {% endif %}
                 </div>
                 <div class="d-flex align-items-center">
                     <div class="stat-icon border bg-white">
@@ -69,7 +83,11 @@
             <div class="stat-card">
                 <div class="d-flex justify-content-between mb-3">
                     <span class="text-muted">เก็บเงินได้</span>
-                    <span class="badge-green">+8.5%</span>
+                    {% if trend_paid_amount is not None %}
+                    <span class="{% if trend_paid_amount >= 0 %}badge-green{% else %}badge-red{% endif %}">{% if trend_paid_amount > 0 %}+{% endif %}{{ trend_paid_amount }}%</span>
+                    {% else %}
+                    <span class="text-muted small">—</span>
+                    {% endif %}
                 </div>
                 <div class="d-flex align-items-center">
                     <div class="stat-icon border bg-white">
@@ -109,7 +127,7 @@
             <div class="white-box text-center mb-4">
                 <div class="box-header">
                     <h5 class="box-title">สถานะงาน</h5>
-                    <a href="#" class="btn btn-sm btn-light rounded-pill">ดูทั้งหมด</a>
+                    <a href="{% url 'issues:all_tasks' %}" class="btn btn-sm btn-light rounded-pill">ดูทั้งหมด</a>
                 </div>
 
                 <div style="height: 200px; position: relative;">
@@ -120,7 +138,7 @@
             <div class="white-box">
                 <div class="box-header">
                     <h5 class="box-title">กิจกรรมเร็วๆ นี้</h5>
-                    <a href="#" class="small text-muted text-decoration-none">ดูปฏิทิน</a>
+                    <a href="{% url 'issues:maintenance_calendar' %}" class="small text-muted text-decoration-none">ดูปฏิทิน</a>
                 </div>
 
                 {% for ev in upcoming_events %}

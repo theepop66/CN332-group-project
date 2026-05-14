@@ -9,14 +9,14 @@
 <div class="page-bg">
     
     <div class="mb-2">
-        <a href="{% url 'complaint_tasks' %}" class="text-decoration-none text-muted mb-2 d-inline-block fw-bold small">
+        <a href="{% url 'issues:complaint_tasks' %}" class="text-decoration-none text-muted mb-2 d-inline-block fw-bold small">
             <i class="bi bi-arrow-left me-1"></i> Back to List
         </a>
         <h2 class="fw-bold mb-3" style="color: #111827;">Create New Task</h2>
         
         <div class="toggle-container">
-            <a href="{% url 'create_maintenance' %}" class="btn-toggle">Maintenance (แจ้งซ่อม)</a>
-            <a href="#" class="btn-toggle active-orange">Complaint (แจ้งเหตุ)</a>
+            <a href="{% url 'issues:create_maintenance' %}" class="btn-toggle">Maintenance (แจ้งซ่อม)</a>
+            <a href="{% url 'issues:create_complaint' %}" class="btn-toggle active-orange">Complaint (แจ้งเหตุ)</a>
         </div>
     </div>
 

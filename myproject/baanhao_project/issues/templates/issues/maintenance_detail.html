@@ -1,7 +1,7 @@
 <div class="container-fluid py-4" style="background-color: #F8FAFC;">
     
     <div class="mb-4">
-        <a href="{% url 'maintenance_tasks' %}" class="text-decoration-none text-muted mb-2 d-inline-block">
+        <a href="{% url 'issues:maintenance_tasks' %}" class="text-decoration-none text-muted mb-2 d-inline-block">
             <i class="bi bi-arrow-left me-1"></i> Back to List
         </a>
         <h2 class="fw-bold">Maintenance #{{ task.created_date|date:"Y" }}-{{ task.id|stringformat:"03d" }}</h2>
@@ -57,7 +57,7 @@
                 <div class="card-body p-4">
                     <div class="d-flex justify-content-between mb-3">
                         <h5 class="fw-bold">Technician Report</h5>
-                        <span class="text-muted small">updated on : {% now "d/M/Y" %}</span>
+                        <span class="text-muted small">updated on : {{ task.updated_at|date:"d/M/Y" }}</span>
                     </div>
 
                     {% if task.after_image %}
@@ -81,18 +81,22 @@
                     <div class="mb-3">
                         <small class="text-muted fw-bold" style="font-size: 0.75rem;">Current Status</small>
                         <div class="mt-2 text-center py-2 rounded-pill fw-bold
-                            {% if task.status == 'SUCCESS' %}bg-success bg-opacity-10 text-success
-                            {% elif task.status == 'IN_PROGRESS' %}bg-info bg-opacity-10 text-info
-                            {% elif task.status == 'OVERDUE' %}bg-danger bg-opacity-10 text-danger
+                            {% if task.status == 'resolved' or task.status == 'closed' %}bg-success bg-opacity-10 text-success
+                            {% elif task.status == 'in_progress' %}bg-info bg-opacity-10 text-info
+                            {% elif is_overdue %}bg-danger bg-opacity-10 text-danger
                             {% else %}bg-warning bg-opacity-10 text-warning{% endif %}">
-                            {{ task.get_status_display }}
+                            {% if is_overdue and task.status != 'resolved' and task.status != 'closed' %}
+                                Overdue · {{ task.get_status_display }}
+                            {% else %}
+                                {{ task.get_status_display }}
+                            {% endif %}
                         </div>
                     </div>
 
                     <div class="mb-4">
                         <small class="text-muted fw-bold" style="font-size: 0.75rem;">Priority</small>
                         <div class="d-flex align-items-center mt-1">
-                            {% if task.priority == 'HIGH' or task.priority == 'CRITICAL' %}
+                            {% if task.priority == 'high' or task.priority == 'urgent' %}
                                 <i class="bi bi-fire text-danger me-2"></i> <span class="fw-bold text-danger">{{ task.get_priority_display }}</span>
                             {% else %}
                                 <i class="bi bi-circle-fill text-secondary me-2 small"></i> <span>{{ task.get_priority_display }}</span>
@@ -102,14 +106,14 @@
 
                     <form method="POST" class="d-grid gap-2">
                         {% csrf_token %}
-                        {% if task.status != 'SUCCESS' %}
+                        {% if task.status != 'resolved' and task.status != 'closed' %}
                             <button type="submit" name="action" value="complete" class="btn btn-dark rounded-pill py-2" style="background-color: #5D4037;">
                                 Make as Complete
                             </button>
+                            <button type="submit" name="action" value="cancel" class="btn btn-light text-muted rounded-pill py-2">
+                                Cancel
+                            </button>
                         {% endif %}
-                        <button type="submit" name="action" value="cancel" class="btn btn-light text-muted rounded-pill py-2">
-                            Cancel
-                        </button>
                     </form>
                 </div>
             </div>
@@ -150,7 +154,7 @@
                         </div>
                         <div>
                             <h6 class="fw-bold mb-0">{{ task.reporter.user.get_full_name|default:task.reporter.user.username }}</h6>
-                            <small class="text-muted">Owner, {{ task.reporter.room_number|default:"Resident" }}</small>
+                            <small class="text-muted">{% if task.reporter.house %}House {{ task.reporter.house }}{% else %}Resident{% endif %}</small>
                         </div>
                     </div>
                 </div>

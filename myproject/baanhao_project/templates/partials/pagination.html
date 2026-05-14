@@ -4,7 +4,7 @@
         
         {% if page_obj.has_previous %}
         <li class="page-item">
-            <a class="page-link-custom" href="?page={{ page_obj.previous_page_number }}{% if request.GET.role %}&role={{ request.GET.role }}{% endif %}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">
+            <a class="page-link-custom" href="?page={{ page_obj.previous_page_number }}{% if request.GET.role %}&role={{ request.GET.role }}{% endif %}{% if request.GET.q %}&q={{ request.GET.q|urlencode }}{% endif %}{% if request.GET.status %}&status={{ request.GET.status|urlencode }}{% endif %}">
                 <i class="bi bi-chevron-left"></i>
             </a>
         </li>
@@ -21,7 +21,7 @@
                 </li>
             {% elif i > page_obj.number|add:'-3' and i < page_obj.number|add:'3' %}
                 <li class="page-item">
-                    <a class="page-link-custom" href="?page={{ i }}{% if request.GET.role %}&role={{ request.GET.role }}{% endif %}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">
+                    <a class="page-link-custom" href="?page={{ i }}{% if request.GET.role %}&role={{ request.GET.role }}{% endif %}{% if request.GET.q %}&q={{ request.GET.q|urlencode }}{% endif %}{% if request.GET.status %}&status={{ request.GET.status|urlencode }}{% endif %}">
                         {{ i }}
                     </a>
                 </li>
@@ -30,7 +30,7 @@
 
         {% if page_obj.has_next %}
         <li class="page-item">
-            <a class="page-link-custom" href="?page={{ page_obj.next_page_number }}{% if request.GET.role %}&role={{ request.GET.role }}{% endif %}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">
+            <a class="page-link-custom" href="?page={{ page_obj.next_page_number }}{% if request.GET.role %}&role={{ request.GET.role }}{% endif %}{% if request.GET.q %}&q={{ request.GET.q|urlencode }}{% endif %}{% if request.GET.status %}&status={{ request.GET.status|urlencode }}{% endif %}">
                 <i class="bi bi-chevron-right"></i>
             </a>
         </li>

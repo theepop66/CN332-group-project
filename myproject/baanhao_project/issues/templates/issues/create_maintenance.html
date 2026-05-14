@@ -7,15 +7,15 @@
 
 {% block content %}
 <div class="page-bg">
-    <a href="{% url 'maintenance_tasks' %}" class="text-decoration-none text-muted mb-2 d-inline-block fw-bold small">
+    <a href="{% url 'issues:maintenance_tasks' %}" class="text-decoration-none text-muted mb-2 d-inline-block fw-bold small">
         <i class="bi bi-arrow-left me-1"></i> Back to List
     </a>
     <h2 class="fw-bold mb-4" style="color: #111827;">Create New Task</h2>
 
     <div class="toggle-container">
-        <a href="#" class="btn-toggle active-purple">Maintenance (แจ้งซ่อม)</a>
+        <a href="{% url 'issues:create_maintenance' %}" class="btn-toggle active-purple">Maintenance (แจ้งซ่อม)</a>
         
-        <a href="{% url 'create_complaint' %}" class="btn-toggle">Complaint (แจ้งเหตุ)</a>
+        <a href="{% url 'issues:create_complaint' %}" class="btn-toggle">Complaint (แจ้งเหตุ)</a>
     </div>
 
     <form method="post" enctype="multipart/form-data" id="taskForm">

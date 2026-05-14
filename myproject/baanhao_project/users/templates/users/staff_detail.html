@@ -70,6 +70,36 @@
                                 <span class="info-label">Position</span>
                                 <span class="info-value">{{ staff.get_role_display }}</span>
                             </div>
+                            {% if officer_profile %}
+                            <div class="info-row">
+                                <span class="info-label">Officer ID</span>
+                                <span class="info-value">{{ officer_profile.officer_id }}</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Department</span>
+                                <span class="info-value">{{ officer_profile.department }}</span>
+                            </div>
+                            {% endif %}
+                            {% if security_profile %}
+                            <div class="info-row">
+                                <span class="info-label">Station</span>
+                                <span class="info-value">{{ security_profile.station_id }}</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Shift</span>
+                                <span class="info-value">{{ security_profile.shift_time }}</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">On duty</span>
+                                <span class="info-value">{% if security_profile.is_on_duty %}Yes{% else %}No{% endif %}</span>
+                            </div>
+                            {% endif %}
+                            {% if admin_profile %}
+                            <div class="info-row">
+                                <span class="info-label">Permission level</span>
+                                <span class="info-value">{{ admin_profile.get_permission_level_display }}</span>
+                            </div>
+                            {% endif %}
                             <div class="info-row">
                                 <span class="info-label">Joined Date</span>
                                 <span class="info-value">{{ staff.date_joined|date:"d M Y" }}</span>
@@ -82,31 +112,36 @@
                     </div>
                 </div>
 
+                {% if technician_skills %}
+                <div class="info-card">
+                    <h5 class="card-title-custom">Skills</h5>
+                    <div class="d-flex flex-wrap gap-2">
+                        {% for skill in technician_skills %}
+                        <span class="badge bg-light text-dark border rounded-pill px-3 py-2">{{ skill.name }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+
                 <div class="info-card">
                     <h5 class="card-title-custom">Recent Tasks</h5>
-                    
-                    <div class="task-item">
-                        <div class="task-icon">
-                            <i class="bi bi-wrench"></i>
-                        </div>
-                        <div class="task-info">
-                            <h6>ซ่อมท่อประปา อาคาร 3</h6>
-                            <span>Assigned: 10 Dec 2025</span>
-                        </div>
-                        <span class="task-status">Completed</span>
-                    </div>
 
-                    <div class="task-item">
-                        <div class="task-icon" style="background-color: #E3F2FD; color: #1976D2;">
-                            <i class="bi bi-shield-check"></i>
+                    {% for t in recent_tasks %}
+                    <a href="{% url t.detail_name t.pk %}" class="text-decoration-none text-reset">
+                        <div class="task-item">
+                            <div class="task-icon" {% if t.icon == 'file-text' %}style="background-color: #E3F2FD; color: #1976D2;"{% endif %}>
+                                <i class="bi bi-{{ t.icon }}"></i>
+                            </div>
+                            <div class="task-info">
+                                <h6>{{ t.title }}</h6>
+                                <span>{{ t.date|date:"d M Y" }}{% if t.is_overdue %} · <span class="text-danger">Overdue</span>{% endif %}</span>
+                            </div>
+                            <span class="task-status {% if t.is_overdue %}text-danger border-danger{% endif %}" style="{% if t.is_overdue %}background-color: #FEE2E2;{% endif %}">{{ t.status_display }}</span>
                         </div>
-                        <div class="task-info">
-                            <h6>ตรวจสอบความปลอดภัยกะดึก</h6>
-                            <span>Assigned: 12 Dec 2025</span>
-                        </div>
-                        <span class="task-status" style="background-color: #FFF3E0; color: #E65100;">In Progress</span>
-                    </div>
-
+                    </a>
+                    {% empty %}
+                    <p class="text-muted small mb-0">No linked tasks in the system for this role yet.</p>
+                    {% endfor %}
                 </div>
 
             </div>

@@ -145,9 +145,9 @@
             <div class="btn-group bg-white p-1 rounded-pill border shadow-sm">
 
                 <!-- LIST -->
-                <a href="{% url 'issues:maintenance_tasks' %}"
+                <a href="{% url 'issues:complaint_tasks' %}"
                 class="btn btn-sm rounded-pill px-3
-                {% if request.resolver_match.url_name == 'maintenance_tasks' %}
+                {% if request.resolver_match.url_name == 'complaint_tasks' %}
                         btn-dark
                 {% else %}
                         btn-light text-muted
@@ -156,9 +156,9 @@
                 </a>
 
                 <!-- CALENDAR -->
-                <a href="{% url 'issues:maintenance_calendar' %}"
+                <a href="{% url 'issues:complaint_calendar' %}"
                 class="btn btn-sm rounded-pill px-3
-                {% if request.resolver_match.url_name == 'maintenance_calendar' %}
+                {% if request.resolver_match.url_name == 'complaint_calendar' %}
                         btn-dark
                 {% else %}
                         btn-light text-muted
@@ -181,19 +181,19 @@
     </div>
 
     <div class="status-filter-wrapper overflow-auto mb-4">
-        <a href="?status=all" class="status-btn {% if current_status == 'all' or not current_status %}active{% endif %}">
+        <a href="?status=all{% if request.GET.q %}&q={{ request.GET.q|urlencode }}{% endif %}" class="status-btn {% if current_status == 'all' or not current_status %}active{% endif %}">
             <span>All Tasks</span> <span class="badge-count">{{ counts.all }}</span>
         </a>
-        <a href="?status=waiting" class="status-btn {% if current_status == 'waiting' %}active{% endif %}">
+        <a href="?status=waiting{% if request.GET.q %}&q={{ request.GET.q|urlencode }}{% endif %}" class="status-btn {% if current_status == 'waiting' %}active{% endif %}">
             <i class="bi bi-clock text-warning"></i> <span>Waiting</span> <span class="badge-count">{{ counts.waiting }}</span>
         </a>
-        <a href="?status=in_process" class="status-btn {% if current_status == 'in_process' %}active{% endif %}">
+        <a href="?status=in_process{% if request.GET.q %}&q={{ request.GET.q|urlencode }}{% endif %}" class="status-btn {% if current_status == 'in_process' %}active{% endif %}">
             <i class="bi bi-gear-wide-connected text-info"></i> <span>In Process</span> <span class="badge-count">{{ counts.in_process }}</span>
         </a>
-        <a href="?status=overdue" class="status-btn {% if current_status == 'overdue' %}active{% endif %}">
+        <a href="?status=overdue{% if request.GET.q %}&q={{ request.GET.q|urlencode }}{% endif %}" class="status-btn {% if current_status == 'overdue' %}active{% endif %}">
             <i class="bi bi-exclamation-triangle text-danger"></i> <span>Overdue</span> <span class="badge-count">{{ counts.overdue }}</span>
         </a>
-        <a href="?status=complete" class="status-btn {% if current_status == 'complete' %}active{% endif %}">
+        <a href="?status=complete{% if request.GET.q %}&q={{ request.GET.q|urlencode }}{% endif %}" class="status-btn {% if current_status == 'complete' %}active{% endif %}">
             <i class="bi bi-check-circle text-success"></i> <span>Complete</span> <span class="badge-count">{{ counts.complete }}</span>
         </a>
     </div>
@@ -239,12 +239,12 @@
                         <td class="text-secondary">{{ task.created_date|date:"d M Y" }}</td>
 
                         <td class="pe-4">
-                            <span class="status-badge 
-                                {% if task.status == 'SUCCESS' or task.status == 'COMPLETE' %}badge-success
-                                {% elif task.status == 'IN_PROGRESS' or task.status == 'IN_PROCESS' %}badge-process
-                                {% elif task.status == 'OVERDUE' %}badge-overdue
+                            <span class="status-badge
+                                {% if task.status == 'resolved' or task.status == 'closed' %}badge-success
+                                {% elif task.is_overdue %}badge-overdue
+                                {% elif task.status == 'in_progress' %}badge-process
                                 {% else %}badge-waiting{% endif %}">
-                                {{ task.get_status_display|default:"Waiting" }}
+                                {{ task.status_display }}
                             </span>
                         </td>
                     </tr>
@@ -269,7 +269,7 @@
                 <ul class="pagination-wrapper">
                     <li>
                         {% if page_obj.has_previous %}
-                        <a class="page-link-custom" href="?page={{ page_obj.previous_page_number }}&status={{ current_status }}&q={{ request.GET.q }}">
+                        <a class="page-link-custom" href="?page={{ page_obj.previous_page_number }}&status={{ current_status }}{% if request.GET.q %}&q={{ request.GET.q|urlencode }}{% endif %}">
                             <i class="bi bi-chevron-left"></i>
                         </a>
                         {% else %}
@@ -281,13 +281,13 @@
                         {% if page_obj.number == i %}
                             <li><span class="page-link-custom active">{{ i }}</span></li>
                         {% elif i > page_obj.number|add:'-3' and i < page_obj.number|add:'3' %}
-                            <li><a class="page-link-custom" href="?page={{ i }}&status={{ current_status }}&q={{ request.GET.q }}">{{ i }}</a></li>
+                            <li><a class="page-link-custom" href="?page={{ i }}&status={{ current_status }}{% if request.GET.q %}&q={{ request.GET.q|urlencode }}{% endif %}">{{ i }}</a></li>
                         {% endif %}
                     {% endfor %}
 
                     <li>
                         {% if page_obj.has_next %}
-                        <a class="page-link-custom" href="?page={{ page_obj.next_page_number }}&status={{ current_status }}&q={{ request.GET.q }}">
+                        <a class="page-link-custom" href="?page={{ page_obj.next_page_number }}&status={{ current_status }}{% if request.GET.q %}&q={{ request.GET.q|urlencode }}{% endif %}">
                             <i class="bi bi-chevron-right"></i>
                         </a>
                         {% else %}

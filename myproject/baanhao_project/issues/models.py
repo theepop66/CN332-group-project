@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 
 class IssueStatus(models.TextChoices):
@@ -48,6 +49,14 @@ class Issue(models.Model):
 
     def __str__(self):
         return f'[{self.status}] {self.title} (by {self.reporter})'
+
+    def get_frontend_detail_url(self):
+        """Return URL path for complaint or maintenance detail, or empty string if unknown."""
+        if Complaint.objects.filter(pk=self.pk).exists():
+            return reverse('issues:complaint_detail', args=[self.pk])
+        if Maintenance.objects.filter(pk=self.pk).exists():
+            return reverse('issues:maintenance_detail', args=[self.pk])
+        return ''
 
 
 class Complaint(Issue):

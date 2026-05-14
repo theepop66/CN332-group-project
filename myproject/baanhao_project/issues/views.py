@@ -34,6 +34,14 @@ def _apply_status_filter(task_list, status_filter):
     return task_list
 
 
+def _overdue_pk_set():
+    return set(overdue_issue_queryset().values_list('pk', flat=True))
+
+
+def _is_issue_overdue(issue_pk):
+    return issue_pk in _overdue_pk_set()
+
+
 def all_tasks(request):
     task_list = Issue.objects.all().select_related('reporter', 'assigned_officer__user').order_by('-created_date')
 
@@ -53,6 +61,7 @@ def all_tasks(request):
     paginator = Paginator(task_list, 30)
     page_obj = paginator.get_page(request.GET.get('page'))
 
+    overdue_pks = _overdue_pk_set()
     final_tasks = []
     for task in page_obj:
         item = {
@@ -62,6 +71,7 @@ def all_tasks(request):
             'created_date': task.created_date,
             'status': task.status,
             'status_display': task.get_status_display(),
+            'is_overdue': task.pk in overdue_pks,
             'type': 'Issue',
             'assign_to': '-',
             'type_badge_class': 'badge-secondary',
@@ -111,6 +121,7 @@ def complaint_tasks(request):
     paginator = Paginator(tasks, 30)
     page_obj = paginator.get_page(request.GET.get('page'))
 
+    overdue_pks = _overdue_pk_set()
     final_tasks = []
     for task in page_obj:
         assign_to = '—'
@@ -123,6 +134,8 @@ def complaint_tasks(request):
                 'location': task.location,
                 'created_date': task.created_date,
                 'status': task.status,
+                'status_display': task.get_status_display(),
+                'is_overdue': task.pk in overdue_pks,
                 'assign_to': assign_to,
             }
         )
@@ -154,6 +167,7 @@ def maintenance_tasks(request):
     paginator = Paginator(tasks, 8)
     page_obj = paginator.get_page(request.GET.get('page'))
 
+    overdue_pks = _overdue_pk_set()
     final_tasks = []
     for task in page_obj:
         tech_name = 'Unassigned'
@@ -167,6 +181,8 @@ def maintenance_tasks(request):
                 'location': task.location,
                 'created_date': task.created_date,
                 'status': task.status,
+                'status_display': task.get_status_display(),
+                'is_overdue': task.pk in overdue_pks,
                 'assign_to': tech_name,
                 'image': task.before_image.url if task.before_image else None,
             }
@@ -213,7 +229,10 @@ def create_maintenance(request):
 
 
 def maintenance_detail(request, pk):
-    task = get_object_or_404(Maintenance, pk=pk)
+    task = get_object_or_404(
+        Maintenance.objects.select_related('reporter__user', 'reporter__house', 'technician__user'),
+        pk=pk,
+    )
 
     if request.method == 'POST':
         action = request.POST.get('action')
@@ -225,11 +244,18 @@ def maintenance_detail(request, pk):
             task.save()
         return redirect('issues:maintenance_detail', pk=pk)
 
-    return render(request, 'issues/maintenance_detail.html', {'task': task})
+    return render(
+        request,
+        'issues/maintenance_detail.html',
+        {'task': task, 'is_overdue': _is_issue_overdue(task.pk)},
+    )
 
 
 def complaint_detail(request, pk):
-    task = get_object_or_404(Complaint, pk=pk)
+    task = get_object_or_404(
+        Complaint.objects.select_related('reporter__user', 'assigned_officer__user'),
+        pk=pk,
+    )
 
     if request.method == 'POST':
         action = request.POST.get('action')
@@ -238,7 +264,11 @@ def complaint_detail(request, pk):
             task.save()
         return redirect('issues:complaint_detail', pk=pk)
 
-    return render(request, 'issues/complaint_detail.html', {'task': task})
+    return render(
+        request,
+        'issues/complaint_detail.html',
+        {'task': task, 'is_overdue': _is_issue_overdue(task.pk)},
+    )
 
 
 def _calendar_context(request, *, use_appointment):

@@ -5,82 +5,67 @@
 {% endblock %}
 {% block content %}
 <div class="container-fluid py-4">
-    <div class="d-flex justify-content-between align-items-center mb-4">
+    <div class="d-flex flex-column flex-xl-row justify-content-between align-items-start gap-3 mb-4">
         <div>
             <h2 class="fw-bold">All Tasks</h2>
             <p class="text-muted">Admin Dashboard</p>
         </div>
-
-        <a href="{% url 'dashboard' %}" class="text-decoration-none text-muted mb-2 d-inline-block">
-            <i class="bi bi-arrow-left me-1"></i> Back to Dashboard
-        </a>
-
-        <a href="{% url 'issues:maintenance_tasks' %}" class="text-decoration-none text-muted mb-2 d-inline-block">
-            <i class="bi bi-arrow-left me-1"></i> All Maintenance Tasks
-
-            <a href="{% url 'issues:complaint_tasks' %}" class="text-decoration-none text-muted mb-2 d-inline-block">
-                <i class="bi bi-arrow-left me-1"></i> All Complaints Tasks
-            </a>
-
-            <div class="d-flex gap-3">
-        <div class="btn-group bg-white p-1 rounded-pill border">
-
-            <!-- LIST -->
-            <a href="{% url 'issues:maintenance_tasks' %}"
-            class="btn btn-sm rounded-pill px-3
-            {% if request.resolver_match.url_name == 'maintenance_tasks' %}
-                    btn-dark
-            {% else %}
-                    btn-light text-muted
-            {% endif %}">
-                List
-            </a>
-
-            <!-- CALENDAR -->
-            <a href="{% url 'issues:maintenance_calendar' %}"
-            class="btn btn-sm rounded-pill px-3
-            {% if request.resolver_match.url_name == 'maintenance_calendar' %}
-                    btn-dark
-            {% else %}
-                    btn-light text-muted
-            {% endif %}">
-                Calendar
-            </a>
-
+        <div class="d-flex flex-column align-items-xl-end gap-3 w-100">
+            <div class="d-flex flex-wrap gap-2">
+                <a href="{% url 'dashboard' %}" class="text-decoration-none text-muted">
+                    <i class="bi bi-arrow-left me-1"></i> Back to Dashboard
+                </a>
+                <a href="{% url 'issues:maintenance_tasks' %}" class="text-decoration-none text-muted">
+                    <i class="bi bi-arrow-left me-1"></i> All Maintenance Tasks
+                </a>
+                <a href="{% url 'issues:complaint_tasks' %}" class="text-decoration-none text-muted">
+                    <i class="bi bi-arrow-left me-1"></i> All Complaints Tasks
+                </a>
             </div>
-        </div>
-
-                <form method="GET" class="position-relative">
+            <div class="d-flex flex-wrap gap-3 align-items-center">
+                <div class="btn-group bg-white p-1 rounded-pill border">
+                    <a href="{% url 'issues:maintenance_tasks' %}"
+                        class="btn btn-sm rounded-pill px-3
+                        {% if request.resolver_match.url_name == 'maintenance_tasks' %}btn-dark{% else %}btn-light text-muted{% endif %}">
+                        List
+                    </a>
+                    <a href="{% url 'issues:maintenance_calendar' %}"
+                        class="btn btn-sm rounded-pill px-3
+                        {% if request.resolver_match.url_name == 'maintenance_calendar' %}btn-dark{% else %}btn-light text-muted{% endif %}">
+                        Calendar
+                    </a>
+                </div>
+                <form method="GET" class="position-relative flex-grow-1" style="min-width: 200px;">
                     <input type="text" name="q" class="form-control rounded-pill ps-4" placeholder="Search task..."
                         value="{{ request.GET.q|default:'' }}">
                     <input type="hidden" name="status" value="{{ current_status }}">
                 </form>
-
                 <a href="{% url 'issues:create_maintenance' %}"
                     class="btn btn-dark rounded-pill px-4 d-flex align-items-center">
                     <i class="bi bi-plus-lg me-2"></i> Create Task
                 </a>
             </div>
+        </div>
     </div>
 
     <div class="d-flex gap-3 mb-4 overflow-auto">
-        <a href="?status=all"
+        <a href="?status=all{% if request.GET.q %}&q={{ request.GET.q|urlencode }}{% endif %}"
             class="btn rounded-pill px-3 {% if current_status == 'all' or not current_status %}btn-dark{% else %}btn-light text-muted{% endif %}">
             All Tasks <span class="badge bg-secondary ms-1">{{ counts.all }}</span>
         </a>
-        <a href="?status=waiting"
+        <a href="?status=waiting{% if request.GET.q %}&q={{ request.GET.q|urlencode }}{% endif %}"
             class="btn rounded-pill px-3 {% if current_status == 'waiting' %}btn-warning text-dark{% else %}btn-light text-muted{% endif %}">
             Waiting <span class="badge bg-secondary ms-1">{{ counts.waiting }}</span>
         </a>
-        <a href="?status=in_process"
+        <a href="?status=in_process{% if request.GET.q %}&q={{ request.GET.q|urlencode }}{% endif %}"
             class="btn rounded-pill px-3 {% if current_status == 'in_process' %}btn-info text-dark{% else %}btn-light text-muted{% endif %}">
             In Process <span class="badge bg-secondary ms-1">{{ counts.in_process }}</span>
         </a>
-        <a href="?status=overdue"
+        <a href="?status=overdue{% if request.GET.q %}&q={{ request.GET.q|urlencode }}{% endif %}"
             class="btn rounded-pill px-3 {% if current_status == 'overdue' %}btn-danger text-white{% else %}btn-light text-muted{% endif %}">
             Overdue <span class="badge bg-secondary ms-1">{{ counts.overdue }}</span>
         </a>
-        <a href="?status=complete"
+        <a href="?status=complete{% if request.GET.q %}&q={{ request.GET.q|urlencode }}{% endif %}"
             class="btn rounded-pill px-3 {% if current_status == 'complete' %}btn-success text-white{% else %}btn-light text-muted{% endif %}">
             Complete <span class="badge bg-secondary ms-1">{{ counts.complete }}</span>
         </a>
@@ -110,7 +95,9 @@
                                     <i
                                         class="bi {% if task.type == 'Complaint' %}bi-file-text{% else %}bi-tools{% endif %} text-primary"></i>
                                 </div>
-                                <span class="fw-medium">{{ task.title }}</span>
+                                <a href="{% if task.type == 'Complaint' %}{% url 'issues:complaint_detail' task.id %}{% elif task.type == 'Maintenance' %}{% url 'issues:maintenance_detail' task.id %}{% else %}#{% endif %}" class="text-decoration-none text-dark fw-medium">
+                                    {{ task.title }}
+                                </a>
                             </div>
                         </td>
 
@@ -137,17 +124,14 @@
                         <td class="text-muted">{{ task.created_date|date:"d M Y" }}</td>
 
                         <td class="pe-4">
-                            {% if task.status == 'SUCCESS' %}
-                            <span
-                                class="badge bg-success bg-opacity-10 text-success px-3 py-2 rounded-pill">Success</span>
-                            {% elif task.status == 'IN_PROGRESS' %}
-                            <span class="badge bg-info bg-opacity-10 text-info px-3 py-2 rounded-pill">In Process</span>
-                            {% elif task.status == 'OVERDUE' %}
-                            <span
-                                class="badge bg-danger bg-opacity-10 text-danger px-3 py-2 rounded-pill">Overdue</span>
+                            {% if task.status == 'resolved' or task.status == 'closed' %}
+                            <span class="badge bg-success bg-opacity-10 text-success px-3 py-2 rounded-pill">{{ task.status_display }}</span>
+                            {% elif task.is_overdue %}
+                            <span class="badge bg-danger bg-opacity-10 text-danger px-3 py-2 rounded-pill">Overdue</span>
+                            {% elif task.status == 'in_progress' %}
+                            <span class="badge bg-info bg-opacity-10 text-info px-3 py-2 rounded-pill">{{ task.status_display }}</span>
                             {% else %}
-                            <span
-                                class="badge bg-warning bg-opacity-10 text-warning px-3 py-2 rounded-pill">Waiting</span>
+                            <span class="badge bg-warning bg-opacity-10 text-warning px-3 py-2 rounded-pill">{{ task.status_display }}</span>
                             {% endif %}
                         </td>
                     </tr>

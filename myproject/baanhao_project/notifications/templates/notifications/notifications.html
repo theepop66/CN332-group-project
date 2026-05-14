@@ -5,7 +5,6 @@
 
 <div class="container-fluid p-4">
 
-    <!-- ===== Header ===== -->
     <div class="mb-4">
         <p class="text-muted mb-1">Admin notification</p>
         <h1 class="fw-bold">Notification</h1>
@@ -13,40 +12,47 @@
 
     <div class="row">
 
-        <!-- ================= MAIN LIST ================= -->
         <div class="col-lg-8">
 
             <div class="bg-white p-4 rounded-4 shadow-sm">
 
-                <!-- Top Bar -->
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h5 class="fw-bold">New for you!</h5>
-                    <a href="#" class="text-decoration-none">Mark as all read</a>
+                <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+                    <h5 class="fw-bold mb-0">New for you!</h5>
+                    <form method="post" action="{% url 'notifications:mark_all_read' %}" class="m-0">
+                        {% csrf_token %}
+                        <input type="hidden" name="next" value="{{ request.get_full_path }}">
+                        <button type="submit" class="btn btn-link text-decoration-none p-0">Mark as all read</button>
+                    </form>
                 </div>
 
-                <!-- ===== Notification List ===== -->
                 <div class="d-flex flex-column gap-3">
 
                     {% for notification in page_obj %}
+                    {% with issue_url=notification.issue.get_frontend_detail_url %}
                     <div class="d-flex align-items-center justify-content-between p-3 rounded-3"
                          style="background:#f5f5f5;">
 
-                        <div class="d-flex align-items-center gap-3">
-                            <img src="https://i.pravatar.cc/50?img={{ forloop.counter }}"
-                                 class="rounded-circle"
-                                 width="45">
+                        <div class="d-flex align-items-center gap-3 flex-grow-1 min-w-0">
+                            {% if request.user.profile_image %}
+                            <img src="{{ request.user.profile_image.url }}" class="rounded-circle flex-shrink-0" width="45" height="45" alt="">
+                            {% else %}
+                            <img src="https://ui-avatars.com/api/?name={{ request.user.username|urlencode }}&background=E5E7EB&color=111827&size=64"
+                                 class="rounded-circle flex-shrink-0" width="45" height="45" alt="">
+                            {% endif %}
 
-                            <div>
+                            <div class="min-w-0">
                                 <div class="fw-semibold">
+                                    {% if issue_url %}
+                                    <a href="{{ issue_url }}" class="text-dark text-decoration-none">{{ notification.title }}</a>
+                                    {% else %}
                                     {{ notification.title }}
+                                    {% endif %}
                                 </div>
-                                <small class="text-muted">
-                                    {{ notification.message }}
-                                </small>
+                                <small class="text-muted">{{ notification.message }}</small>
                             </div>
                         </div>
 
-                        <div>
+                        <div class="flex-shrink-0 ms-2">
                             {% if notification.is_read %}
                                 <span class="text-success fs-5">✔</span>
                             {% else %}
@@ -55,31 +61,29 @@
                         </div>
 
                     </div>
+                    {% endwith %}
                     {% empty %}
                         <div class="text-muted">No notifications found.</div>
                     {% endfor %}
 
                 </div>
 
-                <!-- ===== Pagination ===== -->
                 {% if page_obj.paginator.num_pages > 1 %}
 
-                <div class="d-flex justify-content-between align-items-center mt-4">
+                <div class="d-flex justify-content-between align-items-center mt-4 flex-wrap gap-2">
 
-                    <!-- Showing text -->
                     <div class="text-muted">
                         Showing data {{ page_obj.start_index }}
                         to {{ page_obj.end_index }}
                         of {{ page_obj.paginator.count }} entries
                     </div>
 
-                    <ul class="pagination d-flex gap-2">
+                    <ul class="pagination d-flex gap-2 mb-0">
 
-                        <!-- Previous -->
                         {% if page_obj.has_previous %}
                             <li>
                                 <a class="page-link-custom"
-                                   href="?page={{ page_obj.previous_page_number }}">
+                                   href="?page={{ page_obj.previous_page_number }}{% if type_filter %}&type={{ type_filter|urlencode }}{% endif %}{% if read_filter %}&read={{ read_filter|urlencode }}{% endif %}">
                                     &lt;
                                 </a>
                             </li>
@@ -89,7 +93,6 @@
                             </li>
                         {% endif %}
 
-                        <!-- Page Numbers -->
                         {% for num in page_obj.paginator.page_range %}
                             {% if page_obj.number == num %}
                                 <li>
@@ -100,18 +103,17 @@
                             {% else %}
                                 <li>
                                     <a class="page-link-custom"
-                                       href="?page={{ num }}">
+                                       href="?page={{ num }}{% if type_filter %}&type={{ type_filter|urlencode }}{% endif %}{% if read_filter %}&read={{ read_filter|urlencode }}{% endif %}">
                                         {{ num }}
                                     </a>
                                 </li>
                             {% endif %}
                         {% endfor %}
 
-                        <!-- Next -->
                         {% if page_obj.has_next %}
                             <li>
                                 <a class="page-link-custom"
-                                   href="?page={{ page_obj.next_page_number }}">
+                                   href="?page={{ page_obj.next_page_number }}{% if type_filter %}&type={{ type_filter|urlencode }}{% endif %}{% if read_filter %}&read={{ read_filter|urlencode }}{% endif %}">
                                     &gt;
                                 </a>
                             </li>
@@ -130,44 +132,36 @@
             </div>
         </div>
 
-        <!-- ================= RIGHT FILTER PANEL ================= -->
         <div class="col-lg-4">
 
             <div class="bg-white p-4 rounded-4 shadow-sm">
 
                 <h5 class="fw-bold mb-3">Filter</h5>
 
-                <div class="mb-3">
-                    <label class="form-check">
-                        <input type="checkbox" class="form-check-input" checked>
-                        Electrical System
-                    </label>
+                <form method="get" action="{% url 'notifications:list' %}">
+                    <div class="mb-3">
+                        <label class="form-label text-muted small">Type</label>
+                        <select name="type" class="form-select form-select-sm" onchange="this.form.submit()">
+                            <option value="">All types</option>
+                            {% for value, label in notification_types %}
+                            <option value="{{ value }}" {% if type_filter == value %}selected{% endif %}>{{ label }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
 
-                    <label class="form-check">
-                        <input type="checkbox" class="form-check-input" checked>
-                        Plumbing & Sanitation
-                    </label>
+                    <div class="mb-3">
+                        <label class="form-label text-muted small">Read status</label>
+                        <select name="read" class="form-select form-select-sm" onchange="this.form.submit()">
+                            <option value="" {% if not read_filter %}selected{% endif %}>All</option>
+                            <option value="unread" {% if read_filter == 'unread' %}selected{% endif %}>Unread only</option>
+                            <option value="read" {% if read_filter == 'read' %}selected{% endif %}>Read only</option>
+                        </select>
+                    </div>
 
-                    <label class="form-check">
-                        <input type="checkbox" class="form-check-input" checked>
-                        Road
-                    </label>
-                </div>
-
-                <hr>
-
-                <h6 class="fw-bold">Priority status</h6>
-                <div>
-                    <label class="form-check">
-                        <input type="radio" name="priority" class="form-check-input" checked>
-                        Urgent
-                    </label>
-
-                    <label class="form-check">
-                        <input type="radio" name="priority" class="form-check-input">
-                        Normal
-                    </label>
-                </div>
+                    {% if type_filter or read_filter %}
+                    <a href="{% url 'notifications:list' %}" class="btn btn-outline-secondary btn-sm">Clear filters</a>
+                    {% endif %}
+                </form>
 
             </div>
 
