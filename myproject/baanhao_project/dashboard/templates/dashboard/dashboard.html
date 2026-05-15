@@ -100,6 +100,40 @@
                 <div class="text-muted p-3 text-center">ไม่มีการแจ้งเตือนใหม่</div>
                 {% endfor %}
             </div>
+
+            <div class="white-box mt-4">
+                <div class="box-header">
+                    <h5 class="box-title">เจ้าหน้าที่ปฏิบัติงาน</h5>
+                    <a href="#" class="small text-muted text-decoration-none">ดูทั้งหมด</a>
+                </div>
+                <div class="row g-3">
+                    {% for staff in staff_members %}
+                    <div class="col-md-4 col-sm-6">
+                        <div class="d-flex align-items-center gap-3 p-2 rounded-3 border-0 shadow-sm bg-light bg-opacity-10 h-100">
+                            <div class="flex-shrink-0">
+                                {% if staff.profile_image %}
+                                <img src="{{ staff.profile_image.url }}" alt="{{ staff.username }}" class="rounded-circle" style="width: 40px; height: 40px; object-fit: cover;">
+                                {% else %}
+                                <div class="bg-white border rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                                    <i class="bi bi-person text-secondary"></i>
+                                </div>
+                                {% endif %}
+                            </div>
+                            <div class="overflow-hidden">
+                                <div class="fw-bold text-truncate" style="font-size: 13px;">
+                                    {{ staff.get_full_name|default:staff.username }}
+                                </div>
+                                <div class="text-muted" style="font-size: 10px;">
+                                    {{ staff.get_role_display }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% empty %}
+                    <div class="col-12 text-center py-3 text-muted small">ไม่มีข้อมูลเจ้าหน้าที่</div>
+                    {% endfor %}
+                </div>
+            </div>
         </div>
 
         <div class="col-lg-4">
@@ -117,8 +151,8 @@
 
             <div class="white-box">
                 <div class="box-header">
-                    <h5 class="box-title">กิจกรรมเร็วๆ นี้</h5>
-                    <a href="#" class="small text-muted text-decoration-none">ดูปฏิทิน</a>
+                    <h5 class="box-title">กิจกรรมล่าสุด</h5>
+                    <a href="{% url 'issues:maintenance_calendar' %}" class="small text-muted text-decoration-none">ดูปฏิทิน</a>
                 </div>
 
                 {% for event in upcoming_events %}
@@ -133,7 +167,7 @@
                     </div>
                 </div>
                 {% empty %}
-                <div class="text-muted p-3 text-center">ไม่มีกิจกรรมที่กำลังจะมาถึง</div>
+                <div class="text-muted p-3 text-center">ไม่มีกิจกรรมล่าสุด</div>
                 {% endfor %}
 
             </div>

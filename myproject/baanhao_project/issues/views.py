@@ -13,11 +13,20 @@ from .models import Maintenance
 
 def all_tasks(request):
     # --- 1. Base Query ---
-    # เรียกจากตารางแม่ (Issue)
-    # order_by('-created_date') ให้ตรงกับ field ใน model
-    task_list = Issue.objects.all().select_related('reporter').order_by('-created_date')
+    # ใช้ select_related เพื่อดึงข้อมูลที่เกี่ยวข้องมาใน Query เดียว (ลด N+1 problem)
+    # เราดึง 'complaint' และ 'maintenance' มาด้วยเลยเพื่อเช็คประเภทได้เร็วขึ้น
+    task_list = Issue.objects.all().select_related(
+        'reporter', 
+        'reporter__user',
+        'assigned_officer', 
+        'assigned_officer__user',
+        'complaint', 
+        'maintenance',
+        'maintenance__technician',
+        'maintenance__technician__user'
+    ).order_by('-created_date')
 
-    # --- 2. Search Logic (Title, Description, Location) ---
+    # --- 2. Search Logic ---
     search_query = request.GET.get('q')
     if search_query:
         task_list = task_list.filter(
@@ -27,76 +36,71 @@ def all_tasks(request):
         )
 
     # --- 3. Filter Logic (Status Tabs) ---
-    # Map ค่าจาก URL ให้ตรงกับ Enum ใน models.py (IssueStatus)
     status_filter = request.GET.get('status')
-    
     if status_filter == 'waiting':
-        task_list = task_list.filter(status=IssueStatus.PENDING)
+        # กรองทั้ง PENDING (ใหญ่) และ pending (เล็ก)
+        task_list = task_list.filter(Q(status__iexact='PENDING'))
     elif status_filter == 'in_process':
-        task_list = task_list.filter(status=IssueStatus.IN_PROGRESS)
+        task_list = task_list.filter(Q(status__iexact='IN_PROGRESS'))
     elif status_filter == 'overdue':
-        task_list = task_list.filter(status=IssueStatus.OVERDUE)
+        task_list = task_list.filter(Q(status__iexact='OVERDUE'))
     elif status_filter == 'complete': 
-        task_list = task_list.filter(status=IssueStatus.SUCCESS)
+        # รวมสถานะที่ถือว่าเสร็จสิ้นทั้งหมด
+        task_list = task_list.filter(Q(status__iexact='SUCCESS') | Q(status__iexact='RESOLVED') | Q(status__iexact='CLOSED'))
 
-    # --- 4. Count Data (สำหรับ Badge บน Tabs) ---
+    # --- 4. Count Data ---
     counts = {
         'all': Issue.objects.count(),
-        'waiting': Issue.objects.filter(status=IssueStatus.PENDING).count(),
-        'in_process': Issue.objects.filter(status=IssueStatus.IN_PROGRESS).count(),
-        'overdue': Issue.objects.filter(status=IssueStatus.OVERDUE).count(),
-        'complete': Issue.objects.filter(status=IssueStatus.SUCCESS).count(),
+        'waiting': Issue.objects.filter(status__iexact='PENDING').count(),
+        'in_process': Issue.objects.filter(status__iexact='IN_PROGRESS').count(),
+        'overdue': Issue.objects.filter(status__iexact='OVERDUE').count(),
+        'complete': Issue.objects.filter(Q(status__iexact='SUCCESS') | Q(status__iexact='RESOLVED') | Q(status__iexact='CLOSED')).count(),
     }
 
     # --- 5. Pagination ---
-    # UI เขียนว่า Showing 1 to 8 -> ใช้ 8 รายการต่อหน้า
     paginator = Paginator(task_list, 30) 
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
-    # --- 6. Data Transformation Logic ---
-    # แปลงข้อมูลเพื่อส่งไปแสดงผลให้ตรงกับ Design
+    # --- 6. Data Transformation ---
     final_tasks = []
-    
     for task in page_obj:
-        # ข้อมูลพื้นฐานจาก Issue (Parent)
-        item = {
+        # กำหนดชื่อผู้รับผิดชอบเบื้องต้นจาก assigned_officer (ถ้ามี)
+        assign_to = '-'
+        if task.assigned_officer:
+            assign_to = task.assigned_officer.user.get_full_name() or task.assigned_officer.user.username
+
+        # ตรวจสอบประเภทและรายละเอียดเพิ่มเติม
+        task_type = 'Issue'
+        badge_class = 'badge-secondary'
+
+        # ใช้ hasattr ตรวจสอบ reverse relationship (complaint/maintenance)
+        if hasattr(task, 'complaint') and task.complaint:
+            task_type = 'Complaint'
+            badge_class = 'badge-complaint'
+            if assign_to == '-': # ถ้ายังไม่มี officer รับผิดชอบ ให้โชว์เป็น Security ตามดีไซน์
+                assign_to = 'Security'
+        
+        elif hasattr(task, 'maintenance') and task.maintenance:
+            task_type = 'Maintenance'
+            badge_class = 'badge-maintenance'
+            # ถ้าเป็น Maintenance และมีช่าง ให้โชว์ชื่อช่าง
+            if task.maintenance.technician:
+                assign_to = task.maintenance.technician.user.get_full_name() or task.maintenance.technician.user.username
+            elif assign_to == '-':
+                assign_to = 'Unassigned'
+
+        final_tasks.append({
             'id': task.id,
             'title': task.title,
             'location': task.location,
             'created_date': task.created_date,
-            'status': task.status, # ค่าจะเป็น 'PENDING', 'IN_PROGRESS' ฯลฯ
-            'status_display': task.get_status_display(), # ค่าที่อ่านรู้เรื่อง เช่น 'Pending', 'In Progress'
-            'type': 'Issue',      # Default
-            'assign_to': '-',
-            'type_badge_class': 'badge-secondary' # Default CSS Class
-        }
-
-        # ตรวจสอบว่าเป็น Complaint หรือ Maintenance
-        # โดยใช้ hasattr เช็คว่า task instance นี้มี attributes ของลูกไหม
-        
-        if hasattr(task, 'complaint'):
-            item['type'] = 'Complaint'
-            item['type_badge_class'] = 'badge-complaint' # ไว้ไปเขียน CSS
-            # ใน Model Complaint ของคุณไม่มี field assignee
-            # แต่ใน UI มีคำว่า Security -> เราจึง Hardcode ไว้ก่อน
-            item['assign_to'] = 'Security' 
-            
-        elif hasattr(task, 'maintenance'):
-            item['type'] = 'Maintenance'
-            item['type_badge_class'] = 'badge-maintenance' # ไว้ไปเขียน CSS
-            
-            # ดึงข้อมูล Technician
-            # เข้าถึงผ่าน task.maintenance.technician
-            tech = task.maintenance.technician
-            if tech:
-                # ใช้ str(tech) ถ้า Technician model มี def __str__ 
-                # หรือ tech.user.get_full_name() ถ้าเชื่อมกับ User
-                item['assign_to'] = str(tech) 
-            else:
-                item['assign_to'] = 'Unassigned'
-
-        final_tasks.append(item)
+            'status': task.status,
+            'status_display': task.get_status_display(),
+            'type': task_type,
+            'assign_to': assign_to,
+            'type_badge_class': badge_class
+        })
 
     context = {
         'tasks': final_tasks,
@@ -347,21 +351,29 @@ def maintenance_calendar(request):
         month_days = cal.monthdayscalendar(year, month)
 
     # ==========================
-    # 5. Data
+    # 5. Data - ดึงจาก Issue และใช้ updated_at ตามที่ขอ
     # ==========================
-    maintenances = Maintenance.objects.filter(
-        appointment_date__year=year,
-        appointment_date__month=month
+    issues = Issue.objects.filter(
+        updated_at__year=year,
+        updated_at__month=month
     )
 
     events_by_day = {}
 
-    for m in maintenances:
-        if m.appointment_date:
-            d = m.appointment_date.day
+    for issue in issues:
+        if issue.updated_at:
+            d = issue.updated_at.day
+            
+            # กำหนดสีตามประเภท
+            color = "blue"
+            if hasattr(issue, 'complaint') and issue.complaint:
+                color = "purple"
+            elif hasattr(issue, 'maintenance') and issue.maintenance:
+                color = "green"
+
             events_by_day.setdefault(d, []).append({
-                "title": m.title,
-                "color": "blue"
+                "title": issue.title,
+                "color": color
             })
 
     context = {
