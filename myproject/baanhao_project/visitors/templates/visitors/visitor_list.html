@@ -1,0 +1,284 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<style>
+    .visitor-dashboard {
+        background-color: #f8f9fa;
+        min-height: 100vh;
+        padding-bottom: 2rem;
+    }
+    .stat-card {
+        background: white;
+        border-radius: 16px;
+        padding: 1.5rem;
+        transition: transform 0.2s, box-shadow 0.2s;
+        border: none;
+        box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+    }
+    .stat-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    }
+    .stat-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+    }
+    .table-card {
+        background: white;
+        border-radius: 16px;
+        padding: 1.5rem;
+        box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+        border: none;
+    }
+    .table-custom {
+        margin-bottom: 0;
+    }
+    .table-custom thead th {
+        border-bottom: 2px solid #edf2f7;
+        color: #6c757d;
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 0.85rem;
+        padding: 1rem;
+        background: #f8f9fa;
+    }
+    .table-custom tbody td {
+        padding: 1rem;
+        vertical-align: middle;
+        border-bottom: 1px solid #edf2f7;
+        color: #2b3440;
+    }
+    .table-custom tbody tr:hover {
+        background-color: #f8f9fa;
+    }
+    .badge-status {
+        padding: 0.5em 1em;
+        border-radius: 6px;
+        font-weight: 500;
+        font-size: 0.85rem;
+    }
+    .badge-pending {
+        background-color: #fff3cd;
+        color: #856404;
+    }
+    .badge-approved {
+        background-color: #d1e7dd;
+        color: #0f5132;
+    }
+    .badge-rejected {
+        background-color: #f8d7da;
+        color: #842029;
+    }
+    .avatar-circle {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: #e9ecef;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        color: #495057;
+    }
+    .filter-btn {
+        border-radius: 20px;
+        padding: 0.4rem 1.2rem;
+        font-weight: 500;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="visitor-dashboard p-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2 class="fw-bold mb-1">Visitor Logs</h2>
+            <small class="text-muted">จัดการข้อมูลและประวัติผู้มาติดต่อ</small>
+        </div>
+
+    </div>
+
+    <!-- Statistics Cards -->
+    <div class="row g-4 mb-4">
+        <div class="col-md-3">
+            <div class="stat-card">
+                <div class="d-flex justify-content-between align-items-start">
+                    <div>
+                        <p class="text-muted mb-1">Total Visitors</p>
+                        <h3 class="fw-bold mb-0">{{ stats.total }}</h3>
+                    </div>
+                    <div class="stat-icon bg-primary bg-opacity-10 text-primary">
+                        <i class="bi bi-people"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="stat-card">
+                <div class="d-flex justify-content-between align-items-start">
+                    <div>
+                        <p class="text-muted mb-1">Pending Approval</p>
+                        <h3 class="fw-bold mb-0 text-warning">{{ stats.pending }}</h3>
+                    </div>
+                    <div class="stat-icon bg-warning bg-opacity-10 text-warning">
+                        <i class="bi bi-hourglass-split"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="stat-card">
+                <div class="d-flex justify-content-between align-items-start">
+                    <div>
+                        <p class="text-muted mb-1">Approved</p>
+                        <h3 class="fw-bold mb-0 text-success">{{ stats.approved }}</h3>
+                    </div>
+                    <div class="stat-icon bg-success bg-opacity-10 text-success">
+                        <i class="bi bi-check-circle"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="stat-card">
+                <div class="d-flex justify-content-between align-items-start">
+                    <div>
+                        <p class="text-muted mb-1">Rejected</p>
+                        <h3 class="fw-bold mb-0 text-danger">{{ stats.rejected }}</h3>
+                    </div>
+                    <div class="stat-icon bg-danger bg-opacity-10 text-danger">
+                        <i class="bi bi-x-circle"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Table Section -->
+    <div class="table-card">
+        <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 gap-3">
+            <div class="d-flex gap-2">
+                <a href="?status=all" class="btn filter-btn {% if current_status == 'all' %}btn-dark{% else %}btn-outline-secondary{% endif %}">All</a>
+                <a href="?status=pending" class="btn filter-btn {% if current_status == 'pending' %}btn-warning{% else %}btn-outline-secondary{% endif %}">Pending</a>
+                <a href="?status=approved" class="btn filter-btn {% if current_status == 'approved' %}btn-success{% else %}btn-outline-secondary{% endif %}">Approved</a>
+            </div>
+            
+            <form class="d-flex" method="GET" action="{% url 'visitors:visitor_list' %}">
+                {% if current_status != 'all' %}
+                <input type="hidden" name="status" value="{{ current_status }}">
+                {% endif %}
+                <div class="input-group">
+                    <span class="input-group-text bg-white border-end-0 text-muted"><i class="bi bi-search"></i></span>
+                    <input type="text" class="form-control border-start-0 ps-0" placeholder="Search visitors..." name="q" value="{{ request.GET.q }}">
+                </div>
+            </form>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-custom">
+                <thead>
+                    <tr>
+                        <th>Visitor Name</th>
+                        <th>License Plate</th>
+                        <th>House Number</th>
+                        <th>Date & Time</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for visitor in page_obj %}
+                    <tr>
+                        <td>
+                            <div class="d-flex align-items-center gap-3">
+                                <div class="avatar-circle">
+                                    {{ visitor.visitor_name|make_list|first|upper }}
+                                </div>
+                                <div>
+                                    <div class="fw-bold">{{ visitor.visitor_name }}</div>
+                                    {% if visitor.line_user_id %}
+                                    <small class="text-muted"><i class="bi bi-line text-success"></i> Connected</small>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <span class="badge bg-light text-dark border p-2">{{ visitor.license_plate }}</span>
+                        </td>
+                        <td>
+                            <div class="fw-semibold">{{ visitor.house_number|default:"-" }}</div>
+                        </td>
+                        <td>
+                            <div class="text-dark">{{ visitor.created_at|date:"d M Y" }}</div>
+                            <small class="text-muted">{{ visitor.created_at|date:"H:i" }} น.</small>
+                        </td>
+                        <td>
+                            {% if visitor.status|lower == 'pending' %}
+                                <span class="badge-status badge-pending">Pending</span>
+                            {% elif visitor.status|lower == 'approved' %}
+                                <span class="badge-status badge-approved">Approved</span>
+                            {% elif visitor.status|lower == 'rejected' %}
+                                <span class="badge-status badge-rejected">Rejected</span>
+                            {% else %}
+                                <span class="badge-status bg-secondary text-white">{{ visitor.status }}</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <button class="btn btn-sm btn-light rounded-circle me-1" title="View Details">
+                                <i class="bi bi-eye"></i>
+                            </button>
+                            <button class="btn btn-sm btn-light text-primary rounded-circle" title="Edit">
+                                <i class="bi bi-pencil"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="6" class="text-center py-5 text-muted">
+                            <i class="bi bi-inbox fs-1 d-block mb-3"></i>
+                            No visitors found.
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Pagination -->
+        {% if page_obj.has_other_pages %}
+        <div class="d-flex justify-content-between align-items-center mt-4">
+            <div class="text-muted small">
+                Showing {{ page_obj.start_index }} to {{ page_obj.end_index }} of {{ page_obj.paginator.count }} entries
+            </div>
+            <ul class="pagination pagination-sm mb-0 gap-1">
+                {% if page_obj.has_previous %}
+                <li class="page-item">
+                    <a class="page-link rounded-circle border-0 text-dark" href="?page={{ page_obj.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if current_status != 'all' %}&status={{ current_status }}{% endif %}"><i class="bi bi-chevron-left"></i></a>
+                </li>
+                {% endif %}
+                
+                {% for i in page_obj.paginator.page_range %}
+                    {% if page_obj.number == i %}
+                    <li class="page-item active"><span class="page-link rounded-circle bg-dark border-dark">{{ i }}</span></li>
+                    {% else %}
+                    <li class="page-item"><a class="page-link rounded-circle border-0 text-dark" href="?page={{ i }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if current_status != 'all' %}&status={{ current_status }}{% endif %}">{{ i }}</a></li>
+                    {% endif %}
+                {% endfor %}
+
+                {% if page_obj.has_next %}
+                <li class="page-item">
+                    <a class="page-link rounded-circle border-0 text-dark" href="?page={{ page_obj.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if current_status != 'all' %}&status={{ current_status }}{% endif %}"><i class="bi bi-chevron-right"></i></a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

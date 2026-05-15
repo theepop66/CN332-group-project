@@ -56,10 +56,7 @@
                     <input type="hidden" name="status" value="{{ current_status }}">
                 </form>
 
-                <a href="{% url 'issues:create_maintenance' %}"
-                    class="btn btn-dark rounded-pill px-4 d-flex align-items-center">
-                    <i class="bi bi-plus-lg me-2"></i> Create Task
-                </a>
+
             </div>
     </div>
 
@@ -137,12 +134,12 @@
                         <td class="text-muted">{{ task.created_date|date:"d M Y" }}</td>
 
                         <td class="pe-4">
-                            {% if task.status == 'SUCCESS' %}
+                            {% if task.status|upper == 'SUCCESS' or task.status|upper == 'RESOLVED' or task.status|upper == 'CLOSED' %}
                             <span
                                 class="badge bg-success bg-opacity-10 text-success px-3 py-2 rounded-pill">Success</span>
-                            {% elif task.status == 'IN_PROGRESS' %}
+                            {% elif task.status|upper == 'IN_PROGRESS' %}
                             <span class="badge bg-info bg-opacity-10 text-info px-3 py-2 rounded-pill">In Process</span>
-                            {% elif task.status == 'OVERDUE' %}
+                            {% elif task.status|upper == 'OVERDUE' %}
                             <span
                                 class="badge bg-danger bg-opacity-10 text-danger px-3 py-2 rounded-pill">Overdue</span>
                             {% else %}
