@@ -7,6 +7,3 @@ __pycache__/
 .DS_Store
 my_backup.json
 media/
-
-# Presentation / private docs (local only)
-Documents/
