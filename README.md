@@ -218,9 +218,9 @@ CN332-group-project/              # Root directory of the project
 
 | Student ID | Name | Roles |
 | :---: | :--- | :--- |
-| `6710615292` | athiphat sunsit | Project Manager, Front-end, Back-end, QA |
+| `6710615292` | athiphat sunsit | Team lead , Front-end, Back-end, QA |
 | `6710615185` | ภูริช อัมพะวา | Front-end, Back-end |
 | `6710545010` | นพัตธีรา เหลาเกิ้มหุ่ง | Front-end |
 | `6710615144` | ปณิธาน ตันตื้อ | Front-end |
-| `6710685014` | ธีภพ รัตนทรัพย์ศิริ | Back-end |
+| `6710685014` | ธีภพ รัตนทรัพย์ศิริ | AI RAG, Line OA Back-end |
 
