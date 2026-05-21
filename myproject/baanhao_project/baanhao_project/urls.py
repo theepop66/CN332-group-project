@@ -46,4 +46,7 @@ urlpatterns = [
 
     # visitors
     path('visitors/', include('visitors.urls')),
+
+    # public views
+    path('public/', include('public_views.urls')),
 ]
