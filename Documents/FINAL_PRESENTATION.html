@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=1024, initial-scale=1.0">
+    <title>BaanHao — Final Presentation</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reset.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/white.css" id="theme">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/monokai.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --baanhao-primary: #2563eb;
+            --baanhao-accent: #f59e0b;
+            --baanhao-dark: #1e293b;
+            --baanhao-soft: #f8fafc;
+        }
+        .reveal {
+            font-family: 'IBM Plex Sans Thai', 'Source Sans Pro', sans-serif;
+            font-size: 28px;
+            color: #1e293b;
+        }
+        .reveal h1, .reveal h2, .reveal h3, .reveal h4 {
+            font-family: 'IBM Plex Sans Thai', sans-serif;
+            font-weight: 600;
+            text-transform: none;
+            letter-spacing: -0.01em;
+            color: #0f172a;
+        }
+        .reveal h1 { font-size: 2.4em; }
+        .reveal h2 { font-size: 1.6em; margin-bottom: 0.4em; }
+        .reveal h3 { font-size: 1.15em; color: var(--baanhao-primary); }
+        .reveal h4 { font-size: 1em; color: #475569; }
+        .reveal section { text-align: left; }
+        .reveal .center { text-align: center; }
+        .reveal pre {
+            font-size: 0.45em;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            border-radius: 6px;
+            width: 100%;
+        }
+        .reveal pre code {
+            font-family: 'JetBrains Mono', monospace;
+            padding: 18px 24px;
+            max-height: 480px;
+            line-height: 1.45;
+        }
+        .reveal table {
+            font-size: 0.7em;
+            margin: 0.5em 0;
+        }
+        .reveal table th {
+            background: var(--baanhao-soft);
+            border-bottom: 2px solid var(--baanhao-primary);
+            padding: 8px 14px;
+            font-weight: 600;
+        }
+        .reveal table td {
+            padding: 8px 14px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .reveal .badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 14px;
+            background: var(--baanhao-primary);
+            color: white;
+            font-size: 0.55em;
+            font-weight: 500;
+            margin-right: 6px;
+            vertical-align: middle;
+        }
+        .reveal .badge.accent { background: var(--baanhao-accent); }
+        .reveal .badge.gray { background: #64748b; }
+        .reveal .pattern-card {
+            background: var(--baanhao-soft);
+            padding: 16px 22px;
+            border-left: 4px solid var(--baanhao-primary);
+            border-radius: 4px;
+            margin: 0.6em 0;
+            font-size: 0.85em;
+        }
+        .reveal .pattern-card.accent { border-left-color: var(--baanhao-accent); }
+        .reveal .columns {
+            display: flex;
+            gap: 30px;
+            align-items: flex-start;
+        }
+        .reveal .columns > div { flex: 1; }
+        .reveal .ascii {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.5em;
+            line-height: 1.4;
+            background: #f1f5f9;
+            padding: 16px 20px;
+            border-radius: 6px;
+            white-space: pre;
+            overflow-x: auto;
+        }
+        .reveal .small { font-size: 0.7em; color: #64748b; }
+        .reveal .tag {
+            display: inline-block;
+            background: #e2e8f0;
+            color: #334155;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.6em;
+            margin: 2px 4px 2px 0;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .reveal ul { margin-left: 0.6em; }
+        .reveal ul li { margin: 0.25em 0; }
+        .reveal strong { color: var(--baanhao-dark); }
+        .reveal em { color: var(--baanhao-primary); font-style: normal; font-weight: 500; }
+        .reveal .slide-number {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+        }
+        .reveal .footer {
+            position: absolute;
+            bottom: 12px;
+            left: 30px;
+            font-size: 14px;
+            color: #94a3b8;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        section[data-state="title"] { text-align: center; }
+        section[data-state="title"] h1 {
+            background: linear-gradient(135deg, var(--baanhao-primary), var(--baanhao-accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.2em;
+        }
+        .why {
+            background: #fef3c7;
+            border-left: 4px solid var(--baanhao-accent);
+            padding: 10px 16px;
+            margin-top: 0.6em;
+            font-size: 0.8em;
+            border-radius: 4px;
+        }
+        .problem {
+            background: #fee2e2;
+            border-left: 4px solid #dc2626;
+            padding: 10px 16px;
+            font-size: 0.8em;
+            border-radius: 4px;
+            margin: 0.4em 0;
+        }
+        .solution {
+            background: #dcfce7;
+            border-left: 4px solid #16a34a;
+            padding: 10px 16px;
+            font-size: 0.8em;
+            border-radius: 4px;
+            margin: 0.4em 0;
+        }
+    </style>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+<!-- ============================ SLIDE 1 — TITLE ============================ -->
+<section data-state="title">
+    <h1>BaanHao</h1>
+    <h3 style="color:#475569;">Smart Living Management System</h3>
+    <p style="margin-top:1.5em; color:#64748b;">
+        <span class="badge">CN332</span>
+        <span class="badge accent">OOA &amp; D</span>
+        <span class="badge gray">Final Presentation</span>
+    </p>
+    <p class="small" style="margin-top:2em;">
+        athiphat · ภูริช · นพัตธีรา · ปณิธาน · ธีภพ
+    </p>
+</section>
+
+<!-- ============================ SLIDE 2 — PROBLEM ============================ -->
+<section>
+    <h2>Problem Statement</h2>
+    <div class="columns">
+        <div>
+            <h3>ฝั่งนิติบุคคล</h3>
+            <ul>
+                <li>workflow ซ้ำซาก ตอบคำถามเดิมๆ ทุกวัน</li>
+                <li>รับเรื่องร้องเรียนกระจัดกระจาย</li>
+                <li>ไม่มี data รวมศูนย์เพื่อ analyze</li>
+            </ul>
+        </div>
+        <div>
+            <h3>ฝั่งลูกบ้าน</h3>
+            <ul>
+                <li>ติดต่อนิติฯ ยาก รอตอบนาน</li>
+                <li>ไม่รู้จะส่งเรื่องร้องเรียนยังไง</li>
+                <li>ผู้มาเยี่ยมเข้าหมู่บ้านยุ่งยาก</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- ============================ SLIDE 3 — SOLUTION ============================ -->
+<section>
+    <h2>Solution · 2 Surfaces, 1 Database</h2>
+    <div class="ascii">   LINE OA  (Resident)              Web App  (Juristic)
+        │                                │
+        ▼                                ▼
+   ┌─────────────┐                ┌──────────────┐
+   │  n8n + AI   │                │   Django     │
+   │ Gemini 2.5  │                │   MTV        │
+   └──────┬──────┘                └──────┬───────┘
+          │                              │
+          └──────────────┬───────────────┘
+                         ▼
+              ╔══════════════════════╗
+              ║  Supabase Postgres   ║
+              ║   (Shared State)     ║
+              ╚══════════════════════╝
+    </div>
+    <p style="margin-top:0.8em; font-size:0.85em;">
+        ลูกบ้านคุยกับ LINE OA → AI route ตาม intent → เขียนลง DB ตัวเดียวกับ Django
+    </p>
+</section>
+
+<!-- ============================ SLIDE 4 — BIG PICTURE ============================ -->
+<section>
+    <h2>End-to-End Layered Architecture</h2>
+    <table>
+        <thead>
+            <tr><th>Layer</th><th>LINE Side (Resident)</th><th>Web Side (Juristic)</th></tr>
+        </thead>
+        <tbody>
+            <tr><td><strong>① Client</strong></td><td>LINE App</td><td>Browser</td></tr>
+            <tr><td><strong>② Channel</strong></td><td>LINE Messaging API</td><td>HTTPS + gunicorn</td></tr>
+            <tr><td><strong>③ Orchestration</strong></td><td>n8n workflow (22 nodes)</td><td>Django URL router + Middleware</td></tr>
+            <tr><td><strong>④ Logic / AI</strong></td><td>Gemini 2.5 + RAG + Memory</td><td>Django Apps (MTV)</td></tr>
+            <tr><td><strong>⑤ Routing</strong></td><td>Switch by intent</td><td>ORM + Storage</td></tr>
+            <tr style="background:#fef3c7;"><td><strong>⑥ Persistence</strong></td><td colspan="2" class="center"><strong>Supabase Postgres · Vector Store · S3 (shared)</strong></td></tr>
+            <tr><td><strong>⑦ Output</strong></td><td>LINE reply / Flex QR</td><td>HTML response</td></tr>
+        </tbody>
+    </table>
+</section>
+
+<!-- ============================ SLIDE 5 — TECH STACK ============================ -->
+<section>
+    <h2>Tech Stack</h2>
+    <div class="columns">
+        <div>
+            <h3>Backend</h3>
+            <span class="tag">Django 5.2</span>
+            <span class="tag">Python</span>
+            <span class="tag">PostgreSQL</span>
+            <span class="tag">Supabase</span>
+
+            <h3 style="margin-top:1em;">LINE Integration</h3>
+            <span class="tag">n8n</span>
+            <span class="tag">LINE Messaging API</span>
+            <span class="tag">Gemini 2.5 Flash Lite</span>
+
+            <h3 style="margin-top:1em;">Authentication</h3>
+            <span class="tag">django-allauth</span>
+            <span class="tag">Google OAuth</span>
+            <span class="tag">LINE OAuth</span>
+        </div>
+        <div>
+            <h3>Storage</h3>
+            <span class="tag">boto3</span>
+            <span class="tag">django-storages</span>
+            <span class="tag">AWS S3</span>
+
+            <h3 style="margin-top:1em;">RAG / Vector</h3>
+            <span class="tag">Supabase Vector Store</span>
+            <span class="tag">Gemini Embeddings</span>
+
+            <h3 style="margin-top:1em;">Tools</h3>
+            <span class="tag">Figma</span>
+            <span class="tag">Git</span>
+            <span class="tag">GitHub Projects</span>
+            <span class="tag">Agile / Kanban</span>
+        </div>
+    </div>
+</section>
+
+<!-- ============================ SLIDE 6 — PATTERN MAP ============================ -->
+<section>
+    <h2>Design Patterns Map</h2>
+    <p style="font-size:0.85em;">14 GoF patterns ใช้จริงในระบบ — deep-dive 5 ตัวที่ impact สูงสุด</p>
+    <div class="columns">
+        <div>
+            <h3>🏗 Creational</h3>
+            <span class="tag">Singleton</span>
+            <span class="tag" style="background:#fef3c7;">Abstract Factory ★</span>
+            <span class="tag">Builder</span>
+        </div>
+        <div>
+            <h3>🧱 Structural</h3>
+            <span class="tag" style="background:#fef3c7;">Adapter ★</span>
+            <span class="tag" style="background:#fef3c7;">Facade ★</span>
+            <span class="tag">Composite</span>
+            <span class="tag">Decorator</span>
+            <span class="tag">Proxy</span>
+        </div>
+        <div>
+            <h3>🔄 Behavioral</h3>
+            <span class="tag">Strategy</span>
+            <span class="tag" style="background:#fef3c7;">Template Method ★</span>
+            <span class="tag" style="background:#fef3c7;">Chain of Resp. ★</span>
+            <span class="tag">Command</span>
+            <span class="tag">Iterator</span>
+            <span class="tag" style="background:#fef3c7;">State ★</span>
+        </div>
+    </div>
+    <p class="small" style="margin-top:1em;">★ = deep-dive · ที่เหลืออยู่ใน backup slides</p>
+</section>
+
+<!-- ============================ SLIDE 7 — ABSTRACT FACTORY ============================ -->
+<section>
+    <h2><span class="badge">Creational</span> Abstract Factory</h2>
+    <h4><code>users/models.py</code> — Role-based Architecture</h4>
+    <div class="problem"><strong>Problem</strong> · 5 role (Resident, Technician, JuristicOfficer, Security, Admin) มี attributes ต่างกัน · ถ้ารวมใน User class เดียวจะบวม</div>
+<pre><code class="language-python" data-trim>class User(AbstractUser):                          # Abstract base
+    role = models.CharField(choices=UserRole.choices)
+    phone_number = models.CharField(...)
+    line_id = models.CharField(...)
+
+class Resident(models.Model):                      # Concrete product
+    user = models.OneToOneField(User, related_name='resident_profile')
+    house = models.ForeignKey('properties.House', ...)
+    is_owner = models.BooleanField(default=False)
+
+class Technician(models.Model):                    # Concrete product
+    user = models.OneToOneField(User, related_name='technician_profile')
+    skill_set = models.TextField()
+    current_status = models.CharField(default="AVAILABLE")
+</code></pre>
+    <div class="why"><strong>Why it matters</strong> · เพิ่ม role ใหม่ได้โดยไม่กระทบ User · <em>ตอบ feedback อาจารย์เรื่อง inheritance ที่ยืดหยุ่น</em></div>
+</section>
+
+<!-- ============================ SLIDE 8 — ADAPTER + TEMPLATE METHOD ============================ -->
+<section>
+    <h2><span class="badge">Structural</span><span class="badge accent">Behavioral</span> Adapter + Template Method</h2>
+    <h4><code>users/adapters.py</code> — <code>CustomSocialAccountAdapter</code></h4>
+    <div class="problem"><strong>Problem</strong> · django-allauth login สำเร็จเลย แต่เราต้องการ admin approval ก่อน + จัดการ email conflict</div>
+<pre><code class="language-python" data-trim>class CustomSocialAccountAdapter(DefaultSocialAccountAdapter):
+
+    def save_user(self, request, sociallogin, form=None):
+        user = super().save_user(request, sociallogin, form)
+        user.is_active = False          # ต้องรอ admin อนุมัติ
+        user.role = UserRole.RESIDENT
+        user.save()
+        raise ImmediateHttpResponse(redirect('users:social_extra_info'))
+
+    def pre_social_login(self, request, sociallogin):
+        if not sociallogin.user.is_active:
+            messages.info(request, "Pending admin approval.")
+            raise ImmediateHttpResponse(redirect('users:register'))
+</code></pre>
+    <div class="why"><strong>Why it matters</strong> · ไม่แก้ library ต้นทาง · 2 patterns ใน class เดียว (Adapter แปลง interface · Template Method override steps)</div>
+</section>
+
+<!-- ============================ SLIDE 9 — CHAIN OF RESPONSIBILITY ============================ -->
+<section>
+    <h2><span class="badge accent">Behavioral</span> Chain of Responsibility</h2>
+    <h4>Django Middleware Stack</h4>
+    <div class="problem"><strong>Problem</strong> · 1 request ต้องผ่าน security, session, CSRF, auth, messages · ถ้ารวมใน view จะซ้ำและบวม</div>
+<pre><code class="language-python" data-trim>MIDDLEWARE = [
+    'django.middleware.security.SecurityMiddleware',          # ① HTTPS
+    'django.contrib.sessions.middleware.SessionMiddleware',   # ② Session
+    'django.middleware.csrf.CsrfViewMiddleware',              # ③ CSRF
+    'django.contrib.auth.middleware.AuthenticationMiddleware',# ④ Auth
+    'django.contrib.messages.middleware.MessageMiddleware',   # ⑤ Messages
+    'allauth.account.middleware.AccountMiddleware',           # ⑥ Allauth
+]
+</code></pre>
+    <div class="ascii">Request ──► ① ──► ② ──► ③ ──invalid──► 403 Forbidden  (short-circuit)
+                            └──valid──► ④ ──► ⑤ ──► ⑥ ──► View ──► Response</div>
+    <div class="why"><strong>Why it matters</strong> · แต่ละ handler ทำเรื่องเดียว · เพิ่ม/ลบ/สลับลำดับได้โดยไม่กระทบ logic อื่น</div>
+</section>
+
+<!-- ============================ SLIDE 10 — STATE ============================ -->
+<section>
+    <h2><span class="badge accent">Behavioral</span> State</h2>
+    <h4><code>issues/models.py</code> — Issue Lifecycle</h4>
+    <div class="problem"><strong>Problem</strong> · Issue มี lifecycle ชัดเจน (รอ → ดำเนินการ → จบ/เกิน) · ใช้ flag bool หลายตัวจะ track ยาก</div>
+    <div class="columns">
+        <div>
+<pre><code class="language-python" data-trim>class IssueStatus(models.TextChoices):
+    PENDING     = 'PENDING',     'Pending'
+    IN_PROGRESS = 'IN_PROGRESS', 'In Progress'
+    OVERDUE     = 'OVERDUE',     'Overdue'
+    SUCCESS     = 'SUCCESS',     'Success'
+
+# views.py — State transition
+if action == 'complete':
+    task.status = IssueStatus.SUCCESS
+    task.save()
+</code></pre>
+        </div>
+        <div>
+            <div class="ascii" style="font-size:0.55em;">      [*]
+       │ create
+       ▼
+   ┌─────────┐
+   │ PENDING │
+   └────┬────┘
+        │ assign
+        ▼
+  ┌──────────────┐ deadline ┌─────────┐
+  │ IN_PROGRESS  │─────────►│ OVERDUE │
+  └──────┬───────┘◄─reassign└─────────┘
+         │ complete
+         ▼
+   ┌──────────┐
+   │ SUCCESS  │──► [*]
+   └──────────┘</div>
+        </div>
+    </div>
+    <div class="why"><strong>Why it matters</strong> · lifecycle เป็น explicit · valid transitions ควบคุมจากที่เดียว</div>
+</section>
+
+<!-- ============================ SLIDE 11 — FACADE ============================ -->
+<section>
+    <h2><span class="badge">Structural</span> Facade</h2>
+    <h4>Django ORM ซ่อน SQL ที่ซับซ้อน</h4>
+<pre><code class="language-python" data-trim># เราเขียนแค่บรรทัดเดียว
+tasks = Maintenance.objects.select_related(
+    'issue_ptr', 'reporter', 'technician'
+).order_by('-created_date')
+
+# SQL ที่ Django generate ให้เบื้องหลัง (เราไม่ต้องเขียน)
+# SELECT m.*, i.*, r.*, t.* FROM issues_maintenance m
+#   INNER JOIN issues_issue i ON ...
+#   LEFT OUTER JOIN users_resident r ON ...
+#   LEFT OUTER JOIN users_technician t ON ...
+#   ORDER BY i.created_date DESC
+</code></pre>
+    <div class="why"><strong>Why it matters</strong> · client เรียก method เดียว · ความซับซ้อน (SQL, JOIN, query planning) ซ่อนหลัง interface · พบใน CLI <code>manage_tasks_menu()</code> ด้วย</div>
+</section>
+
+<!-- ============================ SLIDE 12 — OTHER 9 PATTERNS ============================ -->
+<section>
+    <h2>Other 9 Patterns (Quick)</h2>
+    <table style="font-size:0.62em;">
+        <thead><tr><th>Pattern</th><th>จุดที่ใช้</th></tr></thead>
+        <tbody>
+            <tr><td><strong>Singleton</strong></td><td><code>settings.py</code> — module โหลดครั้งเดียว · ทุก app อ้างอิง config object เดียวกัน</td></tr>
+            <tr><td><strong>Builder</strong></td><td><code>Issue.objects.all().filter().exclude().order_by()</code> — chain query ทีละขั้น</td></tr>
+            <tr><td><strong>Composite</strong></td><td><code>base.html</code> + <code>{% block %}</code> · <code>urls.py</code> <code>include()</code></td></tr>
+            <tr><td><strong>Decorator</strong></td><td><code>@login_required</code> บน view functions · stack ได้หลายชั้น</td></tr>
+            <tr><td><strong>Proxy</strong></td><td>Lazy QuerySet (รอ evaluate) + MTI <code>issue_ptr</code></td></tr>
+            <tr><td><strong>Strategy</strong></td><td><code>AUTHENTICATION_BACKENDS</code> — เลือก ModelBackend หรือ AllauthBackend</td></tr>
+            <tr><td><strong>Command</strong></td><td>CLI <code>view/search/add/update/delete_task()</code> — independent operations</td></tr>
+            <tr><td><strong>Iterator</strong></td><td><code>Paginator</code> — traverse QuerySet เป็น page ๆ</td></tr>
+        </tbody>
+    </table>
+    <p class="small" style="margin-top:0.8em;">📎 รายละเอียดอยู่ที่ <code>myproject/baanhao_project/ARCHITECTURE.md</code></p>
+</section>
+
+<!-- ============================ SLIDE 13 — CLASS DIAGRAM ============================ -->
+<section>
+    <h2>Domain Model</h2>
+    <div class="ascii" style="font-size:0.55em;">User (AbstractUser)
+ ├──1:1── Resident ────FK──── House ───1:N─── Vehicle
+ ├──1:1── Technician
+ ├──1:1── JuristicOfficer
+ ├──1:1── Security
+ ├──1:1── Admin
+ └──1:1── RegistrationRequest
+
+Issue (Parent)
+ ├── Complaint     (MTI: issue_ptr)
+ └── Maintenance   (MTI: issue_ptr) ──FK──► Technician
+
+Issue.reporter ──FK──► Resident   (nullable, รองรับ LINE-only report)</div>
+    <div class="pattern-card accent" style="margin-top:0.8em;">
+        <strong>Key Design Decisions</strong>
+        <ul style="font-size:0.95em; margin-top:0.4em;">
+            <li><strong>Multi-Table Inheritance</strong> — Complaint/Maintenance extends Issue (polymorphism + field เฉพาะ)</li>
+            <li><strong>Nullable <code>reporter</code></strong> + <code>reporter_line_id</code> column — รองรับ report จาก LINE โดยไม่มี Django user</li>
+        </ul>
+    </div>
+</section>
+
+<!-- ============================ SLIDE 14 — LINE OA INTENTS ============================ -->
+<section>
+    <h2>LINE OA · AI Agent · 3 Intents</h2>
+    <div class="pattern-card">
+        <strong>1. ตอบกฎหมู่บ้าน</strong> <span class="tag">intent = general</span><br>
+        ลูกบ้านถาม → AI Agent → RAG Retriever → <strong>Supabase Vector Store</strong> → LINE reply<br>
+        <span class="small">Gemini Embeddings + Vector Store เก็บกฎที่ upload ผ่านฟอร์ม</span>
+    </div>
+    <div class="pattern-card accent">
+        <strong>2. Smart Ticket ผู้เยี่ยมชม</strong> <span class="tag">intent = visitor</span><br>
+        "เพื่อนจะมาหา" → AI เก็บ ชื่อ + ทะเบียนรถ → <strong>INSERT visit_logs</strong> + <strong>LINE Flex Message + QR Code</strong>
+    </div>
+    <div class="pattern-card">
+        <strong>3. รับเรื่องร้องเรียน</strong> <span class="tag">intent = complaint</span><br>
+        "ไฟทางเดินดับ" → AI เก็บหัวข้อ/สถานที่/รายละเอียด + จัด priority → <strong>INSERT issues_issue + issues_complaint + notification</strong><br>
+        <span class="small">นิติบุคคลเห็นใน Web Dashboard ทันที</span>
+    </div>
+</section>
+
+<!-- ============================ SLIDE 15 — DEMO ============================ -->
+<section>
+    <h2>Demo</h2>
+    <ul>
+        <li><strong>Web Dashboard</strong> — overview · task summary · recent activity</li>
+        <li><strong>All Tasks Page</strong> — search + filter + pagination <span class="small">(Builder + Iterator)</span></li>
+        <li><strong>Pending Registrations</strong> — admin approval flow <span class="small">(State + Adapter)</span></li>
+        <li><strong>LINE OA Chat</strong> — 3 intents in action</li>
+        <li><strong>QR Visitor Ticket</strong> — Flex Message preview</li>
+    </ul>
+    <div class="pattern-card" style="margin-top:1em;">
+        🎥 GUI walkthrough · <code>youtu.be/igLxI9eYJGI</code><br>
+        📱 LINE OA demo · <code>youtube.com/shorts/j89uEZ3Yu6c</code>
+    </div>
+</section>
+
+<!-- ============================ SLIDE 16 — TEAM ============================ -->
+<section>
+    <h2>Team &amp; Progress</h2>
+    <table>
+        <thead><tr><th>Member</th><th>Total</th><th>✅ Done</th><th>🟢 In Progress</th><th>🔵 Backlog</th></tr></thead>
+        <tbody>
+            <tr><td>@athiphat67</td><td>29</td><td>23</td><td>1</td><td>5</td></tr>
+            <tr><td>@theepop66</td><td>24</td><td>18</td><td>1</td><td>5</td></tr>
+            <tr><td>@6710615185</td><td>23</td><td>17</td><td>1</td><td>5</td></tr>
+            <tr><td>@panifield</td><td>16</td><td>10</td><td>1</td><td>5</td></tr>
+            <tr><td>@napattiral276</td><td>15</td><td>9</td><td>1</td><td>5</td></tr>
+        </tbody>
+    </table>
+    <p style="margin-top:0.8em;"><strong>Methodology</strong> · Agile · GitHub Projects (Kanban) · 12 Iterations</p>
+    <p class="small"><strong>Repo</strong> · github.com/theepop66/CN332-group-project</p>
+</section>
+
+<!-- ============================ SLIDE 17 — LESSONS LEARNED ============================ -->
+<section>
+    <h2>Lessons Learned</h2>
+    <div class="pattern-card">
+        <strong>1. Design Pattern ไม่ใช่ของแต่ง</strong><br>
+        ทุก pattern ที่ใช้เกิดจากปัญหาจริง — ไม่ได้ใส่เพื่อให้ดูซับซ้อน
+    </div>
+    <div class="pattern-card accent">
+        <strong>2. Inheritance ที่ยืดหยุ่น</strong> <span class="small">(ตอบ feedback อาจารย์)</span><br>
+        แยก User (auth) ออกจาก Role profiles (business) → extend role ใหม่ได้โดยไม่กระทบของเก่า
+    </div>
+    <div class="pattern-card">
+        <strong>3. Shared State ระหว่างทีม</strong><br>
+        LINE side (n8n) + Web side (Django) ใช้ DB เดียวกัน → schema design ต้องคิดล่วงหน้า
+    </div>
+    <div class="pattern-card accent">
+        <strong>4. Future Work</strong><br>
+        Mobile native app · Payment integration · LINE Push API · Multi-tenant
+    </div>
+</section>
+
+<!-- ============================ SLIDE 18 — Q&A ============================ -->
+<section data-state="title">
+    <h1>Thank You</h1>
+    <h3 style="color:#475569; margin-top:0.5em;">Q &amp; A</h3>
+    <p style="margin-top:2em;">
+        <span class="tag">github.com/theepop66/CN332-group-project</span>
+    </p>
+    <p class="small" style="margin-top:1em;">
+        Docs · <code>BIG_PICTURE.md</code> · <code>ARCHITECTURE.md</code> · <code>SYSTEM_ARCHITECTURE.md</code>
+    </p>
+</section>
+
+<!-- ============================ BACKUP DIVIDER ============================ -->
+<section data-state="title">
+    <h2>Backup Slides</h2>
+    <p class="small" style="margin-top:1em;">เผื่อโดนถามรายละเอียดเพิ่ม</p>
+</section>
+
+<!-- BACKUP 1 — Singleton -->
+<section>
+    <h2><span class="badge">Backup</span> Singleton · <code>settings.py</code></h2>
+<pre><code class="language-python" data-trim>import os
+from dotenv import load_dotenv
+load_dotenv()
+
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', ...)
+DATABASES = {'default': {'ENGINE': 'django.db.backends.postgresql', ...}}
+INSTALLED_APPS = ['users', 'issues', 'properties', ...]
+
+# ทุกที่ import ได้ object เดียวกันเสมอ
+from django.conf import settings
+print(settings.DEBUG)
+</code></pre>
+</section>
+
+<!-- BACKUP 2 — Builder -->
+<section>
+    <h2><span class="badge">Backup</span> Builder · QuerySet chaining</h2>
+<pre><code class="language-python" data-trim>task_list = Issue.objects.all() \
+    .select_related('reporter') \
+    .order_by('-created_date')
+
+if search_query:
+    task_list = task_list.filter(
+        Q(title__icontains=search_query) |
+        Q(location__icontains=search_query)
+    )
+
+if status_filter == 'waiting':
+    task_list = task_list.filter(status=IssueStatus.PENDING)
+
+paginator = Paginator(task_list, 30)
+</code></pre>
+</section>
+
+<!-- BACKUP 3 — Composite -->
+<section>
+    <h2><span class="badge">Backup</span> Composite · Templates + URLs</h2>
+<pre><code class="language-html" data-trim>&lt;!-- base.html (root component) --&gt;
+&lt;html&gt;&lt;body&gt;
+    {% block sidebar %}{% endblock %}
+    {% block content %}{% endblock %}
+&lt;/body&gt;&lt;/html&gt;
+
+&lt;!-- all_tasks.html (child component) --&gt;
+{% extends "base.html" %}
+{% block content %}
+    {% for task in tasks %}&lt;div&gt;{{ task.title }}&lt;/div&gt;{% endfor %}
+{% endblock %}
+</code></pre>
+<pre><code class="language-python" data-trim># urls.py — Composite routing
+urlpatterns = [
+    path('users/', include('users.urls')),
+    path('issues/', include('issues.urls')),
+]
+</code></pre>
+</section>
+
+<!-- BACKUP 4 — Decorator -->
+<section>
+    <h2><span class="badge">Backup</span> Decorator · <code>@login_required</code></h2>
+<pre><code class="language-python" data-trim>@login_required
+def pending_registrations_view(request):
+    if request.user.role != UserRole.ADMIN:
+        return redirect('dashboard')
+    pending = RegistrationRequest.objects.filter(status=RequestStatus.PENDING)
+    return render(request, 'users/pending_registrations.html', {...})
+
+@login_required
+def approve_registration_view(request, request_id):
+    ...
+</code></pre>
+</section>
+
+<!-- BACKUP 5 — Proxy -->
+<section>
+    <h2><span class="badge">Backup</span> Proxy · Lazy QuerySet + MTI</h2>
+<pre><code class="language-python" data-trim># ยังไม่ยิง SQL — QuerySet เป็น proxy รอ evaluate
+task_list = Issue.objects.all().select_related('reporter')
+if search_query:
+    task_list = task_list.filter(Q(title__icontains=search_query))
+
+# SQL ยิงจริงที่บรรทัดนี้ เมื่อต้องการข้อมูล
+paginator = Paginator(task_list, 30)
+
+# MTI — issue_ptr คือ proxy ไป parent table
+class Complaint(Issue):
+    category = models.CharField(...)
+    evidence_image = models.ImageField(...)
+
+for c in Complaint.objects.all():
+    print(c.title)      # ผ่าน issue_ptr
+    print(c.category)   # Complaint field
+</code></pre>
+</section>
+
+<!-- BACKUP 6 — Strategy -->
+<section>
+    <h2><span class="badge">Backup</span> Strategy · Auth Backends</h2>
+<pre><code class="language-python" data-trim>AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+# Django ลอง authenticate ด้วย backend ตาม order นี้
+</code></pre>
+</section>
+
+<!-- BACKUP 7 — Command + Iterator -->
+<section>
+    <h2><span class="badge">Backup</span> Command + Iterator</h2>
+<pre><code class="language-python" data-trim># Command — แต่ละ function = independent operation
+def view_all_tasks(tasks): ...
+def add_task(tasks): ...
+def update_task(tasks, user): ...
+
+# Iterator — Paginator + QuerySet
+paginator = Paginator(task_list, 30)
+page_obj = paginator.get_page(page_number)
+for task in page_obj:    # iterator protocol
+    process(task)
+</code></pre>
+</section>
+
+<!-- BACKUP 8 — Auth Sequence -->
+<section>
+    <h2><span class="badge">Backup</span> Authentication Sequence</h2>
+    <div class="ascii" style="font-size:0.5em;">User    → Browser    : Click Login with Google
+Browser → Django     : GET /users/social-login-check/google/
+Django  → Browser    : session social_action = login
+Browser → Allauth    : GET /accounts/google/login/
+Allauth → Google     : Redirect to OAuth
+Google  → Allauth    : Callback with token
+Allauth → Adapter    : pre_social_login()
+Adapter → DB         : Check user exists + is_active
+
+[New User]
+  Allauth → Adapter  : save_user()
+  Adapter → DB       : Save user (is_active=False)
+  Adapter → Browser  : Redirect /users/social-extra-info/
+  User fills extra info → RegistrationRequest created
+  → Pending Admin Approval
+
+[Existing Active User]
+  Adapter → Browser  : Allow login → Dashboard</div>
+</section>
+
+<!-- BACKUP 9 — DB Schema -->
+<section>
+    <h2><span class="badge">Backup</span> Database Schema</h2>
+    <div class="ascii" style="font-size:0.45em;">users_user                  id · username · email · password
+                            role · phone_number · line_id · gender
+
+users_resident       (1:1)  · house_id · is_owner
+users_technician     (1:1)  · skill_set · current_status
+users_juristic       (1:1)  · officer_id · department
+users_security       (1:1)  · station_id · shift_time
+users_admin          (1:1)
+users_regrequest     (1:1)  · status · reviewed_by · reviewed_at
+
+properties_house     id · house_number · owner_id
+properties_vehicle   house_id · license_plate · brand · color
+
+issues_issue         reporter_id · reporter_line_id · title
+                     priority · status · location · analysis_json
+issues_complaint     issue_ptr · category · evidence_image
+issues_maintenance   issue_ptr · equipment_type · technician_id
+                     appointment_date · before_image · after_image
+
+notifications_notification  title · message · created_at
+visit_logs           visitor_name · license_plate · line_user_id · status</div>
+</section>
+
+</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/highlight.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/notes/notes.js"></script>
+<script>
+    Reveal.initialize({
+        hash: true,
+        slideNumber: 'c/t',
+        controls: true,
+        progress: true,
+        center: false,
+        transition: 'slide',
+        plugins: [RevealHighlight, RevealNotes]
+    });
+</script>
+</body>
+</html>
