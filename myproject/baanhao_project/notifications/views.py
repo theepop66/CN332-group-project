@@ -1,20 +1,11 @@
 from django.core.paginator import Paginator
 from django.shortcuts import render
-
+from .models import Notification
 
 def notification_view(request):
+    notifications = Notification.objects.all().order_by('-created_at')
 
-    # 🔥 สร้างข้อมูลปลอม 15 อัน
-    fake_notifications = []
-
-    for i in range(1, 16):
-        fake_notifications.append({
-            "title": "TASK#133 (Receive) : Pumpler Configuration",
-            "message": "Mark Gonzales - Technician - 13 Nov",
-            "is_read": True if i % 2 == 0 else False,
-        })
-
-    paginator = Paginator(fake_notifications, 8)  # 8 ต่อหน้า
+    paginator = Paginator(notifications, 8)  # 8 ต่อหน้า
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 

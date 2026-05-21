@@ -131,7 +131,7 @@ docker compose up -d   # starts n8n at http://localhost:5678
 | **Week 7: Implement plan** | [📊 Iteration 7 Slides](https://www.canva.com/design/DAHDLQnATVE/9BKB05CxdQyN2q5MyVqCfg/edit?utm_content=DAHDLQnATVE&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton) <br> [📄 Iteration 5-7 PDF](Documents/Iteration5-7/BaanHao-Iteration5-7.pdf) |-|
 | **Week 8 - 9: Development** | [📊 Iteration 5-7 Slides (PDF)](Documents/Iteration5-7/BaanHao-Iteration5-7.pdf) |-|
 | **Week 10 - 11: Development** | [🎥 GUI Website Walkthrough](https://youtu.be/igLxI9eYJGI?si=iCysm1rsU2UA-4bB) <br> [📱 Line OA Demo](https://youtube.com/shorts/j89uEZ3Yu6c?feature=share) |-|
-| **Week 12 - Final: Testing and Final** | [📄 Final Presentation (PDF)](Documents/Final_Presentation_CN332.pdf) <br> [📊 Use Case Diagram](Documents/Usecase_Diagram/) <br> [📊 Class Diagram](Documents/Database_Diagram/BaanHao_Diagram\(version-1\).pdf) |-|
+| **Week 12 - Final: Testing and Final** | [📄 Final Presentation (PDF)](Documents/Final_Presentation_CN332.pdf) <br> [📊 Use Case Diagram](Documents/Usecase_Diagram/) <br> [📊 Class Diagram](Documents/Database_Diagram/BaanHao_Diagram\(version-1\).pdf) | 18/05/2026|
 
 ---
 
@@ -285,9 +285,9 @@ CN332-group-project/              # Root directory of the project
 
 | Student ID | Name | Roles |
 | :---: | :--- | :--- |
-| `6710615292` | athiphat sunsit | Project Manager, Front-end, Back-end, QA |
+| `6710615292` | athiphat sunsit | Team lead , Front-end, Back-end, QA |
 | `6710615185` | ภูริช อัมพะวา | Front-end, Back-end |
 | `6710545010` | นพัตธีรา เหลาเกิ้มหุ่ง | Front-end |
 | `6710615144` | ปณิธาน ตันตื้อ | Front-end |
-| `6710685014` | ธีภพ รัตนทรัพย์ศิริ | Back-end |
+| `6710685014` | ธีภพ รัตนทรัพย์ศิริ | AI RAG, Line OA Back-end |
 

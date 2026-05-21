@@ -43,4 +43,10 @@ urlpatterns = [
 
     #notifications
     path('notifications/', include('notifications.urls')),
+
+    # visitors
+    path('visitors/', include('visitors.urls')),
+
+    # public views
+    path('public/', include('public_views.urls')),
 ]

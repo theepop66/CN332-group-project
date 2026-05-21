@@ -11,9 +11,9 @@ class VehicleInline(admin.TabularInline):
 @admin.register(House)
 class HouseAdmin(admin.ModelAdmin):
     # หน้าตารางรวม
-    list_display = ('house_number', 'house_id', 'owner', 'get_vehicle_count')
-    search_fields = ('house_number', 'house_id', 'owner__user__username') # ค้นหาจากเลขบ้าน หรือชื่อเจ้าของได้
-    list_filter = ('owner',) # ตัวกรองด้านขวา
+    list_display = ('house_number', 'house_id', 'get_vehicle_count')
+    search_fields = ('house_number', 'house_id') # ค้นหาจากเลขบ้าน
+    list_filter = () # ไม่มีตัวกรองแล้ว
     
     # เอา VehicleInline มาแปะไว้ในหน้านี้
     inlines = [VehicleInline]

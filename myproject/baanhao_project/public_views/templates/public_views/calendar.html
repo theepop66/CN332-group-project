@@ -1,0 +1,87 @@
+{% extends 'public_views/base_public.html' %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="row mb-4">
+        <div class="col-12 d-flex justify-content-between align-items-end flex-wrap gap-3">
+            <div>
+                <h2 class="fw-bold text-dark m-0">{{ current_month_name }}</h2>
+                <small class="text-secondary">กำหนดการซ่อมบำรุงและกิจกรรมประจำเดือน</small>
+            </div>
+            
+            <div class="btn-group shadow-sm">
+                <a href="?month={{ prev_month }}&year={{ prev_year }}" class="btn btn-light border text-secondary">
+                    <i class="bi bi-chevron-left"></i>
+                </a>
+                <a href="?month={{ today_month }}&year={{ today_year }}" class="btn btn-white border text-dark fw-bold bg-white">
+                    Today
+                </a>
+                <a href="?month={{ next_month }}&year={{ next_year }}" class="btn btn-light border text-secondary">
+                    <i class="bi bi-chevron-right"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-white rounded-4 shadow-sm overflow-hidden mb-4 border border-light">
+        <div class="table-responsive">
+            <table class="table table-bordered mb-0" style="table-layout: fixed; min-width: 800px; border-color: #f4f6f9;">
+                <thead class="bg-light text-center">
+                    <tr class="text-secondary small fw-bold">
+                        <th class="py-3 border-0" style="width: 14.28%;">อาทิตย์</th>
+                        <th class="py-3 border-0" style="width: 14.28%;">จันทร์</th>
+                        <th class="py-3 border-0" style="width: 14.28%;">อังคาร</th>
+                        <th class="py-3 border-0" style="width: 14.28%;">พุธ</th>
+                        <th class="py-3 border-0" style="width: 14.28%;">พฤหัสฯ</th>
+                        <th class="py-3 border-0" style="width: 14.28%;">ศุกร์</th>
+                        <th class="py-3 border-0" style="width: 14.28%;">เสาร์</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for week in calendar_grid %}
+                    <tr>
+                        {% for day_info in week %}
+                        <td class="p-2 {% if not day_info.is_current_month %}bg-light opacity-50{% endif %}" 
+                            style="height: 140px; vertical-align: top; border-color: #f8f9fa;">
+                            
+                            {% if day_info.is_current_month %}
+                                <div class="d-flex justify-content-end mb-2">
+                                    <span class="d-inline-flex justify-content-center align-items-center rounded-circle small fw-bold 
+                                        {% if day_info.is_today %}bg-primary text-white shadow{% else %}text-secondary{% endif %}" 
+                                        style="width: 28px; height: 28px;">
+                                        {{ day_info.day }}
+                                    </span>
+                                </div>
+                                
+                                <div class="d-flex flex-column gap-1 overflow-auto" style="max-height: 90px;">
+                                    {% for event in day_info.events %}
+                                    <div class="px-2 py-1 rounded shadow-sm border-start border-3 
+                                        {% if event.status == 'PENDING' %}border-warning bg-warning bg-opacity-10 text-dark
+                                        {% elif event.status == 'IN_PROGRESS' %}border-primary bg-primary bg-opacity-10 text-primary
+                                        {% elif event.status == 'COMPLETED' %}border-success bg-success bg-opacity-10 text-success
+                                        {% else %}border-secondary bg-light text-secondary{% endif %}" 
+                                        style="font-size: 11px; cursor: pointer;">
+                                        <div class="fw-bold text-truncate">{{ event.title }}</div>
+                                        <div class="opacity-75 text-truncate" style="font-size: 10px;">
+                                            <i class="bi bi-clock"></i> {{ event.appointment_date|date:"H:i" }}
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </td>
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="d-flex gap-3 justify-content-center flex-wrap mt-2">
+        <small class="text-secondary"><span class="badge rounded-circle p-1 bg-warning me-1"> </span> รอดำเนินการ</small>
+        <small class="text-secondary"><span class="badge rounded-circle p-1 bg-primary me-1"> </span> กำลังทำ</small>
+        <small class="text-secondary"><span class="badge rounded-circle p-1 bg-success me-1"> </span> เสร็จสิ้น</small>
+    </div>
+</div>
+{% endblock %}
