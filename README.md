@@ -160,15 +160,19 @@ Our team uses **GitHub Projects** (Kanban Board) to manage tasks, sprints, and o
 
 ![Task Distribution](Documents/image_project_track/image2.png)
 
-| Team Member | Total Tasks | 🔴 Done | 🟢 In Progress | 🔵 Backlog |
-| :--- | :---: | :---: | :---: | :---: |
-| @athiphat67 | 29 | 23 | 1 | 5 |
-| @theepop66 | 24 | 18 | 1 | 5 |
-| @6710615185 | 23 | 17 | 1 | 5 |
-| @panifield | 16 | 10 | 1 | 5 |
-| @napattiral276 | 15 | 9 | 1 | 5 |
+> Workload breakdown by assignee
 
-* Latest Update 16 Mar 2026
+![Workload by Assignee](Documents/image_project_track/Workload%20by%20Assignee.png)
+
+| Team Member | Total Issues | ✅ Done | PRs Merged | Commits |
+| :--- | :---: | :---: | :---: | :---: |
+| @athiphat67 | 31 | 31 | 40 | 118 |
+| @theepop66 | 25 | 25 | 2 | 10 |
+| @6710615185 | 24 | 24 | 2 | 20 |
+| @panifield | 16 | 16 | 8 | 15 |
+| @napattiral276 | 15 | 15 | 2 | 8 |
+
+* Latest Update 21 May 2026 — All 44 issues closed (100%)
 
 
 # Software Design Artifacts
