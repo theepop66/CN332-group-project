@@ -156,10 +156,6 @@ Our team uses **GitHub Projects** (Kanban Board) to manage tasks, sprints, and o
 
 ### Task Distribution by Member
 
-> Tasks breakdown per team member (Backlog / In Progress / Done)
-
-![Task Distribution](Documents/image_project_track/image2.png)
-
 > Workload breakdown by assignee
 
 ![Workload by Assignee](Documents/image_project_track/Workload%20by%20Assignee.png)
