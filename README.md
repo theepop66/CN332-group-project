@@ -59,12 +59,12 @@ Simultaneously, for residents, BaanHao is designed to eliminate traditional comm
 | **Week 2: Requirements** | [📄 การแจกแจง Requirement](Documents/Iteration2/hm2_การแจกแจงrequirement.pdf) <br> [📊 Iteration 2 Slides](Documents/Iteration2/iteration2-BaanHao.pdf) |-|
 | **Week 3: Development** | [🎨 Canva Link](https://www.canva.com/design/DAG-12vJwHI/FFv4AjDZGIT0hqmoKelIXQ/view?utm_content=DAG-12vJwHI&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h50f6ef177b) <br> [📊 Iteration 3 Slides](Documents/Iteration3/Iteration3_BannHao.pdf) | 26/01/2026 |
 | **Week 4: UX/UI Demo** | [🎥 GUI Website Walkthrough](https://youtu.be/igLxI9eYJGI?si=iCysm1rsU2UA-4bB) <br> [📱 Line OA Short Demo](https://youtube.com/shorts/j89uEZ3Yu6c?feature=share) |-|
-| **Week 5: Facade Pattern in project** | [📊 Iteration 5 Slides](https://www.canva.com/design/DAHAvvavFFM/HOUiDaKPhY2ek7LEpf9VWA/view?utm_content=DAHAvvavFFM&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=he9fad04ba6) |-|
-| **Week 6: Log in interface** | [📊 Iteration 6 Slides](https://www.canva.com/design/DAHBRznlkXk/oznuqUfk21gcsGM5xwXzZg/edit?utm_content=DAHBRznlkXk&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton) |-|
-| **Week 7: Implement plan** | [📊 Iteration 7 Slides](https://www.canva.com/design/DAHDLQnATVE/9BKB05CxdQyN2q5MyVqCfg/edit?utm_content=DAHDLQnATVE&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton) |-|
-| **Week 8 -  9: Development** | - |-|
-| **Week 10 -  11: Development** | - |-|
-| **Week 12 - Final: Testing and Final** | - |-|
+| **Week 5: Facade Pattern in project** | [📊 Iteration 5 Slides](https://www.canva.com/design/DAHAvvavFFM/HOUiDaKPhY2ek7LEpf9VWA/view?utm_content=DAHAvvavFFM&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=he9fad04ba6) <br> [📄 Iteration 5-7 PDF](Documents/Iteration5-7/BaanHao-Iteration5-7.pdf) |-|
+| **Week 6: Log in interface** | [📊 Iteration 6 Slides](https://www.canva.com/design/DAHBRznlkXk/oznuqUfk21gcsGM5xwXzZg/edit?utm_content=DAHBRznlkXk&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton) <br> [📄 Iteration 5-7 PDF](Documents/Iteration5-7/BaanHao-Iteration5-7.pdf) |-|
+| **Week 7: Implement plan** | [📊 Iteration 7 Slides](https://www.canva.com/design/DAHDLQnATVE/9BKB05CxdQyN2q5MyVqCfg/edit?utm_content=DAHDLQnATVE&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton) <br> [📄 Iteration 5-7 PDF](Documents/Iteration5-7/BaanHao-Iteration5-7.pdf) |-|
+| **Week 8 - 9: Development** | [📊 Iteration 5-7 Slides (PDF)](Documents/Iteration5-7/BaanHao-Iteration5-7.pdf) |-|
+| **Week 10 - 11: Development** | [🎥 GUI Website Walkthrough](https://youtu.be/igLxI9eYJGI?si=iCysm1rsU2UA-4bB) <br> [📱 Line OA Demo](https://youtube.com/shorts/j89uEZ3Yu6c?feature=share) |-|
+| **Week 12 - Final: Testing and Final** | [📊 Use Case Diagram](Documents/Usecase_Diagram/) <br> [📊 Class Diagram](Documents/Database_Diagram/BaanHao_Diagram\(version-1\).pdf) |-|
 
 ---
 
@@ -107,14 +107,14 @@ Our team uses **GitHub Projects** (Kanban Board) to manage tasks, sprints, and o
 # Software Design Artifacts
 
 ### 1. System Modeling (UML Diagrams)
-* **Use Case Diagram:** `empty` 
-* **Class Diagram:** `empty` 
+* **Use Case Diagram:** [📊 View Use Case Diagrams](Documents/Usecase_Diagram/)
+* **Class Diagram:** [📊 BaanHao Class Diagram (PDF)](Documents/Database_Diagram/BaanHao_Diagram\(version-1\).pdf)
 
 ### 2. Database Design
-* **Entity Relationship Diagram (ERD):** `empty` 
+* **Entity Relationship Diagram (ERD):** [📊 BaanHao Database Diagram (PDF)](Documents/Database_Diagram/BaanHao_Diagram\(version-1\).pdf) *(Covered in Class Diagram)*
 
 ### 3. User Interface (UI) & User Experience (UX)
-* **System Wireframes & Mockups:** `empty`
+* **System Wireframes & Mockups:** [🖼️ View Website Mockups](Documents/Iteration4/website/) · [📱 LINE OA Mockup](Documents/Iteration4/LineOA/LineOA_Chatbot.png)
 
 ---
 
@@ -179,11 +179,14 @@ Password : admin12345
 CN332-group-project/              # Root directory of the project
 ├── BannHao_CLI/                  # Command Line Interface module (if applicable)
 ├── Documents/                    # All project documentation and assets
-│   ├── Database_Diagram/         # Database design files (e.g., ER Diagram)
-│   ├── Iteration1/               # Documents and presentation slides for Week 1
-│   ├── Iteration2/               # Documents and presentation slides for Week 2
-│   ├── Iteration3/               # Documents and presentation slides for Week 3
-│   ├── Iteration4/               # Documents and presentation slides for Week 4
+│   ├── Database_Diagram/         # Class diagram and database design files
+│   ├── Iteration1/               # Documents and slides for Week 1
+│   ├── Iteration2/               # Documents and slides for Week 2
+│   ├── Iteration3/               # Documents and slides for Week 3
+│   ├── Iteration4/               # UI mockups and LINE OA screenshots
+│   ├── Iteration5-7/             # Combined slides for Iterations 5-7
+│   ├── Usecase_Diagram/          # System use case diagram images
+│   ├── image_project_track/      # Project tracking screenshots
 │   └── LOGO/                     # Project logo image files
 ├── myproject/                    # Main development folder (Source Code)
 │   ├── baanhao_project/          # Main Django project directory containing all apps
