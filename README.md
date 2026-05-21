@@ -21,8 +21,11 @@ Simultaneously, for residents, BaanHao is designed to eliminate traditional comm
 
 # Key Features
 
-### For Residents (via LINE Official Account) 
-- **Automated FAQ & 24/7 Self-Service:** Instant automated responses for common inquiries such as community rules, outstanding balances, or emergency contacts.
+### For Residents (via LINE Official Account)
+- **RAG-Powered Q&A:** AI chatbot answers questions about community rules, fees, and regulations by retrieving information from an uploaded knowledge base (PDF/CSV) stored in a Supabase vector store, powered by Google Gemini 2.5 Flash Lite.
+- **Smart Ticket (Visitor Registration):** Residents register guests via LINE chat by providing a visitor name and license plate number. The bot validates the input and sends back a QR code Smart Ticket automatically.
+- **Complaint Filing:** Residents report issues (e.g., broken lights, water pipe leaks, noise) by chatting with the bot. The AI collects subject, location, and description, then classifies priority (critical / high / medium / low) and stores the complaint directly into the Django database — triggering an admin notification on the web dashboard.
+- **Conversational Memory:** The bot maintains a 5-turn conversation window per LINE user, enabling multi-step data collection without re-asking previous answers.
 
 ### For Juristic Person (via Web Application)
 - **Dashboard:** A central command hub providing a real-time overview of the system's status, recent activities, and key operational metrics at a glance.
@@ -31,6 +34,65 @@ Simultaneously, for residents, BaanHao is designed to eliminate traditional comm
 - **Event:** A feature to organize, schedule, and promote community events or activities to encourage resident engagement.
 - **Staff:** A role and account management system for juristic personnel, enabling administrators to control access levels and staff responsibilities securely.
 - **Analytics:** In-depth data visualization and reporting tools that analyze task resolution times, frequent issues, and overall operational efficiency to aid in data-driven decision-making.
+
+---
+
+# LINE OA Chatbot — RAG Architecture
+
+The LINE OA chatbot is built on **n8n** (self-hosted via Docker) and uses a **RAG (Retrieval-Augmented Generation)** pipeline to answer resident inquiries from community documents.
+
+### System Flow
+
+```
+Resident (LINE)
+    │
+    ▼
+LINE Messaging Trigger (n8n)
+    │
+    ▼
+AI Agent ── Google Gemini 2.5 Flash Lite (LLM)
+    │     ├── Supabase Vector Store (RAG knowledge base)
+    │     ├── Simple Memory (5-turn conversation window)
+    │     └── Structured Output Parser (JSON intent classification)
+    │
+    ▼
+Switch Router (by intent)
+    │
+    ├─── visitor ──► Send Smart Ticket QR via LINE → Save to visit_logs (Supabase)
+    │
+    ├─── complaint ► Save to issues_issue + issues_complaint → Notify admin dashboard
+    │                └─► Reply confirmation via LINE
+    │
+    └─── general ──► RAG retrieval from vector store → Answer via LINE
+```
+
+### Intent Classification
+
+| Intent | Trigger | Output |
+|---|---|---|
+| `visitor` | Resident wants to register a guest | Smart Ticket QR code (name + license plate) |
+| `complaint` | Resident reports an issue | Stored complaint with priority (critical / high / medium / low) + admin notification |
+| `general` | Any question about village rules/info | RAG-based answer from community documents |
+
+### RAG Knowledge Base Setup
+
+Documents (PDF/CSV) are uploaded via an n8n web form → chunked → embedded with `gemini-embedding-001` → stored in Supabase vector store. On each user query, the AI Agent retrieves relevant chunks before generating a response.
+
+### Integration with Django Dashboard
+
+All data from LINE interactions flows directly into the Django web application database (Supabase PostgreSQL):
+- Complaints appear in the **All Tasks** module with priority labels
+- Visitor logs are stored in `visit_logs` table
+- Admin receives in-app notifications for every new complaint
+
+### Setup
+
+```bash
+cd n8n-LineOA
+cp .env.example .env   # fill in LINE token, Gemini API key, Supabase credentials
+docker compose up -d   # starts n8n at http://localhost:5678
+# Import workflows/lineOArag.json in n8n UI → Activate
+```
 
 ---
 
@@ -45,6 +107,11 @@ Simultaneously, for residents, BaanHao is designed to eliminate traditional comm
 
 ### Database
 - **Relational Database:** ![PostgreSQL](https://img.shields.io/badge/postgresql-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)
+
+### LINE OA Chatbot (RAG Workflow)
+- **Workflow Automation:** ![n8n](https://img.shields.io/badge/n8n-%23EA4B71.svg?style=for-the-badge&logo=n8n&logoColor=white)
+- **LLM & Embeddings:** ![Google Gemini](https://img.shields.io/badge/Google%20Gemini-4285F4?style=for-the-badge&logo=google&logoColor=white) `gemini-2.5-flash-lite` + `gemini-embedding-001`
+- **Vector Store:** ![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white)
 
 ### Tools & Management
 - **Design & Prototyping:** ![Figma](https://img.shields.io/badge/figma-%23F24E1E.svg?style=for-the-badge&logo=figma&logoColor=white) 
@@ -64,7 +131,7 @@ Simultaneously, for residents, BaanHao is designed to eliminate traditional comm
 | **Week 7: Implement plan** | [📊 Iteration 7 Slides](https://www.canva.com/design/DAHDLQnATVE/9BKB05CxdQyN2q5MyVqCfg/edit?utm_content=DAHDLQnATVE&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton) <br> [📄 Iteration 5-7 PDF](Documents/Iteration5-7/BaanHao-Iteration5-7.pdf) |-|
 | **Week 8 - 9: Development** | [📊 Iteration 5-7 Slides (PDF)](Documents/Iteration5-7/BaanHao-Iteration5-7.pdf) |-|
 | **Week 10 - 11: Development** | [🎥 GUI Website Walkthrough](https://youtu.be/igLxI9eYJGI?si=iCysm1rsU2UA-4bB) <br> [📱 Line OA Demo](https://youtube.com/shorts/j89uEZ3Yu6c?feature=share) |-|
-| **Week 12 - Final: Testing and Final** | [📊 Use Case Diagram](Documents/Usecase_Diagram/) <br> [📊 Class Diagram](Documents/Database_Diagram/BaanHao_Diagram\(version-1\).pdf) | 18/01/2026 |
+| **Week 12 - Final: Testing and Final** | [📄 Final Presentation (PDF)](Documents/Final_Presentation_CN332.pdf) <br> [📊 Use Case Diagram](Documents/Usecase_Diagram/) <br> [📊 Class Diagram](Documents/Database_Diagram/BaanHao_Diagram\(version-1\).pdf) | 18/05/2026|
 
 ---
 
