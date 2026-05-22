@@ -42,7 +42,7 @@ For residents, BaanHao eliminates traditional communication barriers, emphasizin
 
 ---
 
-## 2. Demo
+## 2. Demo LineOA RAG
 
 <video src="https://github.com/user-attachments/assets/0a7dbd1f-0d59-4476-a55e-d22e5ae873ec" controls width="100%"></video>
 
