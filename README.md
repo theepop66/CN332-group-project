@@ -1,43 +1,100 @@
 <div align="center">
 
-<img src="Documents/LOGO/baanhao_logo.png" alt="drawing" width="200"/>
+<img src="Documents/LOGO/baanhao_logo.png" alt="Baan Hao Logo" width="180"/>
 
-# **BaanHao: Smart Living Management System**
-## **CN332 Object-Oriented Analysis and Design Project**
+# BaanHao: Smart Living Management System
 
-<div align="left">
+**CN332 Object-Oriented Analysis and Design · Thammasat University**
+
+[![GitHub Issues](https://img.shields.io/github/issues/theepop66/CN332-group-project)](https://github.com/theepop66/CN332-group-project/issues)
+[![GitHub Issues Closed](https://img.shields.io/github/issues-closed/theepop66/CN332-group-project)](https://github.com/theepop66/CN332-group-project/issues?q=is%3Aissue+is%3Aclosed)
+[![GitHub commit activity](https://img.shields.io/github/commit-activity/t/theepop66/CN332-group-project)](https://github.com/theepop66/CN332-group-project/commits)
+[![PRs](https://img.shields.io/github/issues-pr-closed/theepop66/CN332-group-project)](https://github.com/theepop66/CN332-group-project/pulls?q=is%3Apr+is%3Aclosed)
+
+</div>
 
 ---
 
-# Project Overview
+## Table of Contents
+
+1. [Project Overview](#1-project-overview)
+2. [Key Features](#2-key-features)
+3. [Technical Stack](#3-technical-stack)
+4. [LINE OA Chatbot — RAG Architecture](#4-line-oa-chatbot--rag-architecture)
+5. [Software Design Artifacts](#5-software-design-artifacts)
+6. [Installation](#6-installation)
+7. [Project Structure](#7-project-structure)
+8. [Project Trackability](#8-project-trackability)
+9. [Iteration Progress](#9-iteration-progress)
+10. [Instructor Feedback](#10-instructor-feedback)
+11. [Team Members](#11-team-members)
+
+---
+
+## 1. Project Overview
 
 BaanHao is a comprehensive property management platform tailored for housing estates and condominiums. It is engineered to optimize the operational efficiency of juristic persons while significantly enhancing the residential experience.
 
-From an administrative standpoint, the platform focuses on streamlining redundant workflows. It resolves persistent issues such as repetitive handling of basic inquiries and the mismanagement of fragmented or unrecorded complaints.
+From an administrative standpoint, the platform focuses on streamlining redundant workflows — resolving persistent issues such as repetitive handling of basic inquiries and the mismanagement of fragmented or unrecorded complaints.
 
-Simultaneously, for residents, BaanHao is designed to eliminate traditional communication barriers, emphasizing seamless accessibility and rapid response times.
+For residents, BaanHao eliminates traditional communication barriers, emphasizing seamless accessibility and rapid response times.
 
 ---
 
-# Key Features
+## 2. Key Features
 
 ### For Residents (via LINE Official Account)
-- **RAG-Powered Q&A:** AI chatbot answers questions about community rules, fees, and regulations by retrieving information from an uploaded knowledge base (PDF/CSV) stored in a Supabase vector store, powered by Google Gemini 2.5 Flash Lite.
-- **Smart Ticket (Visitor Registration):** Residents register guests via LINE chat by providing a visitor name and license plate number. The bot validates the input and sends back a QR code Smart Ticket automatically.
-- **Complaint Filing:** Residents report issues (e.g., broken lights, water pipe leaks, noise) by chatting with the bot. The AI collects subject, location, and description, then classifies priority (critical / high / medium / low) and stores the complaint directly into the Django database — triggering an admin notification on the web dashboard.
-- **Conversational Memory:** The bot maintains a 5-turn conversation window per LINE user, enabling multi-step data collection without re-asking previous answers.
+
+- **RAG-Powered Q&A** — AI chatbot answers questions about community rules, fees, and regulations by retrieving information from an uploaded knowledge base (PDF/CSV) stored in a Supabase vector store, powered by Google Gemini 2.5 Flash Lite.
+- **Smart Ticket (Visitor Registration)** — Residents register guests via LINE chat by providing a visitor name and license plate. The bot validates input and returns a QR code Smart Ticket automatically.
+- **Complaint Filing** — Residents report issues (broken lights, water pipe leaks, noise, etc.) through the bot. AI collects subject, location, and description, classifies priority (critical / high / medium / low), and stores the complaint into the Django database — triggering an admin notification.
+- **Conversational Memory** — The bot maintains a 5-turn conversation window per LINE user, enabling multi-step data collection without re-asking previous answers.
 
 ### For Juristic Person (via Web Application)
-- **Dashboard:** A central command hub providing a real-time overview of the system's status, recent activities, and key operational metrics at a glance.
-- **All Task (Complaint & Maintenance):** A comprehensive task management module categorizing resident complaints and maintenance requests. Staff can track progress, update ticket statuses, and manage workflows efficiently.
-- **Notice:** An announcement management system allowing staff to create, edit, and broadcast important community notices directly to residents.
-- **Event:** A feature to organize, schedule, and promote community events or activities to encourage resident engagement.
-- **Staff:** A role and account management system for juristic personnel, enabling administrators to control access levels and staff responsibilities securely.
-- **Analytics:** In-depth data visualization and reporting tools that analyze task resolution times, frequent issues, and overall operational efficiency to aid in data-driven decision-making.
+
+- **Dashboard** — Central command hub with real-time overview of system status, recent activities, and key operational metrics.
+- **All Tasks (Complaint & Maintenance)** — Task management module categorizing resident complaints and maintenance requests. Staff can track progress, update statuses, and manage workflows.
+- **Notice** — Announcement management system for creating, editing, and broadcasting community notices to residents.
+- **Event** — Feature to organize, schedule, and promote community events.
+- **Staff** — Role and account management for juristic personnel; administrators control access levels and responsibilities.
+- **Analytics** — Data visualization tools analyzing task resolution times, frequent issues, and operational efficiency.
 
 ---
 
-# LINE OA Chatbot — RAG Architecture
+## 3. Technical Stack
+
+### Frontend
+| Technology | Usage |
+|---|---|
+| ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white) | Juristic web application UI |
+| ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white) | Styling & layout |
+
+### Backend & API
+| Technology | Usage |
+|---|---|
+| ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54) ![Django](https://img.shields.io/badge/django-%23092E20.svg?style=for-the-badge&logo=django&logoColor=white) | REST API & server-side logic |
+| ![LINE](https://img.shields.io/badge/LINE-00C300?style=for-the-badge&logo=line&logoColor=white) | Messaging API (LINE Official Account) |
+
+### Database
+| Technology | Usage |
+|---|---|
+| ![PostgreSQL](https://img.shields.io/badge/postgresql-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white) ![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white) | Relational DB + Vector Store (hosted on Supabase) |
+
+### LINE OA Chatbot (AI / RAG)
+| Technology | Usage |
+|---|---|
+| ![n8n](https://img.shields.io/badge/n8n-%23EA4B71.svg?style=for-the-badge&logo=n8n&logoColor=white) | Workflow automation (self-hosted via Docker) |
+| ![Google Gemini](https://img.shields.io/badge/Google%20Gemini-4285F4?style=for-the-badge&logo=google&logoColor=white) | LLM `gemini-2.5-flash-lite` · Embeddings `gemini-embedding-001` |
+
+### Tools & Management
+| Technology | Usage |
+|---|---|
+| ![Figma](https://img.shields.io/badge/figma-%23F24E1E.svg?style=for-the-badge&logo=figma&logoColor=white) | UI/UX design & prototyping |
+| ![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white) ![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white) | Version control & project management |
+
+---
+
+## 4. LINE OA Chatbot — RAG Architecture
 
 The LINE OA chatbot is built on **n8n** (self-hosted via Docker) and uses a **RAG (Retrieval-Augmented Generation)** pipeline to answer resident inquiries from community documents.
 
@@ -71,7 +128,7 @@ Switch Router (by intent)
 | Intent | Trigger | Output |
 |---|---|---|
 | `visitor` | Resident wants to register a guest | Smart Ticket QR code (name + license plate) |
-| `complaint` | Resident reports an issue | Stored complaint with priority (critical / high / medium / low) + admin notification |
+| `complaint` | Resident reports an issue | Stored complaint with priority + admin notification |
 | `general` | Any question about village rules/info | RAG-based answer from community documents |
 
 ### RAG Knowledge Base Setup
@@ -80,9 +137,10 @@ Documents (PDF/CSV) are uploaded via an n8n web form → chunked → embedded wi
 
 ### Integration with Django Dashboard
 
-All data from LINE interactions flows directly into the Django web application database (Supabase PostgreSQL):
+All data from LINE interactions flows directly into the Django database (Supabase PostgreSQL):
+
 - Complaints appear in the **All Tasks** module with priority labels
-- Visitor logs are stored in `visit_logs` table
+- Visitor logs are stored in the `visit_logs` table
 - Admin receives in-app notifications for every new complaint
 
 ### Setup
@@ -96,59 +154,122 @@ docker compose up -d   # starts n8n at http://localhost:5678
 
 ---
 
-# Technical Stack
+## 5. Software Design Artifacts
 
-### Frontend (Juristic Web Application)
-- **Core Languages:** ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white) ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
+### UML Diagrams
+- **Use Case Diagram:** [📊 View Use Case Diagrams](Documents/Usecase_Diagram/)
+- **Class Diagram:** [📊 BaanHao Class Diagram (PDF)](Documents/Database_Diagram/BaanHao_Diagram\(version-1\).pdf)
 
-### Backend & API
-- **Framework:** ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54) ![Django](https://img.shields.io/badge/django-%23092E20.svg?style=for-the-badge&logo=django&logoColor=white)
-- **Messaging API:** ![LINE](https://img.shields.io/badge/LINE-00C300?style=for-the-badge&logo=line&logoColor=white) 
+### Database Design
+- **Entity Relationship Diagram (ERD):** [📊 BaanHao Database Diagram (PDF)](Documents/Database_Diagram/BaanHao_Diagram\(version-1\).pdf) *(Covered in Class Diagram)*
 
-### Database
-- **Relational Database:** ![PostgreSQL](https://img.shields.io/badge/postgresql-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)
-
-### LINE OA Chatbot (RAG Workflow)
-- **Workflow Automation:** ![n8n](https://img.shields.io/badge/n8n-%23EA4B71.svg?style=for-the-badge&logo=n8n&logoColor=white)
-- **LLM & Embeddings:** ![Google Gemini](https://img.shields.io/badge/Google%20Gemini-4285F4?style=for-the-badge&logo=google&logoColor=white) `gemini-2.5-flash-lite` + `gemini-embedding-001`
-- **Vector Store:** ![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white)
-
-### Tools & Management
-- **Design & Prototyping:** ![Figma](https://img.shields.io/badge/figma-%23F24E1E.svg?style=for-the-badge&logo=figma&logoColor=white) 
-- **Version Control:** ![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white)
-- **Project Management:** ![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white) 
+### UI / UX Design
+- **Website Mockups:** [🖼️ View Website Mockups](Documents/Iteration4/website/)
+- **LINE OA Mockup:** [📱 LINE OA Chatbot Mockup](Documents/Iteration4/LineOA/LineOA_Chatbot.png)
 
 ---
 
-| Project Progress | Doc & Slides | Presentation Date |
-|---|---|---|
-| **Week 1: Concept** | [📄 Concept Paper](Documents/Iteration1/hm1_CONCEPT_PAPER.pdf) <br> [📊 Iteration 1 Slides](Documents/Iteration1/iteration1-BaanHao.pdf) |-|
-| **Week 2: Requirements** | [📄 การแจกแจง Requirement](Documents/Iteration2/hm2_การแจกแจงrequirement.pdf) <br> [📊 Iteration 2 Slides](Documents/Iteration2/iteration2-BaanHao.pdf) |-|
-| **Week 3: Development** | [🎨 Canva Link](https://www.canva.com/design/DAG-12vJwHI/FFv4AjDZGIT0hqmoKelIXQ/view?utm_content=DAG-12vJwHI&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h50f6ef177b) <br> [📊 Iteration 3 Slides](Documents/Iteration3/Iteration3_BannHao.pdf) | 26/01/2026 |
-| **Week 4: UX/UI Demo** | [🎥 GUI Website Walkthrough](https://youtu.be/igLxI9eYJGI?si=iCysm1rsU2UA-4bB) <br> [📱 Line OA Short Demo](https://youtube.com/shorts/j89uEZ3Yu6c?feature=share) |-|
-| **Week 5: Facade Pattern in project** | [📊 Iteration 5 Slides](https://www.canva.com/design/DAHAvvavFFM/HOUiDaKPhY2ek7LEpf9VWA/view?utm_content=DAHAvvavFFM&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=he9fad04ba6) <br> [📄 Iteration 5-7 PDF](Documents/Iteration5-7/BaanHao-Iteration5-7.pdf) |-|
-| **Week 6: Log in interface** | [📊 Iteration 6 Slides](https://www.canva.com/design/DAHBRznlkXk/oznuqUfk21gcsGM5xwXzZg/edit?utm_content=DAHBRznlkXk&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton) <br> [📄 Iteration 5-7 PDF](Documents/Iteration5-7/BaanHao-Iteration5-7.pdf) |-|
-| **Week 7: Implement plan** | [📊 Iteration 7 Slides](https://www.canva.com/design/DAHDLQnATVE/9BKB05CxdQyN2q5MyVqCfg/edit?utm_content=DAHDLQnATVE&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton) <br> [📄 Iteration 5-7 PDF](Documents/Iteration5-7/BaanHao-Iteration5-7.pdf) |-|
-| **Week 8 - 9: Development** | [📊 Iteration 5-7 Slides (PDF)](Documents/Iteration5-7/BaanHao-Iteration5-7.pdf) |-|
-| **Week 10 - 11: Development** | [🎥 GUI Website Walkthrough](https://youtu.be/igLxI9eYJGI?si=iCysm1rsU2UA-4bB) <br> [📱 Line OA Demo](https://youtube.com/shorts/j89uEZ3Yu6c?feature=share) |-|
-| **Week 12 - Final: Testing and Final** | [📄 Final Presentation (PDF)](Documents/Final_Presentation_CN332.pdf) <br> [📊 Use Case Diagram](Documents/Usecase_Diagram/) <br> [📊 Class Diagram](Documents/Database_Diagram/BaanHao_Diagram\(version-1\).pdf) | 18/05/2026|
+## 6. Installation
+
+### Prerequisites
+
+- **Git**
+- **Python 3.10+**
+- **Terminal**
+
+### Step-by-Step
+
+**1. Clone the repository**
+```bash
+git clone https://github.com/theepop66/CN332-group-project.git CN332
+cd CN332/myproject
+```
+
+**2. Create and activate a virtual environment**
+```bash
+# macOS / Linux
+python3 -m venv venv
+source venv/bin/activate
+
+# Windows
+python -m venv venv
+venv\Scripts\activate
+```
+
+**3. Install dependencies**
+```bash
+pip install -r requirement.txt
+```
+
+**4. Configure environment variables**
+```bash
+# Copy the example file and fill in your credentials
+cp baanhao_project/.env.example baanhao_project/.env
+```
+
+**5. Run database migrations**
+```bash
+cd baanhao_project
+python manage.py migrate
+```
+
+**6. Start the development server**
+```bash
+python manage.py runserver
+# Visit http://127.0.0.1:8000/
+```
+
+**7. Test credentials**
+```
+Username : admin
+Password : admin12345
+```
 
 ---
 
-## Instructor Feedback Log
+## 7. Project Structure
 
-> [!IMPORTANT]
-> **Date: 26/01/2026 (Iteration 1-3)**
-> - **Comment:** ให้ดูตัวอย่างการสืบทอด Class (Inheritance) ที่ยืดหยุ่นมากขึ้น เพื่อให้ Code Clean และจัดการ Logic ได้ง่ายขึ้น
+```
+CN332-group-project/
+├── BaanHao_CLI/                  # Command Line Interface module
+├── Documents/                    # All project documentation and assets
+│   ├── Database_Diagram/         # Class diagram & database design
+│   ├── Iteration1/               # Week 1 — Concept paper & slides
+│   ├── Iteration2/               # Week 2 — Requirement analysis
+│   ├── Iteration3/               # Week 3 — Use case & class diagrams
+│   ├── Iteration4/               # Week 4 — UI mockups & LINE OA screenshots
+│   ├── Iteration5-7/             # Weeks 5-7 — Design patterns & implementation
+│   ├── Usecase_Diagram/          # System use case diagram images
+│   ├── image_project_track/      # GitHub Insights dashboard screenshots
+│   └── LOGO/                     # Project logo files
+├── myproject/                    # Main source code
+│   ├── baanhao_project/
+│   │   ├── analytics/            # Data processing & statistics app
+│   │   ├── baanhao_project/      # Django core config (settings.py, urls.py)
+│   │   ├── complaints/           # Resident complaint management app
+│   │   ├── dashboard/            # Juristic admin dashboard app
+│   │   ├── issues/               # General issues & ticketing app
+│   │   ├── maintenance/          # Maintenance request management app
+│   │   ├── notifications/        # Notification system & LINE API integration
+│   │   ├── properties/           # Property & asset management app
+│   │   ├── users/                # User management & authentication app
+│   │   ├── static/               # CSS, JavaScript, images
+│   │   ├── templates/            # HTML templates (frontend UI)
+│   │   └── manage.py             # Django CLI utility
+│   └── requirement.txt           # Python dependencies
+├── n8n-LineOA/                   # n8n LINE OA RAG workflow
+├── github-insights.html          # GitHub Insights dashboard (static)
+└── README.md
+```
 
 ---
 
-# Project Trackability
+## 8. Project Trackability
 
-Our team uses **GitHub Projects** (Kanban Board) to manage tasks, sprints, and overall project progress following Agile methodologies. This ensures transparent collaboration and efficient workflow management.
+Our team uses **GitHub Projects** (Kanban Board) to manage tasks, sprints, and overall project progress following Agile methodologies.
 
-* **Project Board:** [View our Kanban Board Here](https://github.com/users/theepop66/projects/3/views/3)
-* **GitHub Insights Dashboard:** [📊 View Full Dashboard](github-insights.html)
+- **Project Board:** [View Kanban Board](https://github.com/users/theepop66/projects/3/views/3)
+- **GitHub Insights Dashboard:** [📊 View Full Dashboard](github-insights.html)
 
 ### Project Status
 
@@ -158,17 +279,21 @@ Our team uses **GitHub Projects** (Kanban Board) to manage tasks, sprints, and o
 
 ### GitHub Insights Dashboard Preview
 
-![Hero — Team Members](Documents/image_project_track/dashboard-hero.png)
-![Commit Activity — Charts](Documents/image_project_track/dashboard-charts.png)
-![PRs Merged & Monthly Stacked](Documents/image_project_track/dashboard-pr-stacked.png)
-![Issue Tracker & Sprint Board](Documents/image_project_track/dashboard-sprint-board.png)
+![Hero — Team Members & Summary](Documents/image_project_track/dashboard-hero.png)
+
+![Commit Activity — Timeline & Contribution Share](Documents/image_project_track/dashboard-charts.png)
+
+![PRs Merged & Monthly Stacked Commits](Documents/image_project_track/dashboard-pr-stacked.png)
+
+![Issue Tracker & Sprint Kanban Board](Documents/image_project_track/dashboard-sprint-board.png)
+
 ![Sprint History & Contributor Leaderboard](Documents/image_project_track/dashboard-leaderboard.png)
 
 ### Contributor Summary
 
-| Team Member | Role | Commits | PRs Merged | Issues Closed |
+| Team Member | Role | Commits | PRs Merged | Issues |
 | :--- | :--- | :---: | :---: | :---: |
-| [@athiphat67](https://github.com/athiphat67) | Team Lead · Front-end · Back-end · QA | **129** | **41** | 44 |
+| [@athiphat67](https://github.com/athiphat67) | Team Lead · Front-end · Back-end · QA | **129** | **41** | 44 ✅ |
 | [@6710615185](https://github.com/6710615185) | Front-end · Back-end | 16 | 2 | — |
 | [@panifield](https://github.com/panifield) | Front-end | 16 | 8 | — |
 | [@napattiral276](https://github.com/napattiral276) | Front-end | 14 | 2 | — |
@@ -177,124 +302,39 @@ Our team uses **GitHub Projects** (Kanban Board) to manage tasks, sprints, and o
 
 > Last updated 22 May 2026 — All 44 issues closed across 12 iterations · 100% completion
 
+---
 
-# Software Design Artifacts
+## 9. Iteration Progress
 
-### 1. System Modeling (UML Diagrams)
-* **Use Case Diagram:** [📊 View Use Case Diagrams](Documents/Usecase_Diagram/)
-* **Class Diagram:** [📊 BaanHao Class Diagram (PDF)](Documents/Database_Diagram/BaanHao_Diagram\(version-1\).pdf)
-
-### 2. Database Design
-* **Entity Relationship Diagram (ERD):** [📊 BaanHao Database Diagram (PDF)](Documents/Database_Diagram/BaanHao_Diagram\(version-1\).pdf) *(Covered in Class Diagram)*
-
-### 3. User Interface (UI) & User Experience (UX)
-* **System Wireframes & Mockups:** [🖼️ View Website Mockups](Documents/Iteration4/website/) · [📱 LINE OA Mockup](Documents/Iteration4/LineOA/LineOA_Chatbot.png)
+| Iteration | Topic | Documents & Slides | Presented |
+| :---: | :--- | :--- | :---: |
+| **1** | Concept Paper | [📄 Concept Paper](Documents/Iteration1/hm1_CONCEPT_PAPER.pdf) · [📊 Slides](Documents/Iteration1/iteration1-BaanHao.pdf) | — |
+| **2** | Requirements Analysis | [📄 การแจกแจง Requirement](Documents/Iteration2/hm2_การแจกแจงrequirement.pdf) · [📊 Slides](Documents/Iteration2/iteration2-BaanHao.pdf) | — |
+| **3** | UML Diagrams | [🎨 Canva](https://www.canva.com/design/DAG-12vJwHI/FFv4AjDZGIT0hqmoKelIXQ/view) · [📊 Slides](Documents/Iteration3/Iteration3_BannHao.pdf) | 26/01/2026 |
+| **4** | GUI & LINE OA Demo | [🎥 GUI Walkthrough](https://youtu.be/igLxI9eYJGI?si=iCysm1rsU2UA-4bB) · [📱 LINE OA Demo](https://youtube.com/shorts/j89uEZ3Yu6c?feature=share) | — |
+| **5** | Facade Pattern & Back-end | [📊 Slides](https://www.canva.com/design/DAHAvvavFFM/HOUiDaKPhY2ek7LEpf9VWA/view) · [📄 PDF](Documents/Iteration5-7/BaanHao-Iteration5-7.pdf) | — |
+| **6** | Login Interface & Adapter Pattern | [📊 Slides](https://www.canva.com/design/DAHBRznlkXk/oznuqUfk21gcsGM5xwXzZg/edit) · [📄 PDF](Documents/Iteration5-7/BaanHao-Iteration5-7.pdf) | — |
+| **7** | Implementation Plan | [📊 Slides](https://www.canva.com/design/DAHDLQnATVE/9BKB05CxdQyN2q5MyVqCfg/edit) · [📄 PDF](Documents/Iteration5-7/BaanHao-Iteration5-7.pdf) | — |
+| **8 – 9** | Development | [📄 Iteration 5-7 PDF](Documents/Iteration5-7/BaanHao-Iteration5-7.pdf) | — |
+| **10 – 11** | Development & Integration | [🎥 GUI Walkthrough](https://youtu.be/igLxI9eYJGI?si=iCysm1rsU2UA-4bB) · [📱 LINE OA Demo](https://youtube.com/shorts/j89uEZ3Yu6c?feature=share) | — |
+| **12 — Final** | System Testing & Final Presentation | [📄 Final Presentation](Documents/Final_Presentation_CN332.pdf) · [📊 Use Case](Documents/Usecase_Diagram/) · [📊 Class Diagram](Documents/Database_Diagram/BaanHao_Diagram\(version-1\).pdf) | 18/05/2026 |
 
 ---
 
-# Installation
+## 10. Instructor Feedback
 
-### Prerequisites 
-- **Git**
-- **Terminal**
-
-### Step-by-Step Installation
-
-**1. Clone the repository:**
-```bash
-git clone https://github.com/theepop66/CN332-group-project.git CN332
-cd CN332/myproject
-```
-
-**2. Create and activate a virtual environment:**
-```bash
-# For Windows
-python -m venv venv
-venv\Scripts\activate
-
-# For macOS/Linux
-python3 -m venv venv
-source venv/bin/activate
-```
-
-**3. Install dependencies:**
-```bash
-pip install -r requirement.txt
-```
-
-**4. Environment Variables Setup:**
-```bash
-# about .env file. Let talk to Back-end Team :)
-```
-
-**5. Database Setup & Migration:**
-```bash
-# about database file. Let talk to Back-end Team :)
-```
-
-**6. Run the development server:**
-```bash
-cd baanhao_project
-
-python manage.py runserver
-
-# Note: When you run server successfully, you can click http://127.0.0.1:8000/ to use the web application.
-```
-
-**7. Test Account :**
-```bash
-Username : admin
-Password : admin12345
-```
----
-
-# Project Structure
-```markdown
-CN332-group-project/              # Root directory of the project
-├── BannHao_CLI/                  # Command Line Interface module (if applicable)
-├── Documents/                    # All project documentation and assets
-│   ├── Database_Diagram/         # Class diagram and database design files
-│   ├── Iteration1/               # Documents and slides for Week 1
-│   ├── Iteration2/               # Documents and slides for Week 2
-│   ├── Iteration3/               # Documents and slides for Week 3
-│   ├── Iteration4/               # UI mockups and LINE OA screenshots
-│   ├── Iteration5-7/             # Combined slides for Iterations 5-7
-│   ├── Usecase_Diagram/          # System use case diagram images
-│   ├── image_project_track/      # Project tracking screenshots
-│   └── LOGO/                     # Project logo image files
-├── myproject/                    # Main development folder (Source Code)
-│   ├── baanhao_project/          # Main Django project directory containing all apps
-│   │   ├── analytics/            # Django App: Data processing and statistics
-│   │   ├── baanhao_project/      # Django core configuration (settings.py, urls.py)
-│   │   ├── complaints/           # Django App: Resident complaint management
-│   │   ├── dashboard/            # Django App: Juristic admin dashboard UI/Logic
-│   │   ├── issues/               # Django App: General issues and ticketing system
-│   │   ├── maintenance/          # Django App: Maintenance request management
-│   │   ├── media/profile_images/ # Directory for user-uploaded media (e.g., profile pics)
-│   │   ├── notifications/        # Django App: Notification system & LINE API integration
-│   │   ├── profile_images/       # (Fallback/Default directory for profile pictures)
-│   │   ├── properties/           # Django App: Property and asset management
-│   │   ├── static/               # Directory for static files (CSS, JavaScript, Images)
-│   │   ├── templates/            # Directory for HTML templates (Frontend UI)
-│   │   ├── users/                # Django App: User management, authentication, and roles
-│   │   ├── .env.example          # Template for environment variables (e.g., DB credentials)
-│   │   ├── db.sqlite3            # Default SQLite database for local development
-│   │   └── manage.py             # Django command-line utility (runserver, migrate, etc.)
-│   ├── .gitignore                # Git ignore file for the source code level (e.g., venv)
-│   └── requirement.txt          # Python dependencies list (e.g., django, psycopg2)
-├── .gitignore                    # Root level Git ignore file
-└── README.md                     # The main project documentation file (this file)
-```
+> [!IMPORTANT]
+> **Date: 26/01/2026 (Iteration 1–3)**
+> - **Comment:** ให้ดูตัวอย่างการสืบทอด Class (Inheritance) ที่ยืดหยุ่นมากขึ้น เพื่อให้ Code Clean และจัดการ Logic ได้ง่ายขึ้น
 
 ---
 
-## Team Members
+## 11. Team Members
 
-| Student ID | Name | Roles |
-| :---: | :--- | :--- |
-| `6710615292` | athiphat sunsit | Team lead , Front-end, Back-end, QA |
-| `6710615185` | ภูริช อัมพะวา | Front-end, Back-end |
-| `6710545010` | นพัตธีรา เหลาเกิ้มหุ่ง | Front-end |
-| `6710615144` | ปณิธาน ตันตื้อ | Front-end |
-| `6710685014` | ธีภพ รัตนทรัพย์ศิริ | AI RAG, Line OA Back-end |
-
+| Student ID | Name | GitHub | Roles |
+| :---: | :--- | :--- | :--- |
+| `6710615292` | Athiphat Sunsit | [@athiphat67](https://github.com/athiphat67) | Team Lead · Front-end · Back-end · QA |
+| `6710615185` | ภูริช อัมพะวา | [@6710615185](https://github.com/6710615185) | Front-end · Back-end |
+| `6710545010` | นพัตธีรา เหลาเกิ้มหุ่ง | [@napattiral276](https://github.com/napattiral276) | Front-end |
+| `6710615144` | ปณิธาน ตันตื้อ | [@panifield](https://github.com/panifield) | Front-end |
+| `6710685014` | ธีภพ รัตนทรัพย์ศิริ | [@theepop66](https://github.com/theepop66) | AI RAG · LINE OA · Back-end |
