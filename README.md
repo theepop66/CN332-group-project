@@ -18,16 +18,17 @@
 ## Table of Contents
 
 1. [Project Overview](#1-project-overview)
-2. [Key Features](#2-key-features)
-3. [Technical Stack](#3-technical-stack)
-4. [LINE OA Chatbot — RAG Architecture](#4-line-oa-chatbot--rag-architecture)
-5. [Software Design Artifacts](#5-software-design-artifacts)
-6. [Installation](#6-installation)
-7. [Project Structure](#7-project-structure)
-8. [Project Trackability](#8-project-trackability)
-9. [Iteration Progress](#9-iteration-progress)
-10. [Instructor Feedback](#10-instructor-feedback)
-11. [Team Members](#11-team-members)
+2. [Demo](#2-demo)
+3. [Key Features](#3-key-features)
+4. [Technical Stack](#4-technical-stack)
+5. [LINE OA Chatbot — RAG Architecture](#5-line-oa-chatbot--rag-architecture)
+6. [Software Design Artifacts](#6-software-design-artifacts)
+7. [Installation](#7-installation)
+8. [Project Structure](#8-project-structure)
+9. [Project Trackability](#9-project-trackability)
+10. [Iteration Progress](#10-iteration-progress)
+11. [Instructor Feedback](#11-instructor-feedback)
+12. [Team Members](#12-team-members)
 
 ---
 
@@ -41,7 +42,13 @@ For residents, BaanHao eliminates traditional communication barriers, emphasizin
 
 ---
 
-## 2. Key Features
+## 2. Demo
+
+<video src="https://github.com/user-attachments/assets/0a7dbd1f-0d59-4476-a55e-d22e5ae873ec" controls width="100%"></video>
+
+---
+
+## 3. Key Features
 
 ### For Residents (via LINE Official Account)
 
@@ -61,7 +68,7 @@ For residents, BaanHao eliminates traditional communication barriers, emphasizin
 
 ---
 
-## 3. Technical Stack
+## 4. Technical Stack
 
 ### Frontend
 | Technology | Usage |
@@ -94,7 +101,7 @@ For residents, BaanHao eliminates traditional communication barriers, emphasizin
 
 ---
 
-## 4. LINE OA Chatbot — RAG Architecture
+## 5. LINE OA Chatbot — RAG Architecture
 
 The LINE OA chatbot is built on **n8n** (self-hosted via Docker) and uses a **RAG (Retrieval-Augmented Generation)** pipeline to answer resident inquiries from community documents.
 
@@ -154,7 +161,7 @@ docker compose up -d   # starts n8n at http://localhost:5678
 
 ---
 
-## 5. Software Design Artifacts
+## 6. Software Design Artifacts
 
 ### UML Diagrams
 - **Use Case Diagram:** [📊 View Use Case Diagrams](Documents/Usecase_Diagram/)
@@ -169,7 +176,7 @@ docker compose up -d   # starts n8n at http://localhost:5678
 
 ---
 
-## 6. Installation
+## 7. Installation
 
 ### Prerequisites
 
@@ -227,7 +234,7 @@ Password : admin12345
 
 ---
 
-## 7. Project Structure
+## 8. Project Structure
 
 ```
 CN332-group-project/
@@ -264,7 +271,7 @@ CN332-group-project/
 
 ---
 
-## 8. Project Trackability
+## 9. Project Trackability
 
 Our team uses **GitHub Projects** (Kanban Board) to manage tasks, sprints, and overall project progress following Agile methodologies.
 
@@ -304,7 +311,7 @@ Our team uses **GitHub Projects** (Kanban Board) to manage tasks, sprints, and o
 
 ---
 
-## 9. Iteration Progress
+## 10. Iteration Progress
 
 | Iteration | Topic | Documents & Slides | Presented |
 | :---: | :--- | :--- | :---: |
@@ -321,7 +328,7 @@ Our team uses **GitHub Projects** (Kanban Board) to manage tasks, sprints, and o
 
 ---
 
-## 10. Instructor Feedback
+## 11. Instructor Feedback
 
 > [!IMPORTANT]
 > **Date: 26/01/2026 (Iteration 1–3)**
@@ -329,7 +336,7 @@ Our team uses **GitHub Projects** (Kanban Board) to manage tasks, sprints, and o
 
 ---
 
-## 11. Team Members
+## 12. Team Members
 
 | Student ID | Name | GitHub | Roles |
 | :---: | :--- | :--- | :--- |
