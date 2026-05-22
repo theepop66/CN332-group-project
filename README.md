@@ -148,31 +148,26 @@ docker compose up -d   # starts n8n at http://localhost:5678
 Our team uses **GitHub Projects** (Kanban Board) to manage tasks, sprints, and overall project progress following Agile methodologies. This ensures transparent collaboration and efficient workflow management.
 
 * **Project Board:** [View our Kanban Board Here](https://github.com/users/theepop66/projects/3/views/3)
+* **GitHub Insights Dashboard:** [📊 View Full Dashboard](github-insights.html)
 
 ### Project Status
 
 ![Open Issues](https://img.shields.io/github/issues/theepop66/CN332-group-project)
 ![Closed Issues](https://img.shields.io/github/issues-closed/theepop66/CN332-group-project)
+![Total Commits](https://img.shields.io/github/commit-activity/t/theepop66/CN332-group-project)
 
-### Task Distribution by Member
+### Contributor Summary
 
-> Tasks breakdown per team member (Backlog / In Progress / Done)
+| Team Member | Role | Commits | PRs Merged | Issues Closed |
+| :--- | :--- | :---: | :---: | :---: |
+| [@athiphat67](https://github.com/athiphat67) | Team Lead · Front-end · Back-end · QA | **129** | **41** | 44 |
+| [@6710615185](https://github.com/6710615185) | Front-end · Back-end | 16 | 2 | — |
+| [@panifield](https://github.com/panifield) | Front-end | 16 | 8 | — |
+| [@napattiral276](https://github.com/napattiral276) | Front-end | 14 | 2 | — |
+| [@theepop66](https://github.com/theepop66) | AI RAG · LINE OA · Back-end | 10 | 2 | — |
+| **Total** | | **185** | **55** | **44 / 44 (100%)** |
 
-![Task Distribution](Documents/image_project_track/image2.png)
-
-> Workload breakdown by assignee
-
-![Workload by Assignee](Documents/image_project_track/Workload%20by%20Assignee.png)
-
-| Team Member | Total Issues | ✅ Done | PRs Merged | Commits |
-| :--- | :---: | :---: | :---: | :---: |
-| @athiphat67 | 31 | 31 | 40 | 118 |
-| @theepop66 | 25 | 25 | 2 | 10 |
-| @6710615185 | 24 | 24 | 2 | 20 |
-| @panifield | 16 | 16 | 8 | 15 |
-| @napattiral276 | 15 | 15 | 2 | 8 |
-
-* Latest Update 21 May 2026 — All 44 issues closed (100%)
+> Last updated 22 May 2026 — All 44 issues closed across 12 iterations · 100% completion
 
 
 # Software Design Artifacts

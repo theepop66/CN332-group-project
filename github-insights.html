@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GitHub Insights — Baan Hao</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <style>
+    :root {
+      --bg: #eef5ff;
+      --surface: #ffffff;
+      --surface2: #f4f8ff;
+      --border: #dde8f5;
+      --text: #0f1f3d;
+      --muted: #5a7194;
+      --accent: #2563eb;
+      --c1: #6366f1;
+      --c2: #0891b2;
+      --c3: #ec4899;
+      --c4: #f59e0b;
+      --c5: #10b981;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans Thai', sans-serif;
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* ── DECORATIVE BLOBS ── */
+    body::before {
+      content: '';
+      position: fixed;
+      top: -120px; left: -120px;
+      width: 420px; height: 420px;
+      background: radial-gradient(circle, #bfdbfe88 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 0;
+    }
+    body::after {
+      content: '';
+      position: fixed;
+      bottom: -80px; right: -80px;
+      width: 340px; height: 340px;
+      background: radial-gradient(circle, #c7d2fe88 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── HEADER ── */
+    .header {
+      background: #ffffff;
+      border-bottom: 1px solid var(--border);
+      padding: 0 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      position: sticky; top: 0; z-index: 100;
+      box-shadow: 0 1px 12px #2563eb12;
+      min-height: 64px;
+    }
+    .header-left { display: flex; align-items: center; gap: 14px; }
+    .logo-box {
+      width: 38px; height: 38px;
+      background: linear-gradient(135deg, #2563eb, #6366f1);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .logo-box svg { width: 22px; height: 22px; fill: white; }
+    .repo-info h1 { font-size: 15px; font-weight: 700; color: var(--text); }
+    .repo-info p { font-size: 11px; color: var(--muted); margin-top: 1px; }
+    .header-right { display: flex; align-items: center; gap: 8px; }
+    .badge {
+      padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 600;
+      border: 1.5px solid;
+    }
+    .badge-blue { background: #eff6ff; color: #2563eb; border-color: #bfdbfe; }
+    .badge-green { background: #f0fdf4; color: #16a34a; border-color: #bbf7d0; }
+    .header-date { font-size: 11px; color: var(--muted); }
+
+    /* ── MAIN ── */
+    main { max-width: 1300px; margin: 0 auto; padding: 32px 24px; position: relative; z-index: 1; }
+
+    /* ── HERO STRIP ── */
+    .hero {
+      background: linear-gradient(135deg, #1d4ed8 0%, #4f46e5 50%, #7c3aed 100%);
+      border-radius: 20px;
+      padding: 28px 36px;
+      margin-bottom: 28px;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 220px; height: 220px;
+      background: rgba(255,255,255,.08);
+      border-radius: 50%;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -40px; right: 160px;
+      width: 140px; height: 140px;
+      background: rgba(255,255,255,.05);
+      border-radius: 50%;
+    }
+    .hero-left h2 { font-size: 22px; font-weight: 800; letter-spacing: -.3px; }
+    .hero-left p { font-size: 13px; opacity: .75; margin-top: 4px; }
+    .hero-stats { display: flex; gap: 32px; flex-wrap: wrap; }
+    .hero-stat { text-align: center; }
+    .hero-stat-val { font-size: 32px; font-weight: 800; line-height: 1; }
+    .hero-stat-lbl { font-size: 11px; opacity: .65; margin-top: 3px; text-transform: uppercase; letter-spacing: .5px; }
+
+    /* ── SECTION TITLE ── */
+    .section-title {
+      font-size: 13px; font-weight: 700; color: var(--muted);
+      text-transform: uppercase; letter-spacing: 1px;
+      margin-bottom: 14px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+    .section-title .dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+
+    /* ── MEMBER CARDS ── */
+    .members-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .member-card {
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+      transition: transform .15s, box-shadow .15s;
+      box-shadow: 0 2px 8px #2563eb0a;
+    }
+    .member-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px #2563eb18;
+    }
+    .member-card.m1 { border-top: 3px solid var(--c1); }
+    .member-card.m2 { border-top: 3px solid var(--c2); }
+    .member-card.m3 { border-top: 3px solid var(--c3); }
+    .member-card.m4 { border-top: 3px solid var(--c4); }
+    .member-card.m5 { border-top: 3px solid var(--c5); }
+
+    .member-top { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+    .avatar {
+      width: 46px; height: 46px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--border);
+      box-shadow: 0 2px 6px #0001;
+    }
+    .member-info h3 { font-size: 14px; font-weight: 700; color: var(--text); line-height: 1.3; }
+    .member-info .sid { font-size: 10px; color: var(--muted); }
+    .member-info .handle { font-size: 10px; color: var(--accent); font-family: monospace; }
+
+    .role-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 14px; }
+    .role-tag {
+      padding: 2px 8px; border-radius: 4px; font-size: 10px; font-weight: 600;
+      background: var(--surface2); border: 1px solid var(--border); color: var(--muted);
+    }
+    .role-tag.lead { background: #eff6ff; color: #2563eb; border-color: #bfdbfe; }
+
+    .member-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+    .mstat {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 8px 4px;
+      text-align: center;
+    }
+    .mstat-val { font-size: 18px; font-weight: 800; }
+    .mstat-lbl { font-size: 9px; color: var(--muted); margin-top: 1px; text-transform: uppercase; letter-spacing: .3px; }
+
+    /* ── CHARTS ── */
+    .charts-2col { display: grid; grid-template-columns: 2fr 1fr; gap: 18px; margin-bottom: 20px; }
+    .charts-2eq  { display: grid; grid-template-columns: 1fr 1fr;  gap: 18px; margin-bottom: 32px; }
+    @media (max-width: 900px) {
+      .charts-2col, .charts-2eq { grid-template-columns: 1fr; }
+    }
+    .chart-card {
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: 16px;
+      padding: 22px;
+      box-shadow: 0 2px 8px #2563eb0a;
+    }
+    .chart-title { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 16px; }
+
+    /* ── ISSUE TRACKER ── */
+    .issue-stats-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+    @media (max-width: 700px) { .issue-stats-row { grid-template-columns: 1fr 1fr; } }
+    .issue-stat {
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: 14px;
+      padding: 16px 20px;
+      box-shadow: 0 2px 8px #2563eb0a;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .issue-stat-icon {
+      width: 42px; height: 42px;
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+    .issue-stat-text .val { font-size: 26px; font-weight: 800; line-height: 1; }
+    .issue-stat-text .lbl { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+    /* KANBAN BOARD */
+    .kanban-wrapper {
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: 16px;
+      padding: 22px;
+      box-shadow: 0 2px 8px #2563eb0a;
+      margin-bottom: 20px;
+    }
+    .kanban-board {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+      margin-top: 16px;
+    }
+    @media (max-width: 800px) { .kanban-board { grid-template-columns: 1fr; } }
+    .kanban-col {
+      border-radius: 12px;
+      padding: 14px;
+      min-height: 140px;
+    }
+    .kanban-col.col-done { background: #f0fdf4; border: 1.5px solid #bbf7d0; }
+    .kanban-col.col-final { background: #eff6ff; border: 1.5px solid #bfdbfe; }
+    .kanban-col.col-history { background: #f5f3ff; border: 1.5px solid #ddd6fe; }
+
+    .kanban-col-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 12px;
+    }
+    .kanban-col-title {
+      font-size: 12px; font-weight: 700; display: flex; align-items: center; gap: 6px;
+    }
+    .kanban-col-count {
+      font-size: 11px; font-weight: 700;
+      padding: 2px 8px; border-radius: 10px;
+    }
+    .col-done .kanban-col-count { background: #dcfce7; color: #16a34a; }
+    .col-final .kanban-col-count { background: #dbeafe; color: #2563eb; }
+    .col-history .kanban-col-count { background: #ede9fe; color: #7c3aed; }
+
+    .issue-card {
+      background: white;
+      border-radius: 8px;
+      padding: 10px 12px;
+      margin-bottom: 8px;
+      box-shadow: 0 1px 4px #0000000d;
+      border: 1px solid #e9f1ff;
+      font-size: 12px;
+    }
+    .issue-card:last-child { margin-bottom: 0; }
+    .issue-card-top {
+      display: flex; align-items: flex-start; justify-content: space-between; gap: 8px;
+    }
+    .issue-card-title { font-weight: 600; color: var(--text); line-height: 1.4; flex: 1; }
+    .issue-number { font-size: 10px; color: var(--muted); font-family: monospace; white-space: nowrap; }
+    .issue-card-meta { display: flex; align-items: center; gap: 6px; margin-top: 6px; }
+    .status-dot {
+      width: 6px; height: 6px; border-radius: 50; flex-shrink: 0;
+    }
+    .status-closed { background: #16a34a; }
+    .issue-date { font-size: 10px; color: var(--muted); }
+    .iter-tag {
+      font-size: 10px; font-weight: 600; padding: 1px 6px;
+      border-radius: 3px; white-space: nowrap;
+    }
+
+    /* SPRINT HISTORY (early iters) */
+    .sprint-history { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 10px; }
+    .sprint-chip {
+      background: var(--surface2);
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 12px;
+      text-align: center;
+    }
+    .sprint-chip .snum { font-size: 13px; font-weight: 800; color: var(--text); }
+    .sprint-chip .stitle { font-size: 10px; color: var(--muted); margin-top: 2px; line-height: 1.3; }
+    .sprint-chip .scount { font-size: 11px; font-weight: 600; color: #16a34a; margin-top: 4px; }
+    .sprint-chip .sbar { height: 4px; border-radius: 2px; background: #dcfce7; margin-top: 6px; overflow: hidden; }
+    .sprint-chip .sbar-fill { height: 100%; background: #16a34a; border-radius: 2px; }
+
+    /* ── LEADERBOARD TABLE ── */
+    .table-card {
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px #2563eb0a;
+      margin-bottom: 32px;
+    }
+    table.lb { width: 100%; border-collapse: collapse; font-size: 13px; }
+    table.lb th {
+      background: var(--surface2);
+      padding: 11px 16px;
+      font-size: 11px; text-transform: uppercase; letter-spacing: .6px;
+      color: var(--muted); font-weight: 600;
+      border-bottom: 1.5px solid var(--border);
+      text-align: left;
+    }
+    table.lb td { padding: 13px 16px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+    table.lb tr:last-child td { border-bottom: none; }
+    table.lb tr:hover td { background: #f8fbff; }
+    .rank { font-size: 16px; font-weight: 800; color: var(--muted); }
+    .rank.r1 { color: #f59e0b; }
+    .rank.r2 { color: #94a3b8; }
+    .rank.r3 { color: #cd7f32; }
+    .user-cell { display: flex; align-items: center; gap: 10px; }
+    .user-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+    .prog-bar { height: 6px; background: #e2e8f0; border-radius: 3px; overflow: hidden; }
+    .prog-fill { height: 100%; border-radius: 3px; }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center; padding: 24px;
+      font-size: 12px; color: var(--muted);
+      border-top: 1px solid var(--border);
+      position: relative; z-index: 1;
+    }
+    footer a { color: var(--accent); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-left">
+    <div class="logo-box">
+      <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+    </div>
+    <div class="repo-info">
+      <h1>theepop66 / CN332-group-project</h1>
+      <p>Baan Hao — Smart Living Management System · CN332 Object-Oriented Analysis and Design</p>
+    </div>
+  </div>
+  <div class="header-right">
+    <span class="badge badge-blue">5 Contributors</span>
+    <span class="badge badge-green">✓ 100% Complete</span>
+    <span class="header-date">Updated 22 May 2026</span>
+  </div>
+</div>
+
+<main>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-left">
+      <h2>🏠 Baan Hao — GitHub Insights</h2>
+      <p>theepop66/CN332-group-project · Thammasat University · Jan – May 2026</p>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="hero-stat-val">185</div>
+        <div class="hero-stat-lbl">Total Commits</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-val">55</div>
+        <div class="hero-stat-lbl">PRs Merged</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-val">44</div>
+        <div class="hero-stat-lbl">Issues Closed</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-val">12</div>
+        <div class="hero-stat-lbl">Iterations</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-val">5</div>
+        <div class="hero-stat-lbl">Members</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TEAM MEMBERS -->
+  <div class="section-title"><span class="dot" style="background:var(--c1)"></span>Team Members</div>
+  <div class="members-grid">
+
+    <div class="member-card m1">
+      <div class="member-top">
+        <img class="avatar" src="https://github.com/athiphat67.png"
+          onerror="this.src='https://ui-avatars.com/api/?name=A+S&background=6366f1&color=fff&size=96'" />
+        <div class="member-info">
+          <h3>Athiphat Sunsit</h3>
+          <div class="sid">6710615292</div>
+          <div class="handle">@athiphat67</div>
+        </div>
+      </div>
+      <div class="role-tags">
+        <span class="role-tag lead">Team Lead</span>
+        <span class="role-tag">Front-end</span>
+        <span class="role-tag">Back-end</span>
+        <span class="role-tag">QA</span>
+      </div>
+      <div class="member-stats">
+        <div class="mstat"><div class="mstat-val" style="color:var(--c1)">129</div><div class="mstat-lbl">Commits</div></div>
+        <div class="mstat"><div class="mstat-val" style="color:var(--c1)">41</div><div class="mstat-lbl">PRs</div></div>
+        <div class="mstat"><div class="mstat-val" style="color:var(--c1)">12</div><div class="mstat-lbl">Reviews</div></div>
+      </div>
+    </div>
+
+    <div class="member-card m2">
+      <div class="member-top">
+        <img class="avatar" src="https://github.com/6710615185.png"
+          onerror="this.src='https://ui-avatars.com/api/?name=P+A&background=0891b2&color=fff&size=96'" />
+        <div class="member-info">
+          <h3>ภูริช อัมพะวา</h3>
+          <div class="sid">6710615185</div>
+          <div class="handle">@6710615185</div>
+        </div>
+      </div>
+      <div class="role-tags">
+        <span class="role-tag">Front-end</span>
+        <span class="role-tag">Back-end</span>
+      </div>
+      <div class="member-stats">
+        <div class="mstat"><div class="mstat-val" style="color:var(--c2)">16</div><div class="mstat-lbl">Commits</div></div>
+        <div class="mstat"><div class="mstat-val" style="color:var(--c2)">2</div><div class="mstat-lbl">PRs</div></div>
+        <div class="mstat"><div class="mstat-val" style="color:var(--c2)">0</div><div class="mstat-lbl">Reviews</div></div>
+      </div>
+    </div>
+
+    <div class="member-card m3">
+      <div class="member-top">
+        <img class="avatar" src="https://github.com/napattiral276.png"
+          onerror="this.src='https://ui-avatars.com/api/?name=N&background=ec4899&color=fff&size=96'" />
+        <div class="member-info">
+          <h3>นพัตธีรา เหลาเกิ้มหุ่ง</h3>
+          <div class="sid">6710545010</div>
+          <div class="handle">@napattiral276</div>
+        </div>
+      </div>
+      <div class="role-tags">
+        <span class="role-tag">Front-end</span>
+      </div>
+      <div class="member-stats">
+        <div class="mstat"><div class="mstat-val" style="color:var(--c3)">14</div><div class="mstat-lbl">Commits</div></div>
+        <div class="mstat"><div class="mstat-val" style="color:var(--c3)">2</div><div class="mstat-lbl">PRs</div></div>
+        <div class="mstat"><div class="mstat-val" style="color:var(--c3)">0</div><div class="mstat-lbl">Reviews</div></div>
+      </div>
+    </div>
+
+    <div class="member-card m4">
+      <div class="member-top">
+        <img class="avatar" src="https://github.com/panifield.png"
+          onerror="this.src='https://ui-avatars.com/api/?name=P+T&background=f59e0b&color=fff&size=96'" />
+        <div class="member-info">
+          <h3>ปณิธาน ตันตื้อ</h3>
+          <div class="sid">6710615144</div>
+          <div class="handle">@panifield</div>
+        </div>
+      </div>
+      <div class="role-tags">
+        <span class="role-tag">Front-end</span>
+      </div>
+      <div class="member-stats">
+        <div class="mstat"><div class="mstat-val" style="color:var(--c4)">16</div><div class="mstat-lbl">Commits</div></div>
+        <div class="mstat"><div class="mstat-val" style="color:var(--c4)">8</div><div class="mstat-lbl">PRs</div></div>
+        <div class="mstat"><div class="mstat-val" style="color:var(--c4)">0</div><div class="mstat-lbl">Reviews</div></div>
+      </div>
+    </div>
+
+    <div class="member-card m5">
+      <div class="member-top">
+        <img class="avatar" src="https://github.com/theepop66.png"
+          onerror="this.src='https://ui-avatars.com/api/?name=T+R&background=10b981&color=fff&size=96'" />
+        <div class="member-info">
+          <h3>ธีภพ รัตนทรัพย์ศิริ</h3>
+          <div class="sid">6710685014</div>
+          <div class="handle">@theepop66</div>
+        </div>
+      </div>
+      <div class="role-tags">
+        <span class="role-tag">AI RAG</span>
+        <span class="role-tag">LINE OA</span>
+        <span class="role-tag">Back-end</span>
+      </div>
+      <div class="member-stats">
+        <div class="mstat"><div class="mstat-val" style="color:var(--c5)">10</div><div class="mstat-lbl">Commits</div></div>
+        <div class="mstat"><div class="mstat-val" style="color:var(--c5)">2</div><div class="mstat-lbl">PRs</div></div>
+        <div class="mstat"><div class="mstat-val" style="color:var(--c5)">1</div><div class="mstat-lbl">Reviews</div></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- CHARTS -->
+  <div class="section-title"><span class="dot" style="background:var(--c2)"></span>Commit Activity</div>
+  <div class="charts-2col">
+    <div class="chart-card">
+      <div class="chart-title">Commits Over Time (Monthly)</div>
+      <canvas id="timelineChart" height="200"></canvas>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">Contribution Share</div>
+      <div style="max-width:260px;margin:0 auto;">
+        <canvas id="donutChart" height="230"></canvas>
+      </div>
+    </div>
+  </div>
+  <div class="charts-2eq">
+    <div class="chart-card">
+      <div class="chart-title">PRs Merged per Member</div>
+      <canvas id="prChart" height="210"></canvas>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">Monthly Commits (Stacked)</div>
+      <canvas id="stackedChart" height="210"></canvas>
+    </div>
+  </div>
+
+  <!-- ISSUE TRACKER -->
+  <div class="section-title" style="margin-top:8px;"><span class="dot" style="background:#16a34a"></span>Issue Tracker &amp; Sprint Board</div>
+
+  <div class="issue-stats-row">
+    <div class="issue-stat">
+      <div class="issue-stat-icon" style="background:#eff6ff;">📋</div>
+      <div class="issue-stat-text">
+        <div class="val" style="color:#2563eb">44</div>
+        <div class="lbl">Total Issues</div>
+      </div>
+    </div>
+    <div class="issue-stat">
+      <div class="issue-stat-icon" style="background:#f0fdf4;">✅</div>
+      <div class="issue-stat-text">
+        <div class="val" style="color:#16a34a">44</div>
+        <div class="lbl">Closed / Done</div>
+      </div>
+    </div>
+    <div class="issue-stat">
+      <div class="issue-stat-icon" style="background:#fff7ed;">🔓</div>
+      <div class="issue-stat-text">
+        <div class="val" style="color:#ea580c">0</div>
+        <div class="lbl">Open</div>
+      </div>
+    </div>
+    <div class="issue-stat">
+      <div class="issue-stat-icon" style="background:#f5f3ff;">🏁</div>
+      <div class="issue-stat-text">
+        <div class="val" style="color:#7c3aed">100%</div>
+        <div class="lbl">Completion Rate</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- KANBAN BOARD (Recent Sprints) -->
+  <div class="kanban-wrapper">
+    <div class="chart-title">Sprint Board — Final Phase (Iterations 10 – 12)</div>
+    <div style="font-size:12px;color:var(--muted);margin-top:-8px;margin-bottom:4px;">All issues closed ✓ — 100% sprint completion</div>
+    <div class="kanban-board">
+
+      <!-- Iter 10 -->
+      <div class="kanban-col col-history">
+        <div class="kanban-col-header">
+          <div class="kanban-col-title" style="color:#7c3aed">
+            <span>🔷</span> Iteration 10
+          </div>
+          <span class="kanban-col-count">1 issue</span>
+        </div>
+        <div class="issue-card">
+          <div class="issue-card-top">
+            <div class="issue-card-title">Development</div>
+            <span class="issue-number">#82</span>
+          </div>
+          <div class="issue-card-meta">
+            <span class="status-dot status-closed"></span>
+            <span class="issue-date">Closed 14 May 2026</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Iter 11 -->
+      <div class="kanban-col col-final">
+        <div class="kanban-col-header">
+          <div class="kanban-col-title" style="color:#2563eb">
+            <span>🔵</span> Iteration 11
+          </div>
+          <span class="kanban-col-count">5 issues</span>
+        </div>
+        <div class="issue-card">
+          <div class="issue-card-top">
+            <div class="issue-card-title">Part 1: Migrate DB → Supabase PostgreSQL</div>
+            <span class="issue-number">#95</span>
+          </div>
+          <div class="issue-card-meta">
+            <span class="status-dot status-closed"></span>
+            <span class="issue-date">Closed 21 May</span>
+          </div>
+        </div>
+        <div class="issue-card">
+          <div class="issue-card-top">
+            <div class="issue-card-title">Part 2: n8n LINE OA Workflow Integration</div>
+            <span class="issue-number">#96</span>
+          </div>
+          <div class="issue-card-meta">
+            <span class="status-dot status-closed"></span>
+            <span class="issue-date">Closed 21 May</span>
+          </div>
+        </div>
+        <div class="issue-card">
+          <div class="issue-card-top">
+            <div class="issue-card-title">Part 3: Event &amp; Invoice Management</div>
+            <span class="issue-number">#97</span>
+          </div>
+          <div class="issue-card-meta">
+            <span class="status-dot status-closed"></span>
+            <span class="issue-date">Closed 21 May</span>
+          </div>
+        </div>
+        <div class="issue-card">
+          <div class="issue-card-top">
+            <div class="issue-card-title">Part 4: Real Database Deployment</div>
+            <span class="issue-number">#98</span>
+          </div>
+          <div class="issue-card-meta">
+            <span class="status-dot status-closed"></span>
+            <span class="issue-date">Closed 21 May</span>
+          </div>
+        </div>
+        <div class="issue-card">
+          <div class="issue-card-top">
+            <div class="issue-card-title">Development (main sprint)</div>
+            <span class="issue-number">#83</span>
+          </div>
+          <div class="issue-card-meta">
+            <span class="status-dot status-closed"></span>
+            <span class="issue-date">Closed 21 May</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Iter 12 -->
+      <div class="kanban-col col-done">
+        <div class="kanban-col-header">
+          <div class="kanban-col-title" style="color:#16a34a">
+            <span>✅</span> Iteration 12
+          </div>
+          <span class="kanban-col-count">2 issues</span>
+        </div>
+        <div class="issue-card">
+          <div class="issue-card-top">
+            <div class="issue-card-title">System Testing &amp; QA</div>
+            <span class="issue-number">#84</span>
+          </div>
+          <div class="issue-card-meta">
+            <span class="status-dot status-closed"></span>
+            <span class="issue-date">Closed 21 May 2026</span>
+          </div>
+        </div>
+        <div class="issue-card" style="border-color:#bbf7d0;">
+          <div class="issue-card-top">
+            <div class="issue-card-title">🎉 Final Project — All deliverables complete</div>
+            <span class="issue-number">#78</span>
+          </div>
+          <div class="issue-card-meta">
+            <span class="status-dot status-closed"></span>
+            <span class="issue-date">Closed 21 May 2026</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SPRINT HISTORY (Iters 1–9) -->
+  <div class="kanban-wrapper" style="margin-bottom:32px;">
+    <div class="chart-title">Sprint History — Early &amp; Mid Phase (Iterations 1 – 9)</div>
+    <div style="font-size:12px;color:var(--muted);margin-top:-8px;margin-bottom:16px;">All iterations completed · 38 issues closed</div>
+    <div class="sprint-history">
+      <div class="sprint-chip">
+        <div class="snum">Iter 1</div>
+        <div class="stitle">Concept &amp; Requirements</div>
+        <div class="scount">✓ 6 issues</div>
+        <div class="sbar"><div class="sbar-fill" style="width:100%"></div></div>
+      </div>
+      <div class="sprint-chip">
+        <div class="snum">Iter 2</div>
+        <div class="stitle">Requirement Analysis</div>
+        <div class="scount">✓ 5 issues</div>
+        <div class="sbar"><div class="sbar-fill" style="width:100%"></div></div>
+      </div>
+      <div class="sprint-chip">
+        <div class="snum">Iter 3</div>
+        <div class="stitle">UML &amp; Diagrams</div>
+        <div class="scount">✓ 4 issues</div>
+        <div class="sbar"><div class="sbar-fill" style="width:100%"></div></div>
+      </div>
+      <div class="sprint-chip">
+        <div class="snum">Iter 4</div>
+        <div class="stitle">GUI, CLI &amp; LINE OA</div>
+        <div class="scount">✓ 6 issues</div>
+        <div class="sbar"><div class="sbar-fill" style="width:100%"></div></div>
+      </div>
+      <div class="sprint-chip">
+        <div class="snum">Iter 5</div>
+        <div class="stitle">Back-end &amp; AI RAG</div>
+        <div class="scount">✓ 6 issues</div>
+        <div class="sbar"><div class="sbar-fill" style="width:100%"></div></div>
+      </div>
+      <div class="sprint-chip">
+        <div class="snum">Iter 6</div>
+        <div class="stitle">Auth &amp; Design Patterns</div>
+        <div class="scount">✓ 5 issues</div>
+        <div class="sbar"><div class="sbar-fill" style="width:100%"></div></div>
+      </div>
+      <div class="sprint-chip">
+        <div class="snum">Iter 7</div>
+        <div class="stitle">Implementation Plan</div>
+        <div class="scount">✓ 2 issues</div>
+        <div class="sbar"><div class="sbar-fill" style="width:100%"></div></div>
+      </div>
+      <div class="sprint-chip">
+        <div class="snum">Midterm</div>
+        <div class="stitle">Midterm Week</div>
+        <div class="scount">✓ 1 issue</div>
+        <div class="sbar"><div class="sbar-fill" style="width:100%"></div></div>
+      </div>
+      <div class="sprint-chip">
+        <div class="snum">Iter 9</div>
+        <div class="stitle">Development</div>
+        <div class="scount">✓ 1 issue</div>
+        <div class="sbar"><div class="sbar-fill" style="width:100%"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LEADERBOARD -->
+  <div class="section-title"><span class="dot" style="background:var(--c4)"></span>Contributor Leaderboard</div>
+  <div class="table-card">
+    <table class="lb">
+      <thead>
+        <tr>
+          <th style="width:48px">#</th>
+          <th>Contributor</th>
+          <th>Role</th>
+          <th>Commits</th>
+          <th style="min-width:180px">Commit Share</th>
+          <th>PRs Merged</th>
+          <th>Activity</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="rank r1">1</span></td>
+          <td>
+            <div class="user-cell">
+              <span class="user-dot" style="background:var(--c1)"></span>
+              <div><div style="font-weight:700">Athiphat Sunsit</div><div style="font-size:11px;color:var(--muted)">@athiphat67</div></div>
+            </div>
+          </td>
+          <td><span class="role-tag lead">Team Lead</span></td>
+          <td style="font-weight:800;font-size:17px;color:var(--c1)">129</td>
+          <td>
+            <div class="prog-bar"><div class="prog-fill" style="width:69.7%;background:var(--c1)"></div></div>
+            <div style="font-size:11px;color:var(--muted);margin-top:3px">69.7%</div>
+          </td>
+          <td style="font-weight:700">41</td>
+          <td style="font-size:11px;color:var(--muted)">Jan – May 2026</td>
+        </tr>
+        <tr>
+          <td><span class="rank r2">2</span></td>
+          <td>
+            <div class="user-cell">
+              <span class="user-dot" style="background:var(--c2)"></span>
+              <div><div style="font-weight:700">ภูริช อัมพะวา</div><div style="font-size:11px;color:var(--muted)">@6710615185</div></div>
+            </div>
+          </td>
+          <td><span class="role-tag">Front + Back</span></td>
+          <td style="font-weight:800;font-size:17px;color:var(--c2)">16</td>
+          <td>
+            <div class="prog-bar"><div class="prog-fill" style="width:8.6%;background:var(--c2)"></div></div>
+            <div style="font-size:11px;color:var(--muted);margin-top:3px">8.6%</div>
+          </td>
+          <td style="font-weight:700">2</td>
+          <td style="font-size:11px;color:var(--muted)">Jan – Feb 2026</td>
+        </tr>
+        <tr>
+          <td><span class="rank r2">2</span></td>
+          <td>
+            <div class="user-cell">
+              <span class="user-dot" style="background:var(--c4)"></span>
+              <div><div style="font-weight:700">ปณิธาน ตันตื้อ</div><div style="font-size:11px;color:var(--muted)">@panifield</div></div>
+            </div>
+          </td>
+          <td><span class="role-tag">Front-end</span></td>
+          <td style="font-weight:800;font-size:17px;color:var(--c4)">16</td>
+          <td>
+            <div class="prog-bar"><div class="prog-fill" style="width:8.6%;background:var(--c4)"></div></div>
+            <div style="font-size:11px;color:var(--muted);margin-top:3px">8.6%</div>
+          </td>
+          <td style="font-weight:700">8</td>
+          <td style="font-size:11px;color:var(--muted)">Jan – May 2026</td>
+        </tr>
+        <tr>
+          <td><span class="rank r3">4</span></td>
+          <td>
+            <div class="user-cell">
+              <span class="user-dot" style="background:var(--c3)"></span>
+              <div><div style="font-weight:700">นพัตธีรา เหลาเกิ้มหุ่ง</div><div style="font-size:11px;color:var(--muted)">@napattiral276</div></div>
+            </div>
+          </td>
+          <td><span class="role-tag">Front-end</span></td>
+          <td style="font-weight:800;font-size:17px;color:var(--c3)">14</td>
+          <td>
+            <div class="prog-bar"><div class="prog-fill" style="width:7.6%;background:var(--c3)"></div></div>
+            <div style="font-size:11px;color:var(--muted);margin-top:3px">7.6%</div>
+          </td>
+          <td style="font-weight:700">2</td>
+          <td style="font-size:11px;color:var(--muted)">Jan – May 2026</td>
+        </tr>
+        <tr>
+          <td><span class="rank">5</span></td>
+          <td>
+            <div class="user-cell">
+              <span class="user-dot" style="background:var(--c5)"></span>
+              <div><div style="font-weight:700">ธีภพ รัตนทรัพย์ศิริ</div><div style="font-size:11px;color:var(--muted)">@theepop66</div></div>
+            </div>
+          </td>
+          <td><span class="role-tag">AI RAG / LINE OA</span></td>
+          <td style="font-weight:800;font-size:17px;color:var(--c5)">10</td>
+          <td>
+            <div class="prog-bar"><div class="prog-fill" style="width:5.4%;background:var(--c5)"></div></div>
+            <div style="font-size:11px;color:var(--muted);margin-top:3px">5.4%</div>
+          </td>
+          <td style="font-weight:700">2</td>
+          <td style="font-size:11px;color:var(--muted)">Jan – May 2026</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</main>
+
+<footer>
+  CN332 · Baan Hao Smart Living Management System · Thammasat University · Data: 22 May 2026
+  <br><a href="https://github.com/theepop66/CN332-group-project">github.com/theepop66/CN332-group-project</a>
+</footer>
+
+<script>
+  const C = { c1:'#6366f1', c2:'#0891b2', c3:'#ec4899', c4:'#f59e0b', c5:'#10b981' };
+  const a = (hex, op) => hex + Math.round(op*255).toString(16).padStart(2,'0');
+
+  Chart.defaults.font.family = "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif";
+
+  const gridColor = '#e2e8f040';
+  const tickColor = '#5a7194';
+  const baseScales = {
+    x: { grid: { color: '#e2e8f060' }, ticks: { color: tickColor } },
+    y: { grid: { color: '#e2e8f060' }, ticks: { color: tickColor } }
+  };
+
+  // 1. LINE CHART
+  new Chart(document.getElementById('timelineChart'), {
+    type: 'line',
+    data: {
+      labels: ['Jan 2026', 'Feb 2026', 'Mar 2026', 'Apr 2026', 'May 2026'],
+      datasets: [
+        { label: 'athiphat67',    data: [46,32,26,0,25], borderColor: C.c1, backgroundColor: a(C.c1,.1), tension:.4, fill:true, pointRadius:5, pointHoverRadius:7, borderWidth:2.5 },
+        { label: '6710615185',   data: [7, 9, 0, 0, 0],  borderColor: C.c2, backgroundColor: a(C.c2,.08), tension:.4, fill:true, pointRadius:5, borderWidth:2 },
+        { label: 'napattiral276',data: [2, 6, 0, 0, 6],  borderColor: C.c3, backgroundColor: a(C.c3,.08), tension:.4, fill:true, pointRadius:5, borderWidth:2 },
+        { label: 'panifield',    data: [1,12, 0, 0, 3],  borderColor: C.c4, backgroundColor: a(C.c4,.08), tension:.4, fill:true, pointRadius:5, borderWidth:2 },
+        { label: 'theepop66',    data: [2, 4, 0, 0, 4],  borderColor: C.c5, backgroundColor: a(C.c5,.08), tension:.4, fill:true, pointRadius:5, borderWidth:2 }
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { labels: { color: tickColor, usePointStyle: true, padding: 14 } } },
+      scales: baseScales
+    }
+  });
+
+  // 2. DONUT
+  new Chart(document.getElementById('donutChart'), {
+    type: 'doughnut',
+    data: {
+      labels: ['athiphat67 (129)', '6710615185 (16)', 'napattiral276 (14)', 'panifield (16)', 'theepop66 (10)'],
+      datasets: [{
+        data: [129,16,14,16,10],
+        backgroundColor: [C.c1, C.c2, C.c3, C.c4, C.c5],
+        borderColor: '#fff', borderWidth: 3, hoverOffset: 8
+      }]
+    },
+    options: {
+      responsive: true, cutout: '68%',
+      plugins: {
+        legend: {
+          position: 'bottom',
+          labels: { color: tickColor, padding: 10, font: { size: 10 }, usePointStyle: true }
+        }
+      }
+    }
+  });
+
+  // 3. PR BAR
+  new Chart(document.getElementById('prChart'), {
+    type: 'bar',
+    data: {
+      labels: ['athiphat67','panifield','6710615185','napattiral276','theepop66'],
+      datasets: [{
+        label: 'PRs Merged',
+        data: [41,8,2,2,2],
+        backgroundColor: [C.c1, C.c4, C.c2, C.c3, C.c5],
+        borderRadius: 6, barThickness: 26
+      }]
+    },
+    options: {
+      indexAxis: 'y', responsive: true,
+      plugins: { legend: { display: false } },
+      scales: {
+        x: { grid: { color: '#e2e8f060' }, ticks: { color: tickColor } },
+        y: { grid: { display: false }, ticks: { color: '#0f1f3d', font: { size: 12 } } }
+      }
+    }
+  });
+
+  // 4. STACKED
+  new Chart(document.getElementById('stackedChart'), {
+    type: 'bar',
+    data: {
+      labels: ['Jan 2026', 'Feb 2026', 'Mar 2026', 'May 2026'],
+      datasets: [
+        { label:'athiphat67',    data:[46,32,26,25], backgroundColor: a(C.c1,.85), borderRadius:2 },
+        { label:'6710615185',    data:[7, 9, 0, 0],  backgroundColor: a(C.c2,.85), borderRadius:2 },
+        { label:'napattiral276', data:[2, 6, 0, 6],  backgroundColor: a(C.c3,.85), borderRadius:2 },
+        { label:'panifield',     data:[1,12, 0, 3],  backgroundColor: a(C.c4,.85), borderRadius:2 },
+        { label:'theepop66',     data:[2, 4, 0, 4],  backgroundColor: a(C.c5,.85), borderRadius:2 }
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { labels: { color: tickColor, usePointStyle: true, padding: 12, font: { size: 10 } } } },
+      scales: {
+        x: { stacked: true, grid: { display: false }, ticks: { color: tickColor } },
+        y: { stacked: true, grid: { color: '#e2e8f060' }, ticks: { color: tickColor } }
+      }
+    }
+  });
+</script>
+</body>
+</html>
