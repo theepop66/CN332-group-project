@@ -296,17 +296,6 @@ Our team uses **GitHub Projects** (Kanban Board) to manage tasks, sprints, and o
 
 ![Sprint History & Contributor Leaderboard](Documents/image_project_track/dashboard-leaderboard.png)
 
-### Contributor Summary
-
-| Team Member | Role | Commits | PRs Merged | Issues |
-| :--- | :--- | :---: | :---: | :---: |
-| [@athiphat67](https://github.com/athiphat67) | Team Lead · Front-end · Back-end · QA | **129** | **41** | 44 ✅ |
-| [@6710615185](https://github.com/6710615185) | Front-end · Back-end | 16 | 2 | — |
-| [@panifield](https://github.com/panifield) | Front-end | 16 | 8 | — |
-| [@napattiral276](https://github.com/napattiral276) | Front-end | 14 | 2 | — |
-| [@theepop66](https://github.com/theepop66) | AI RAG · LINE OA · Back-end | 10 | 2 | — |
-| **Total** | | **185** | **55** | **44 / 44 (100%)** |
-
 > Last updated 22 May 2026 — All 44 issues closed across 12 iterations · 100% completion
 
 ---
