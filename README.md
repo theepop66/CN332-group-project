@@ -156,6 +156,14 @@ Our team uses **GitHub Projects** (Kanban Board) to manage tasks, sprints, and o
 ![Closed Issues](https://img.shields.io/github/issues-closed/theepop66/CN332-group-project)
 ![Total Commits](https://img.shields.io/github/commit-activity/t/theepop66/CN332-group-project)
 
+### GitHub Insights Dashboard Preview
+
+![Hero — Team Members](Documents/image_project_track/dashboard-hero.png)
+![Commit Activity — Charts](Documents/image_project_track/dashboard-charts.png)
+![PRs Merged & Monthly Stacked](Documents/image_project_track/dashboard-pr-stacked.png)
+![Issue Tracker & Sprint Board](Documents/image_project_track/dashboard-sprint-board.png)
+![Sprint History & Contributor Leaderboard](Documents/image_project_track/dashboard-leaderboard.png)
+
 ### Contributor Summary
 
 | Team Member | Role | Commits | PRs Merged | Issues Closed |
